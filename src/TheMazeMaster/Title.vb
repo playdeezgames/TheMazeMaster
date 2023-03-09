@@ -4,6 +4,7 @@
         Console.WriteLine("The Maze Master")
         Console.WriteLine("By TheGrumpyGameDev")
         Console.WriteLine("For Jam for All BASIC Dialects (#4)")
+        Console.WriteLine("(1) Start")
         Select Case Console.ReadKey(True).Key
             Case ConsoleKey.D1
                 Game.Start()

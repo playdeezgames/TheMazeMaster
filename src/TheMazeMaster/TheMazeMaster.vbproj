@@ -5,6 +5,7 @@
     <RootNamespace>TheMazeMaster</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
+    <ImportedNamespaces>System.IO=False,System.Text.Json=False,System.Text.Json.Serialization=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,TheMazeMaster=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -14,5 +15,181 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="CHAMBER0.map" />
+    <None Remove="CHAMBER1.map" />
+    <None Remove="CHAMBER10.map" />
+    <None Remove="CHAMBER11.map" />
+    <None Remove="CHAMBER12.map" />
+    <None Remove="CHAMBER13.map" />
+    <None Remove="CHAMBER14.map" />
+    <None Remove="CHAMBER15.map" />
+    <None Remove="CHAMBER2.map" />
+    <None Remove="CHAMBER3.map" />
+    <None Remove="CHAMBER4.map" />
+    <None Remove="CHAMBER5.map" />
+    <None Remove="CHAMBER6.map" />
+    <None Remove="CHAMBER7.map" />
+    <None Remove="CHAMBER8.map" />
+    <None Remove="CHAMBER9.map" />
+    <None Remove="CHAMBERDOOR1.map" />
+    <None Remove="CHAMBERDOOR2.map" />
+    <None Remove="CHAMBERDOOR4.map" />
+    <None Remove="CHAMBERDOOR8.map" />
+    <None Remove="PASSAGEWAY0.map" />
+    <None Remove="PASSAGEWAY1.map" />
+    <None Remove="PASSAGEWAY10.map" />
+    <None Remove="PASSAGEWAY11.map" />
+    <None Remove="PASSAGEWAY12.map" />
+    <None Remove="PASSAGEWAY13.map" />
+    <None Remove="PASSAGEWAY14.map" />
+    <None Remove="PASSAGEWAY15.map" />
+    <None Remove="PASSAGEWAY2.map" />
+    <None Remove="PASSAGEWAY3.map" />
+    <None Remove="PASSAGEWAY4.map" />
+    <None Remove="PASSAGEWAY5.map" />
+    <None Remove="PASSAGEWAY6.map" />
+    <None Remove="PASSAGEWAY7.map" />
+    <None Remove="PASSAGEWAY8.map" />
+    <None Remove="PASSAGEWAY9.map" />
+    <None Remove="PASSAGEWAYDOOR1.map" />
+    <None Remove="PASSAGEWAYDOOR2.map" />
+    <None Remove="PASSAGEWAYDOOR4.map" />
+    <None Remove="PASSAGEWAYDOOR8.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="CHAMBER0.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER1.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER10.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER11.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER12.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER13.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER14.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER15.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER2.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER3.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER4.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER5.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER6.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER7.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER8.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBER9.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBERDOOR1.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBERDOOR2.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBERDOOR4.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHAMBERDOOR8.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY0.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY1.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY10.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY11.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY12.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY13.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY14.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY15.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY2.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY3.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY4.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY5.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY6.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY7.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY8.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAY9.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAYDOOR1.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAYDOOR2.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAYDOOR4.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PASSAGEWAYDOOR8.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="System.IO" />
+    <Import Include="System.Text.Json" />
+    <Import Include="System.Text.Json.Serialization" />
+  </ItemGroup>
 
 </Project>

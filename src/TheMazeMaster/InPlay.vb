@@ -1,40 +1,37 @@
 ﻿Friend Module InPlay
     Friend Function Update() As String
-        Throw New NotImplementedException()
+        Console.Clear()
+        IN_PLAY_DRAW_MAP()
+        Return IN_PLAY_MOVE_PLAYER()
     End Function
+
+    Private Function IN_PLAY_MOVE_PLAYER() As String
+        Dim key = Console.ReadKey(True).Key
+        Dim d =
+            If(key = ConsoleKey.UpArrow, DIRECTION_NORTH,
+            If(key = ConsoleKey.DownArrow, DIRECTION_SOUTH,
+            If(key = ConsoleKey.LeftArrow, DIRECTION_WEST,
+            If(key = ConsoleKey.RightArrow, DIRECTION_EAST,
+            DIRECTION_COUNT))))
+        Dim R = STATE_IN_PLAY
+        If d < DIRECTION_COUNT Then
+            Dim MR = MOVE_PLAYER(d)
+            '         IF MR=MOVE_FIGHT THEN
+            '             FIGHT_CREATURE_INDEX=GET_PLAYER_ENEMY(D)
+            '             FIGHT_START()
+            '             RETURN STATE_FIGHT
+            '         ELSEIF MR=MOVE_PICKUP THEN
+            '             PICKUP_ITEM_INDEX=GET_PLAYER_PICKUP(D)
+            '             RETURN STATE_PICKUP
+            '         ENDIF
+        End If
+        Return R
+    End Function
+
+    Private Sub IN_PLAY_DRAW_MAP()
+        Dim MX = CREATURE_MAZE_COLUMN(PLAYER_CREATURE_INDEX)
+        Dim M_y = CREATURE_MAZE_ROW(PLAYER_CREATURE_INDEX)
+        Dim ROOM_MAP = GET_ROOM_MAP(MX, M_y)
+        MAP(ROOM_MAP, 0, 0)
+    End Sub
 End Module
-'DEF IN_PLAY_DRAW_MAP()
-'     MX=CREATURE_MAZE_COLUMN(PLAYER_CREATURE_INDEX)
-'     MY=CREATURE_MAZE_ROW(PLAYER_CREATURE_INDEX)
-'     ROOM_MAP = GET_ROOM_MAP(MX,MY)
-'     MAP ROOM_MAP,0,0
-' ENDDEF
-' DEF IN_PLAY_MOVE_PLAYER()
-'     R=STATE_IN_PLAY
-'     D=DIRECTION_COUNT
-'     IF KEYP CODE_UP THEN
-'         D=DIRECTION_NORTH
-'     ELSEIF KEYP CODE_DOWN THEN
-'         D=DIRECTION_SOUTH
-'     ELSEIF KEYP CODE_LEFT THEN
-'         D=DIRECTION_WEST
-'     ELSEIF KEYP CODE_RIGHT THEN
-'         D=DIRECTION_EAST
-'     ENDIF
-'     IF D<DIRECTION_COUNT THEN
-'         MR=MOVE_PLAYER(D)
-'         IF MR=MOVE_FIGHT THEN
-'             FIGHT_CREATURE_INDEX=GET_PLAYER_ENEMY(D)
-'             FIGHT_START()
-'             RETURN STATE_FIGHT
-'         ELSEIF MR=MOVE_PICKUP THEN
-'             PICKUP_ITEM_INDEX=GET_PLAYER_PICKUP(D)
-'             RETURN STATE_PICKUP
-'         ENDIF
-'     ENDIF
-'     RETURN R
-' ENDDEF
-' DEF IN_PLAY_UPDATE(DELTA)
-'     IN_PLAY_DRAW_MAP()
-'     RETURN IN_PLAY_MOVE_PLAYER()
-' ENDDEF

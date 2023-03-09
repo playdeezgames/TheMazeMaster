@@ -1,0 +1,10 @@
+﻿Friend Module ChamberDoors
+    Friend CHAMBERDOOR_MAPS As New List(Of MapData)
+    Sub Initialize()
+        CHAMBERDOOR_MAPS.Clear()
+        CHAMBERDOOR_MAPS.Add(LOAD_RESOURCE("CHAMBERDOOR1.map"))
+        CHAMBERDOOR_MAPS.Add(LOAD_RESOURCE("CHAMBERDOOR2.map"))
+        CHAMBERDOOR_MAPS.Add(LOAD_RESOURCE("CHAMBERDOOR4.map"))
+        CHAMBERDOOR_MAPS.Add(LOAD_RESOURCE("CHAMBERDOOR8.map"))
+    End Sub
+End Module

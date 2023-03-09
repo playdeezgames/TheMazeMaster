@@ -1,11 +1,8 @@
 ﻿Friend Module Game
     Friend Sub Start()
-        Throw New NotImplementedException()
+        Maze.Generate()
+        Rooms.Generate()
+        Creatures.Generate()
+        Player.Generate()
     End Sub
 End Module
-'DEF START_GAME()
-'     GENERATE_MAZE()
-'     GENERATE_ROOMS()
-'     GENERATE_CREATURES()
-'     GENERATE_PLAYER()
-' ENDDEF
