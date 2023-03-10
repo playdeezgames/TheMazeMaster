@@ -13,7 +13,7 @@
             FIGHT_MESSAGES.RemoveAt(0)
         End While
         For R = 0 To FIGHT_MESSAGES.Count - 1
-            Console.WriteLine(FIGHT_MESSAGES(R))
+            AnsiConsole.MarkUpLine(FIGHT_MESSAGES(R))
         Next R
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX

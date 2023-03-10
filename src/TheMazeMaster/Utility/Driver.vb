@@ -23,7 +23,7 @@
     Friend Sub MAP(map As MapData, offsetx As Integer, offsety As Integer)
         For y = 0 To map.Layers(0).Data.Height - 1
             For x = 0 To map.Layers(0).Data.Width - 1
-                Dim ch As Char = "?"c
+                Dim ch As String = "?"
                 For l = 0 To map.Layers.Count - 1
                     If map.Layers(l).Type = "render" Then
                         Dim ti = MGET(map, l, x, y)
@@ -32,9 +32,9 @@
                         End If
                     End If
                 Next
-                Console.Write(ch)
+                AnsiConsole.Markup(ch)
             Next
-            Console.WriteLine()
+            AnsiConsole.WriteLine()
         Next
     End Sub
     Friend Function ROLL_DICE(D As Integer, M As Integer) As Integer

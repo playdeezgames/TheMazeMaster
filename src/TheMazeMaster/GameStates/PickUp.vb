@@ -3,8 +3,8 @@
     Friend Function Update() As String
         Dim II = PICKUP_ITEM_INDEX
         Dim IT = ITEM_TYPES(II)
-        Console.WriteLine($"PICK UP {ITEMTYPE_NAMES(IT)}?")
-        Console.WriteLine("(Y)ES/(N)O")
+        AnsiConsole.MarkUpLine($"PICK UP {ITEMTYPE_NAMES(IT)}?")
+        AnsiConsole.MarkUpLine("(Y)ES/(N)O")
         Select Case Console.ReadKey(True).Key
             Case ConsoleKey.N
                 Return STATE_IN_PLAY

@@ -1,8 +1,8 @@
 ﻿Friend Module InPlay
     Friend Function Update() As String
-        Console.Clear()
+        AnsiConsole.Clear()
         DrawMap()
-        Console.WriteLine("▲▼►◄ - Navigate")
+        AnsiConsole.MarkUpLine("▲▼►◄ - Navigate")
         Return MovePlayer()
     End Function
 

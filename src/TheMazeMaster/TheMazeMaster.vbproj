@@ -5,7 +5,7 @@
     <RootNamespace>TheMazeMaster</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
-    <ImportedNamespaces>System.IO=False,System.Text.Json=False,System.Text.Json.Serialization=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,TheMazeMaster=True</ImportedNamespaces>
+    <ImportedNamespaces>Spectre.Console=False,System.IO=False,System.Text.Json=False,System.Text.Json.Serialization=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,TheMazeMaster=True</ImportedNamespaces>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -183,10 +183,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.46.0" />
     <PackageReference Include="System.Text.Json" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Import Include="Spectre.Console" />
     <Import Include="System.IO" />
     <Import Include="System.Text.Json" />
     <Import Include="System.Text.Json.Serialization" />
