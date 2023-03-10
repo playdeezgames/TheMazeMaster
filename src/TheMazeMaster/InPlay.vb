@@ -20,9 +20,9 @@
                 FIGHT_CREATURE_INDEX = GET_PLAYER_ENEMY(d)
                 FIGHT_START()
                 Return STATE_FIGHT
-                '         ELSEIF MR=MOVE_PICKUP THEN
-                '             PICKUP_ITEM_INDEX=GET_PLAYER_PICKUP(D)
-                '             RETURN STATE_PICKUP
+            ElseIf MR = MOVE_PICKUP Then
+                PICKUP_ITEM_INDEX = GET_PLAYER_PICKUP(d)
+                Return STATE_PICKUP
             End If
         End If
         Return R

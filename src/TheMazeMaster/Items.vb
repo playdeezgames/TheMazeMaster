@@ -34,39 +34,38 @@
             MSET(RM, 2, X, Y, TI)
         End If
     End Sub
+    Friend Function FIND_ITEM(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
+        For Each entry In ITEM_MAZE_COLUMNS
+            Dim II = entry.Key
+            Dim CMX = entry.Value
+            Dim CMY = ITEM_MAZE_ROWS(II)
+            Dim CX = ITEM_ROOM_COLUMNS(II)
+            Dim CY = ITEM_ROOM_ROWS(II)
+            If MX = CMX AndAlso M_Y = CMY AndAlso X = CX AndAlso Y = CY Then
+                Return II
+            End If
+        Next
+        Return -1
+    End Function
+    Friend Sub REMOVE_ITEM(I As Integer)
+        If ITEM_MAZE_COLUMNS.ContainsKey(I) Then
+            Dim IT = ITEM_TYPES(I)
+            Dim MX = ITEM_MAZE_COLUMNS(I)
+            Dim MY = ITEM_MAZE_ROWS(I)
+            Dim X = ITEM_ROOM_COLUMNS(I)
+            Dim Y = ITEM_ROOM_ROWS(I)
+            Dim TI = TILE_EMPTY
+            Dim RM = GET_ROOM_MAP(MX, MY)
+            MSET(RM, 2, X, Y, TI)
+        End If
+    End Sub
+    Friend Sub ITEM_CLEAR_ROOM(II As Integer)
+        ITEM_MAZE_COLUMNS.Remove(II)
+        ITEM_MAZE_ROWS.Remove(II)
+        ITEM_ROOM_COLUMNS.Remove(II)
+        ITEM_ROOM_ROWS.Remove(II)
+    End Sub
+    Friend Sub ITEM_DESTROY(II As Integer)
+        ITEM_TYPES(II) = ITEMTYPE_NONE
+    End Sub
 End Module
-' DEF REMOVE_ITEM(I)
-'     IF EXISTS(ITEM_MAZE_COLUMNS,I) THEN
-'         IT = ITEM_TYPES(I)
-'         MX=ITEM_MAZE_COLUMNS(I)
-'         MY=ITEM_MAZE_ROWS(I)
-'         X=ITEM_ROOM_COLUMNS(I)
-'         Y=ITEM_ROOM_ROWS(I)
-'         TI=TILE_EMPTY
-'         RM=GET_ROOM_MAP(MX,MY)
-'         MSET RM,2,X,Y,TI
-'     ENDIF
-' ENDDEF
-' DEF FIND_ITEM(MX,MY,X,Y)
-'     I=ITERATOR(ITEM_MAZE_COLUMNS)
-'     WHILE MOVE_NEXT(I)
-'         II=GET(I)
-'         CMX=VAL(I)
-'         CMY=ITEM_MAZE_ROWS(II)
-'         CX=ITEM_ROOM_COLUMNS(II)
-'         CY=ITEM_ROOM_ROWS(II)
-'         IF MX=CMX AND MY=CMY AND X=CX AND Y=CY THEN
-'             RETURN II
-'         ENDIF
-'     WEND
-'     RETURN -1
-' ENDDEF
-' DEF ITEM_CLEAR_ROOM(II)
-'     REMOVE(ITEM_MAZE_COLUMNS,II)
-'     REMOVE(ITEM_MAZE_ROWS,II)
-'     REMOVE(ITEM_ROOM_COLUMNS,II)
-'     REMOVE(ITEM_ROOM_ROWS,II)
-' ENDDEF
-' DEF ITEM_DESTROY(II)
-'     ITEM_TYPES(II)=ITEMTYPE_NONE
-' ENDDEF

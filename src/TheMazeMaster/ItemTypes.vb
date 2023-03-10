@@ -3,6 +3,15 @@
     Friend Const ITEMTYPE_FIST = "FIST"
     Friend Const ITEMTYPE_BITE = "BITE"
     Friend Const ITEMTYPE_RATTAIL = "RATTAIL"
+    Friend ReadOnly ITEMTYPE_STACKS As IReadOnlyList(Of String) =
+        New List(Of String) From {ITEMTYPE_RATTAIL}
+    Friend ReadOnly ITEMTYPE_NAMES As IReadOnlyDictionary(Of String, String) =
+        New Dictionary(Of String, String) From
+        {
+            {ITEMTYPE_FIST, "FIST"},
+            {ITEMTYPE_BITE, "BITE"},
+            {ITEMTYPE_RATTAIL, "RAT TAIL"}
+        }
     Friend ReadOnly ITEMTYPE_TILE_INDICES As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {
@@ -32,7 +41,12 @@
         End If
         Return ROLL_DICE(D, M)
     End Function
+    Friend ReadOnly ALL_ITEMTYPES As IReadOnlyList(Of String) =
+        New List(Of String) From
+        {
+            ITEMTYPE_FIST,
+            ITEMTYPE_BITE,
+            ITEMTYPE_RATTAIL
+        }
 End Module
-' ALL_ITEMTYPES=LIST(ITEMTYPE_FIST,ITEMTYPE_BITE,ITEMTYPE_RATTAIL)
-' ITEMTYPE_NAMES=DICT(ITEMTYPE_FIST,"FIST",ITEMTYPE_BITE,"BITE",ITEMTYPE_RATTAIL,"RAT TAIL")
-' ITEMTYPE_STACKS=LIST(ITEMTYPE_RATTAIL)
+

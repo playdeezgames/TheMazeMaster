@@ -28,34 +28,34 @@
     Friend Sub PLAYER_ADD_XP(XP As Integer)
         PLAYER_XP = PLAYER_XP + XP
     End Sub
+    Friend Function GET_PLAYER_PICKUP(D As Integer) As Integer
+        Dim I = PLAYER_CREATURE_INDEX
+        Dim X = CREATURE_ROOM_COLUMN(I)
+        Dim Y = CREATURE_ROOM_ROW(I)
+        Dim NX = STEP_X(D, X, Y)
+        Dim NY = STEP_Y(D, X, Y)
+        Dim MX = CREATURE_MAZE_COLUMN(I)
+        Dim MY = CREATURE_MAZE_ROW(I)
+        Return FIND_ITEM(MX, MY, NX, NY)
+    End Function
+    Friend Sub PLAYER_TAKE_ITEM(II As Integer)
+        ITEM_CLEAR_ROOM(II)
+        Dim IT = ITEM_TYPES(II)
+        If ITEMTYPE_STACKS.contains(IT) Then
+            '    IF NOT EXISTS(PLAYER_STACKS,IT) THEN
+            '        IC=1
+            '    ELSE
+            '        IC=PLAYER_STACKS(IT)+1
+            '    END IF
+            '    PLAYER_STACKS(IT)=IC
+            '    ITEM_DESTROY(II)
+        Else
+            '    IF NOT EXISTS(PLAYER_INVENTORY,II) THEN
+            '        PUSH(PLAYER_INVENTORY,II)
+            '    END IF
+        End If
+    End Sub
 End Module
-' DEF GET_PLAYER_PICKUP(D)
-'     I=PLAYER_CREATURE_INDEX
-'     X=CREATURE_ROOM_COLUMN(I)
-'     Y=CREATURE_ROOM_ROW(I)
-'     NX=STEP_X(D,X,Y)
-'     NY=STEP_Y(D,X,Y)
-'     MX=CREATURE_MAZE_COLUMN(I)
-'     MY=CREATURE_MAZE_ROW(I)
-'     RETURN FIND_ITEM(MX,MY,NX,NY)
-' ENDDEF
 ' DEF HAS_PLAYER_LEVELED()
 '     RETURN PLAYER_XP>=PLAYER_XP_GOAL
-' ENDDEF
-' DEF PLAYER_TAKE_ITEM(II)
-'     ITEM_CLEAR_ROOM(II)
-'     IT=ITEM_TYPES(II)
-'     IF EXISTS(ITEMTYPE_STACKS,IT) THEN
-'         IF NOT EXISTS(PLAYER_STACKS,IT) THEN
-'             IC=1
-'         ELSE
-'             IC=PLAYER_STACKS(IT)+1
-'         ENDIF
-'         PLAYER_STACKS(IT)=IC
-'         ITEM_DESTROY(II)
-'     ELSE
-'         IF NOT EXISTS(PLAYER_INVENTORY,II) THEN
-'             PUSH(PLAYER_INVENTORY,II)
-'         ENDIF
-'     ENDIF
 ' ENDDEF
