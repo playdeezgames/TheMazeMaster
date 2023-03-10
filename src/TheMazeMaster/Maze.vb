@@ -56,47 +56,6 @@
                 End If
             Next
         Loop Until IsGenerated()
-        DumpMaze()
-    End Sub
-
-    Private Sub DumpMaze()
-        For row = 0 To MAZE_ROWS - 1
-            For column = 0 To MAZE_COLUMNS - 1
-                Console.Write("#")
-                If MAZE_CELL_DOORS(column, row, DIRECTION_NORTH) Then
-                    Console.Write(" ")
-                Else
-                    Console.Write("#")
-                End If
-                Console.Write("#")
-            Next
-            Console.WriteLine()
-            For column = 0 To MAZE_COLUMNS - 1
-                If MAZE_CELL_DOORS(column, row, DIRECTION_WEST) Then
-                    Console.Write(" ")
-                Else
-                    Console.Write("#")
-                End If
-                Console.Write(" ")
-                If MAZE_CELL_DOORS(column, row, DIRECTION_EAST) Then
-                    Console.Write(" ")
-                Else
-                    Console.Write("#")
-                End If
-            Next
-            Console.WriteLine()
-            For column = 0 To MAZE_COLUMNS - 1
-                Console.Write("#")
-                If MAZE_CELL_DOORS(column, row, DIRECTION_SOUTH) Then
-                    Console.Write(" ")
-                Else
-                    Console.Write("#")
-                End If
-                Console.Write("#")
-            Next
-            Console.WriteLine()
-        Next
-        Console.ReadLine()
     End Sub
 
     Private Function IsGenerated() As Boolean
