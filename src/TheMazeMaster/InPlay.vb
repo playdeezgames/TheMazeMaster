@@ -1,11 +1,12 @@
 ﻿Friend Module InPlay
     Friend Function Update() As String
         Console.Clear()
-        IN_PLAY_DRAW_MAP()
-        Return IN_PLAY_MOVE_PLAYER()
+        DrawMap()
+        Console.WriteLine("▲▼►◄ - Navigate")
+        Return MovePlayer()
     End Function
 
-    Private Function IN_PLAY_MOVE_PLAYER() As String
+    Private Function MovePlayer() As String
         Dim key = Console.ReadKey(True).Key
         Dim d =
             If(key = ConsoleKey.UpArrow, DIRECTION_NORTH,
@@ -28,7 +29,7 @@
         Return R
     End Function
 
-    Private Sub IN_PLAY_DRAW_MAP()
+    Private Sub DrawMap()
         Dim MX = CREATURE_MAZE_COLUMN(PLAYER_CREATURE_INDEX)
         Dim M_y = CREATURE_MAZE_ROW(PLAYER_CREATURE_INDEX)
         Dim ROOM_MAP = GET_ROOM_MAP(MX, M_y)

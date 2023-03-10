@@ -60,124 +60,124 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="CHAMBER0.map">
+    <Content Include="Assets\CHAMBER0.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER1.map">
+    <Content Include="Assets\CHAMBER1.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER10.map">
+    <Content Include="Assets\CHAMBER10.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER11.map">
+    <Content Include="Assets\CHAMBER11.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER12.map">
+    <Content Include="Assets\CHAMBER12.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER13.map">
+    <Content Include="Assets\CHAMBER13.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER14.map">
+    <Content Include="Assets\CHAMBER14.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER15.map">
+    <Content Include="Assets\CHAMBER15.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER2.map">
+    <Content Include="Assets\CHAMBER2.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER3.map">
+    <Content Include="Assets\CHAMBER3.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER4.map">
+    <Content Include="Assets\CHAMBER4.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER5.map">
+    <Content Include="Assets\CHAMBER5.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER6.map">
+    <Content Include="Assets\CHAMBER6.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER7.map">
+    <Content Include="Assets\CHAMBER7.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER8.map">
+    <Content Include="Assets\CHAMBER8.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBER9.map">
+    <Content Include="Assets\CHAMBER9.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBERDOOR1.map">
+    <Content Include="Assets\CHAMBERDOOR1.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBERDOOR2.map">
+    <Content Include="Assets\CHAMBERDOOR2.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBERDOOR4.map">
+    <Content Include="Assets\CHAMBERDOOR4.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CHAMBERDOOR8.map">
+    <Content Include="Assets\CHAMBERDOOR8.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY0.map">
+    <Content Include="Assets\PASSAGEWAY0.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY1.map">
+    <Content Include="Assets\PASSAGEWAY1.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY10.map">
+    <Content Include="Assets\PASSAGEWAY10.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY11.map">
+    <Content Include="Assets\PASSAGEWAY11.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY12.map">
+    <Content Include="Assets\PASSAGEWAY12.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY13.map">
+    <Content Include="Assets\PASSAGEWAY13.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY14.map">
+    <Content Include="Assets\PASSAGEWAY14.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY15.map">
+    <Content Include="Assets\PASSAGEWAY15.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY2.map">
+    <Content Include="Assets\PASSAGEWAY2.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY3.map">
+    <Content Include="Assets\PASSAGEWAY3.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY4.map">
+    <Content Include="Assets\PASSAGEWAY4.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY5.map">
+    <Content Include="Assets\PASSAGEWAY5.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY6.map">
+    <Content Include="Assets\PASSAGEWAY6.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY7.map">
+    <Content Include="Assets\PASSAGEWAY7.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY8.map">
+    <Content Include="Assets\PASSAGEWAY8.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAY9.map">
+    <Content Include="Assets\PASSAGEWAY9.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAYDOOR1.map">
+    <Content Include="Assets\PASSAGEWAYDOOR1.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAYDOOR2.map">
+    <Content Include="Assets\PASSAGEWAYDOOR2.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAYDOOR4.map">
+    <Content Include="Assets\PASSAGEWAYDOOR4.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PASSAGEWAYDOOR8.map">
+    <Content Include="Assets\PASSAGEWAYDOOR8.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

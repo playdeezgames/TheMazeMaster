@@ -46,31 +46,32 @@
 
     Friend Const TILE_EMPTY = 239
 
+    '╔╗╚╝
     Friend ReadOnly TILE_TABLE As IReadOnlyDictionary(Of Integer, Char) =
         New Dictionary(Of Integer, Char) From
         {
-            {TILE_WALL_NORTH, "#"c},
-            {TILE_WALL_EAST, "#"c},
-            {TILE_WALL_SOUTH, "#"c},
-            {TILE_WALL_WEST, "#"c},
-            {TILE_CORNER_INSIDE_NORTHEAST, "/"c},
-            {TILE_CORNER_INSIDE_SOUTHEAST, "\"c},
-            {TILE_CORNER_INSIDE_SOUTHWEST, "/"c},
-            {TILE_CORNER_INSIDE_NORTHWEST, "\"c},
-            {TILE_CORNER_OUTSIDE_NORTHEAST, "/"c},
-            {TILE_CORNER_OUTSIDE_SOUTHEAST, "\"c},
-            {TILE_CORNER_OUTSIDE_SOUTHWEST, "/"c},
-            {TILE_CORNER_OUTSIDE_NORTHWEST, "\"c},
+            {TILE_WALL_NORTH, "═"c},
+            {TILE_WALL_EAST, "║"c},
+            {TILE_WALL_SOUTH, "═"c},
+            {TILE_WALL_WEST, "║"c},
+            {TILE_CORNER_INSIDE_NORTHEAST, "╗"c},
+            {TILE_CORNER_INSIDE_SOUTHEAST, "╝"c},
+            {TILE_CORNER_INSIDE_SOUTHWEST, "╚"c},
+            {TILE_CORNER_INSIDE_NORTHWEST, "╔"c},
+            {TILE_CORNER_OUTSIDE_NORTHEAST, "╗"c},
+            {TILE_CORNER_OUTSIDE_SOUTHEAST, "╝"c},
+            {TILE_CORNER_OUTSIDE_SOUTHWEST, "╚"c},
+            {TILE_CORNER_OUTSIDE_NORTHWEST, "╔"c},
             {TILE_DOOR_NORTH, "."c},
             {TILE_DOOR_EAST, "."c},
             {TILE_DOOR_SOUTH, "."c},
             {TILE_DOOR_WEST, "."c},
-            {TILE_SOLID, "!"c},
+            {TILE_SOLID, "█"c},
             {TILE_FLOOR, "."c},
             {TILE_BLOOD, ","c},
             {TILE_RATTAIL, ")"c},
             {TILE_RAT, "r"c},
-            {TILE_DUDE, "@"c}
+            {TILE_DUDE, "☻"c}
         }
     Friend Function CAN_WALK_ON_TILE(T As Integer) As Boolean
         If T = TILE_FLOOR OrElse T = TILE_DOOR_EAST OrElse T = TILE_DOOR_WEST OrElse T = TILE_DOOR_NORTH OrElse T = TILE_DOOR_SOUTH OrElse T = TILE_BLOOD Then
