@@ -74,7 +74,7 @@
         MSET(RM, 2, CREATURE_ROOM_COLUMN(i), CREATURE_ROOM_ROW(i), TI)
     End Sub
 
-    Private Sub REMOVE_CREATURE(i As Integer)
+    Friend Sub REMOVE_CREATURE(i As Integer)
         Dim MX = CREATURE_MAZE_COLUMN(i)
         Dim My = CREATURE_MAZE_ROW(i)
         Dim RM = GET_ROOM_MAP(MX, My)
@@ -145,61 +145,63 @@
         End If
         Return R
     End Function
+    Friend Function FIND_CREATURE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
+        For I = 0 To CREATURE_ALIVE.Count - 1
+            If CREATURE_ALIVE(I) Then
+                If MX = CREATURE_MAZE_COLUMN(I) AndAlso M_Y = CREATURE_MAZE_ROW(I) AndAlso X = CREATURE_ROOM_COLUMN(I) AndAlso Y = CREATURE_ROOM_ROW(I) Then
+                    Return I
+                End If
+            End If
+        Next
+        Return -1
+    End Function
+    Friend Function GET_CREATURE_NAME(I As Integer) As String
+        Dim CT = CREATURE_TYPE(I)
+        Return CREATURETYPE_NAME(CT)
+    End Function
+    Friend Function GET_CREATURE_HEALTH(I As Integer) As Integer
+        Return CREATURE_HITPOINTS(I) - CREATURE_WOUNDS(I)
+    End Function
+    Friend Function GET_CREATURE_XP(I As Integer) As Integer
+        Dim CT = CREATURE_TYPE(I)
+        If CREATURETYPE_XP.ContainsKey(CT) Then
+            Return CREATURETYPE_XP(CT)
+        End If
+        Return 0
+    End Function
+    Friend Function CREATURE_ROLL_ATTACK(I As Integer) As Integer
+        If CREATURE_WEAPONS.ContainsKey(I) Then
+            Dim W = CREATURE_WEAPONS(I)
+            Return ITEM_ROLL_ATTACK(W)
+        End If
+        Return 0
+    End Function
+    Friend Function CREATURE_ROLL_DEFEND(I As Integer) As Integer
+        'ARMOR
+        Return 0
+    End Function
+    Friend Sub WOUND_CREATURE(I As Integer, D As Integer)
+        If CREATURE_ALIVE(I) Then
+            CREATURE_WOUNDS(I) = CREATURE_WOUNDS(I) + D
+            If CREATURE_WOUNDS(I) >= CREATURE_HITPOINTS(I) Then
+                CREATURE_ALIVE(I) = False
+                CREATURE_WOUNDS(I) = CREATURE_HITPOINTS(I)
+            End If
+        End If
+    End Sub
+    Friend Sub CREATURE_DROP_ITEM(I As Integer)
+        Dim CT = CREATURE_TYPE(I)
+        'TODO: CHANCE OF NOT DROPPING ITEM?
+        'TODO: WEIGHTED GENERATOR FOR WHAT ITEM GETS DROPPED?
+        If Not CREATURETYPE_ITEMTYPE_DROP.ContainsKey(CT) Then
+            Return
+        End If
+        Dim IT = CREATURETYPE_ITEMTYPE_DROP(CT)
+        Dim MX = CREATURE_MAZE_COLUMN(I)
+        Dim M_Y = CREATURE_MAZE_ROW(I)
+        Dim X = CREATURE_ROOM_COLUMN(I)
+        Dim Y = CREATURE_ROOM_ROW(I)
+        Dim II = CREATE_ROOM_ITEM(IT, MX, M_Y, X, Y)
+        PLACE_ITEM(II)
+    End Sub
 End Module
-' DEF GET_CREATURE_XP(I)
-'     CT=CREATURE_TYPE(I)
-'     IF EXISTS(CREATURETYPE_XP,CT) THEN
-'         RETURN CREATURETYPE_XP(CT)
-'     END IF
-'     RETURN 0
-' ENDDEF
-' DEF CREATURE_DROP_ITEM(I)
-'     CT=CREATURE_TYPE(I)
-'     'TODO: CHANCE OF NOT DROPPING ITEM?
-'     'TODO: WEIGHTED GENERATOR FOR WHAT ITEM GETS DROPPED?
-'     IT=CREATURETYPE_ITEMTYPE_DROP(CT)
-'     MX=CREATURE_MAZE_COLUMN(I)
-'     M_Y=CREATURE_MAZE_ROW(I)
-'     X=CREATURE_ROOM_COLUMN(I)
-'     Y=CREATURE_ROOM_ROW(I)
-'     II=CREATE_ROOM_ITEM(IT,MX,M_Y,X,Y)
-'     PRINT II;
-'     PLACE_ITEM(II)
-' ENDDEF
-' DEF CREATURE_ROLL_ATTACK(I)
-'     IF EXISTS(CREATURE_WEAPONS,I) THEN
-'         W=CREATURE_WEAPONS(I)
-'         RETURN ITEM_ROLL_ATTACK(W)
-'     END IF
-'     RETURN 0
-' ENDDEF
-' DEF CREATURE_ROLL_DEFEND(I)
-'     'ARMOR
-'     RETURN 0
-' ENDDEF
-' DEF GET_CREATURE_NAME(I)
-'     CT=CREATURE_TYPE(I)
-'     RETURN CREATURETYPE_NAME(CT)
-' ENDDEF
-' DEF GET_CREATURE_HEALTH(I)
-'     RETURN CREATURE_HITPOINTS(I)-CREATURE_WOUNDS(I)
-' ENDDEF
-' DEF FIND_CREATURE(MX,M_Y,X,Y)
-'     FOR I=0 TO LEN(CREATURE_ALIVE)-1
-'         IF CREATURE_ALIVE(I) THEN
-'             IF MX=CREATURE_MAZE_COLUMN(I) AND M_Y=CREATURE_MAZE_ROW(I) AND X=CREATURE_ROOM_COLUMN(I) AND Y=CREATURE_ROOM_ROW(I) THEN
-'                 RETURN I
-'             END IF
-'         END IF
-'     NEXT I
-'     RETURN -1
-' ENDDEF
-' DEF WOUND_CREATURE(I,D)
-'     IF CREATURE_ALIVE(I) THEN
-'         CREATURE_WOUNDS(I)=CREATURE_WOUNDS(I)+D
-'         IF CREATURE_WOUNDS(I)>=CREATURE_HITPOINTS(I) THEN
-'             CREATURE_ALIVE(I)=FALSE
-'             CREATURE_WOUNDS(I)=CREATURE_HITPOINTS(I)
-'         END IF
-'     END IF
-' ENDDEF

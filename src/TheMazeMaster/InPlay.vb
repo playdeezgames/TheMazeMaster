@@ -16,14 +16,14 @@
         Dim R = STATE_IN_PLAY
         If d < DIRECTION_COUNT Then
             Dim MR = MOVE_PLAYER(d)
-            '         IF MR=MOVE_FIGHT THEN
-            '             FIGHT_CREATURE_INDEX=GET_PLAYER_ENEMY(D)
-            '             FIGHT_START()
-            '             RETURN STATE_FIGHT
-            '         ELSEIF MR=MOVE_PICKUP THEN
-            '             PICKUP_ITEM_INDEX=GET_PLAYER_PICKUP(D)
-            '             RETURN STATE_PICKUP
-            '         ENDIF
+            If MR = MOVE_FIGHT Then
+                FIGHT_CREATURE_INDEX = GET_PLAYER_ENEMY(d)
+                FIGHT_START()
+                Return STATE_FIGHT
+                '         ELSEIF MR=MOVE_PICKUP THEN
+                '             PICKUP_ITEM_INDEX=GET_PLAYER_PICKUP(D)
+                '             RETURN STATE_PICKUP
+            End If
         End If
         Return R
     End Function

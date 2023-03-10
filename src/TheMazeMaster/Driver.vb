@@ -1,6 +1,4 @@
-﻿Imports System.Data
-
-Friend Module Driver
+﻿Friend Module Driver
     Private ReadOnly random As New Random()
     Friend Sub UpdateWith(updater As Action)
         Do
@@ -39,4 +37,14 @@ Friend Module Driver
             Console.WriteLine()
         Next
     End Sub
+    Friend Function ROLL_DICE(D As Integer, M As Integer) As Integer
+        Dim R = 0
+        While D > 0 And R < M
+            D = D - 1
+            If Rnd(1, 6) = 6 Then
+                R = R + 1
+            End If
+        End While
+        Return R
+    End Function
 End Module
