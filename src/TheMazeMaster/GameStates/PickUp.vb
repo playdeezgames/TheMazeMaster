@@ -3,7 +3,7 @@
     Friend Function Update() As String
         Dim II = PICKUP_ITEM_INDEX
         Dim IT = ITEM_TYPES(II)
-        AnsiConsole.MarkUpLine($"PICK UP {ITEMTYPE_NAMES(IT)}?")
+        AnsiConsole.MarkupLine($"PICK UP {AllItemTypes(IT).Name}?")
         AnsiConsole.MarkUpLine("(Y)ES/(N)O")
         Select Case Console.ReadKey(True).Key
             Case ConsoleKey.N

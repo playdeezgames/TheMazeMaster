@@ -29,7 +29,7 @@
             Dim MY = ITEM_MAZE_ROWS(I)
             Dim X = ITEM_ROOM_COLUMNS(I)
             Dim Y = ITEM_ROOM_ROWS(I)
-            Dim TI = ITEMTYPE_TILE_INDICES(IT)
+            Dim TI = AllItemTypes(IT).TileIndex
             Dim RM = GET_ROOM_MAP(MX, MY)
             MSET(RM, 2, X, Y, TI)
         End If

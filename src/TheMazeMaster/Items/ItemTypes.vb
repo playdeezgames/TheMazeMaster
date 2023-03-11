@@ -2,29 +2,26 @@
     Friend AllItemTypes As IReadOnlyDictionary(Of String, ItemType) =
         New Dictionary(Of String, ItemType) From
         {
-            {ITEMTYPE_FIST, New ItemType},
-            {ITEMTYPE_BITE, New ItemType},
-            {ITEMTYPE_RATTAIL, New ItemType(stacks:=True)}
+            {
+                ITEMTYPE_FIST,
+                New ItemType("Fist")
+            },
+            {
+                ITEMTYPE_BITE,
+                New ItemType("Bite")
+            },
+            {
+                ITEMTYPE_RATTAIL,
+                New ItemType(
+                    "Rat Tail",
+                    stacks:=True,
+                    tileIndex:=TILE_RATTAIL)
+            }
         }
     Friend Const ITEMTYPE_NONE = ""
     Friend Const ITEMTYPE_FIST = "FIST"
     Friend Const ITEMTYPE_BITE = "BITE"
     Friend Const ITEMTYPE_RATTAIL = "RATTAIL"
-    Friend ReadOnly ITEMTYPE_NAMES As IReadOnlyDictionary(Of String, String) =
-        New Dictionary(Of String, String) From
-        {
-            {ITEMTYPE_FIST, "FIST"},
-            {ITEMTYPE_BITE, "BITE"},
-            {ITEMTYPE_RATTAIL, "RAT TAIL"}
-        }
-    Friend ReadOnly ITEMTYPE_TILE_INDICES As IReadOnlyDictionary(Of String, Integer) =
-        New Dictionary(Of String, Integer) From
-        {
-            {ITEMTYPE_FIST, TILE_EMPTY},
-            {ITEMTYPE_BITE, TILE_EMPTY},
-            {ITEMTYPE_RATTAIL, TILE_RATTAIL}
-        }
-
     Friend ReadOnly ITEMTYPE_ATTACK_VALUE As IReadOnlyDictionary(Of String, Integer) = New Dictionary(Of String, Integer) From
         {
             {ITEMTYPE_FIST, 1},
