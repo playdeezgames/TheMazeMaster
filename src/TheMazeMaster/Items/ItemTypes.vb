@@ -28,12 +28,5 @@
     Friend Const ITEMTYPE_FIST = "FIST"
     Friend Const ITEMTYPE_BITE = "BITE"
     Friend Const ITEMTYPE_RATTAIL = "RATTAIL"
-    Friend ReadOnly ALL_ITEMTYPES As IReadOnlyList(Of String) =
-        New List(Of String) From
-        {
-            ITEMTYPE_FIST,
-            ITEMTYPE_BITE,
-            ITEMTYPE_RATTAIL
-        }
 End Module
 
