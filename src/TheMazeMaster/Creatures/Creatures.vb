@@ -58,7 +58,7 @@
         CREATURE_MAZE_ROW.Add(m_y)
         CREATURE_ROOM_COLUMN.Add(x)
         CREATURE_ROOM_ROW.Add(y)
-        CREATURE_HITPOINTS.Add(CREATURETYPE_HITPOINTS(cT))
+        CREATURE_HITPOINTS.Add(AllCreatureTypes(cT).HitPoints)
         CREATURE_WOUNDS.Add(0)
         Dim WT = AllCreatureTypes(cT).DefaultWeaponType
         CREATURE_WEAPONS(I) = CREATE_ITEM(WT)
