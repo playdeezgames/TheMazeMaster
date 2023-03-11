@@ -23,6 +23,5 @@
                     drop:=ITEMTYPE_RATTAIL)
             }
         }
-    Friend ReadOnly ALL_CREATURETYPES As IReadOnlyList(Of CreatureTypeIdentifier) = New List(Of CreatureTypeIdentifier) From {CreatureTypeIdentifier.Dude, CreatureTypeIdentifier.Rat}
 End Module
 

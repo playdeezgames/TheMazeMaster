@@ -10,11 +10,10 @@
     Friend CREATURE_WEAPONS As New Dictionary(Of Integer, Integer)
     Friend Sub Generate()
         CLEAR_CREATURES()
-        For CTI = 0 To ALL_CREATURETYPES.Count - 1
-            Dim CT = ALL_CREATURETYPES(CTI)
-            Dim SC = AllCreatureTypes(CT).SpawnCount
+        For Each entry In AllCreatureTypes
+            Dim SC = entry.Value.SpawnCount
             While SC > 0
-                GENERATE_CREATURE(CT)
+                GENERATE_CREATURE(entry.Key)
                 SC -= 1
             End While
         Next
