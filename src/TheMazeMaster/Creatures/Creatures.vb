@@ -23,10 +23,10 @@
     Friend Function GENERATE_CREATURE(cT As String) As Integer
         Dim L = AllCreatureTypes(cT).MinimumExitCount
         Dim H = AllCreatureTypes(cT).MaximumExitCount
-        Dim LX = CREATURETYPE_MINIMUM_X(cT)
-        Dim LY = CREATURETYPE_MINIMUM_Y(cT)
-        Dim HX = CREATURETYPE_MAXIMUM_X(cT)
-        Dim HY = CREATURETYPE_MAXIMUM_Y(cT)
+        Dim LX = AllCreatureTypes(cT).MinimumX
+        Dim LY = AllCreatureTypes(cT).MinimumY
+        Dim HX = AllCreatureTypes(cT).MaximumX
+        Dim HY = AllCreatureTypes(cT).MaximumY
         Dim e As Integer
         Dim x As Integer
         Dim y As Integer
@@ -157,17 +157,14 @@
     End Function
     Friend Function GET_CREATURE_NAME(I As Integer) As String
         Dim CT = CREATURE_TYPE(I)
-        Return CREATURETYPE_NAME(CT)
+        Return AllCreatureTypes(CT).Name
     End Function
     Friend Function GET_CREATURE_HEALTH(I As Integer) As Integer
         Return CREATURE_HITPOINTS(I) - CREATURE_WOUNDS(I)
     End Function
     Friend Function GET_CREATURE_XP(I As Integer) As Integer
         Dim CT = CREATURE_TYPE(I)
-        If CREATURETYPE_XP.ContainsKey(CT) Then
-            Return CREATURETYPE_XP(CT)
-        End If
-        Return 0
+        Return AllCreatureTypes(CT).XP
     End Function
     Friend Function CREATURE_ROLL_ATTACK(I As Integer) As Integer
         If CREATURE_WEAPONS.ContainsKey(I) Then
@@ -193,10 +190,10 @@
         Dim CT = CREATURE_TYPE(I)
         'TODO: CHANCE OF NOT DROPPING ITEM?
         'TODO: WEIGHTED GENERATOR FOR WHAT ITEM GETS DROPPED?
-        If Not CREATURETYPE_ITEMTYPE_DROP.ContainsKey(CT) Then
+        Dim IT = AllCreatureTypes(CT).Drop
+        If IT = ITEMTYPE_NONE Then
             Return
         End If
-        Dim IT = CREATURETYPE_ITEMTYPE_DROP(CT)
         Dim MX = CREATURE_MAZE_COLUMN(I)
         Dim M_Y = CREATURE_MAZE_ROW(I)
         Dim X = CREATURE_ROOM_COLUMN(I)
