@@ -1,10 +1,25 @@
 ﻿Module CreatureTypes
+    Friend ReadOnly AllCreatureTypes As IReadOnlyDictionary(Of String, CreatureType) =
+        New Dictionary(Of String, CreatureType) From
+        {
+            {
+                CREATURETYPE_DUDE,
+                New CreatureType With
+                {
+                    .TileIndex = TILE_DUDE
+                }
+            },
+            {
+                CREATURETYPE_RAT,
+                New CreatureType With
+                {
+                    .TileIndex = TILE_RAT
+                }
+            }
+        }
     Friend Const CREATURETYPE_DUDE = "DUDE"
     Friend Const CREATURETYPE_RAT = "RAT"
     Friend ReadOnly ALL_CREATURETYPES As IReadOnlyList(Of String) = New List(Of String) From {CREATURETYPE_DUDE, CREATURETYPE_RAT}
-    Friend ReadOnly CREATURETYPE_TILE_INDICES As IReadOnlyDictionary(Of String, Integer) =
-        New Dictionary(Of String, Integer) From
-        {{CREATURETYPE_DUDE, TILE_DUDE}, {CREATURETYPE_RAT, TILE_RAT}}
     Friend ReadOnly CREATURETYPE_MINIMUM_EXIT_COUNTS As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {{CREATURETYPE_DUDE, 2}, {CREATURETYPE_RAT, 1}}

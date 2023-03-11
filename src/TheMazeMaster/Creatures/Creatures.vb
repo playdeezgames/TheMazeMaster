@@ -70,7 +70,7 @@
         Dim MX = CREATURE_MAZE_COLUMN(i)
         Dim My = CREATURE_MAZE_ROW(i)
         Dim RM = GET_ROOM_MAP(MX, My)
-        Dim TI = CREATURETYPE_TILE_INDICES(CREATURE_TYPE(i))
+        Dim TI = AllCreatureTypes(CREATURE_TYPE(i)).TileIndex
         MSET(RM, 2, CREATURE_ROOM_COLUMN(i), CREATURE_ROOM_ROW(i), TI)
     End Sub
 
