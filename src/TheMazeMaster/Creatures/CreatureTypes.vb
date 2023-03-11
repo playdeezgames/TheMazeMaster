@@ -9,7 +9,7 @@
                     TILE_DUDE,
                     3,
                     minimumExitCount:=2,
-                    defaultWeaponType:=ITEMTYPE_FIST)
+                    defaultWeaponType:=ItemTypeIdentifier.Fist)
             },
             {
                 CreatureTypeIdentifier.Rat,
@@ -18,9 +18,9 @@
                     TILE_RAT,
                     1,
                     spawnCount:=192,
-                    defaultWeaponType:=ITEMTYPE_BITE,
+                    defaultWeaponType:=ItemTypeIdentifier.Bite,
                     xp:=1,
-                    drop:=ITEMTYPE_RATTAIL)
+                    drop:=ItemTypeIdentifier.RatTail)
             }
         }
 End Module

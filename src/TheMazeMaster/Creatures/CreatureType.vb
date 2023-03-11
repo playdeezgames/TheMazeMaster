@@ -1,4 +1,4 @@
-﻿Public Class CreatureType
+﻿Friend Class CreatureType
     Public Sub New(
                   name As String,
                   tileIndex As Integer,
@@ -10,9 +10,9 @@
                   Optional minimumY As Integer = 1,
                   Optional maximumX As Integer = 13,
                   Optional maximumY As Integer = 13,
-                  Optional defaultWeaponType As String = ITEMTYPE_NONE,
+                  Optional defaultWeaponType As ItemTypeIdentifier = ItemTypeIdentifier.None,
                   Optional xp As Integer = 0,
-                  Optional drop As String = ITEMTYPE_NONE)
+                  Optional drop As ItemTypeIdentifier = ItemTypeIdentifier.None)
         Me.Name = name
         Me.TileIndex = tileIndex
         Me.MinimumExitCount = minimumExitCount
@@ -32,12 +32,12 @@
     Public ReadOnly Property MinimumExitCount As Integer
     Public ReadOnly Property MaximumExitCount As Integer
     Public ReadOnly Property SpawnCount As Integer
-    Public ReadOnly Property DefaultWeaponType As String
+    Public ReadOnly Property DefaultWeaponType As ItemTypeIdentifier
     Public ReadOnly Property HitPoints As Integer
     Public ReadOnly Property MinimumX As Integer
     Public ReadOnly Property MinimumY As Integer
     Public ReadOnly Property MaximumX As Integer
     Public ReadOnly Property MaximumY As Integer
     Public ReadOnly Property XP As Integer
-    Public ReadOnly Property Drop As String
+    Public ReadOnly Property Drop As ItemTypeIdentifier
 End Class

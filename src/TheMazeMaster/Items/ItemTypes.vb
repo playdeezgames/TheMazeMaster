@@ -1,32 +1,28 @@
 ﻿Friend Module ItemTypes
-    Friend AllItemTypes As IReadOnlyDictionary(Of String, ItemType) =
-        New Dictionary(Of String, ItemType) From
+    Friend AllItemTypes As IReadOnlyDictionary(Of ItemTypeIdentifier, ItemType) =
+        New Dictionary(Of ItemTypeIdentifier, ItemType) From
         {
             {
-                ITEMTYPE_FIST,
+                ItemTypeIdentifier.Fist,
                 New ItemType(
                     "Fist",
                     attackValue:=1,
                     attackMaximum:=1)
             },
             {
-                ITEMTYPE_BITE,
+                ItemTypeIdentifier.Bite,
                 New ItemType(
                     "Bite",
                     attackValue:=1,
                     attackMaximum:=1)
             },
             {
-                ITEMTYPE_RATTAIL,
+                ItemTypeIdentifier.RatTail,
                 New ItemType(
                     "Rat Tail",
                     stacks:=True,
                     tileIndex:=TILE_RATTAIL)
             }
         }
-    Friend Const ITEMTYPE_NONE = ""
-    Friend Const ITEMTYPE_FIST = "FIST"
-    Friend Const ITEMTYPE_BITE = "BITE"
-    Friend Const ITEMTYPE_RATTAIL = "RATTAIL"
 End Module
 

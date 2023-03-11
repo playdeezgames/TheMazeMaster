@@ -1,10 +1,10 @@
 ﻿Friend Module Items
-    Friend ITEM_TYPES As New List(Of String)
+    Friend ITEM_TYPES As New List(Of ItemTypeIdentifier)
     Friend ITEM_MAZE_COLUMNS As New Dictionary(Of Integer, Integer)
     Friend ITEM_MAZE_ROWS As New Dictionary(Of Integer, Integer)
     Friend ITEM_ROOM_COLUMNS As New Dictionary(Of Integer, Integer)
     Friend ITEM_ROOM_ROWS As New Dictionary(Of Integer, Integer)
-    Function CREATE_ITEM(IT As String) As Integer
+    Function CREATE_ITEM(IT As ItemTypeIdentifier) As Integer
         'TODO: FIRST LOOK FOR EMPTY ITEM
         Dim I = ITEM_TYPES.Count
         ITEM_TYPES.Add(IT)
@@ -14,7 +14,7 @@
         Dim IT = ITEM_TYPES(I)
         Return AllItemTypes(IT).RollAttack
     End Function
-    Friend Function CREATE_ROOM_ITEM(IT As String, MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
+    Friend Function CREATE_ROOM_ITEM(IT As ItemTypeIdentifier, MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         Dim I = CREATE_ITEM(IT)
         ITEM_MAZE_COLUMNS(I) = MX
         ITEM_MAZE_ROWS(I) = M_Y
@@ -66,6 +66,6 @@
         ITEM_ROOM_ROWS.Remove(II)
     End Sub
     Friend Sub ITEM_DESTROY(II As Integer)
-        ITEM_TYPES(II) = ITEMTYPE_NONE
+        ITEM_TYPES(II) = ItemTypeIdentifier.None
     End Sub
 End Module

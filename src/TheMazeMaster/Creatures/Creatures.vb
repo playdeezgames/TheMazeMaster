@@ -190,7 +190,7 @@
         'TODO: CHANCE OF NOT DROPPING ITEM?
         'TODO: WEIGHTED GENERATOR FOR WHAT ITEM GETS DROPPED?
         Dim IT = AllCreatureTypes(CT).Drop
-        If IT = ITEMTYPE_NONE Then
+        If IT = ItemTypeIdentifier.None Then
             Return
         End If
         Dim MX = CREATURE_MAZE_COLUMN(I)
