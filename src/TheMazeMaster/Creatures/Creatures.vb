@@ -12,10 +12,10 @@
         CLEAR_CREATURES()
         For CTI = 0 To ALL_CREATURETYPES.Count - 1
             Dim CT = ALL_CREATURETYPES(CTI)
-            Dim SC = CREATURETYPE_SPAWN_COUNTS(CT)
+            Dim SC = AllCreatureTypes(CT).SpawnCount
             While SC > 0
                 GENERATE_CREATURE(CT)
-                SC = SC - 1
+                SC -= 1
             End While
         Next
     End Sub
