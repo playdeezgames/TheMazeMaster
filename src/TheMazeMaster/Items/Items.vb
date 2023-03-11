@@ -12,7 +12,7 @@
     End Function
     Friend Function ITEM_ROLL_ATTACK(I As Integer) As Integer
         Dim IT = ITEM_TYPES(I)
-        Return ITEMTYPE_ROLL_ATTACK(IT)
+        Return AllItemTypes(IT).RollAttack
     End Function
     Friend Function CREATE_ROOM_ITEM(IT As String, MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         Dim I = CREATE_ITEM(IT)

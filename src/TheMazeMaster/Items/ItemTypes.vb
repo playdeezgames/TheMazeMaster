@@ -4,11 +4,17 @@
         {
             {
                 ITEMTYPE_FIST,
-                New ItemType("Fist")
+                New ItemType(
+                    "Fist",
+                    attackValue:=1,
+                    attackMaximum:=1)
             },
             {
                 ITEMTYPE_BITE,
-                New ItemType("Bite")
+                New ItemType(
+                    "Bite",
+                    attackValue:=1,
+                    attackMaximum:=1)
             },
             {
                 ITEMTYPE_RATTAIL,
@@ -22,27 +28,6 @@
     Friend Const ITEMTYPE_FIST = "FIST"
     Friend Const ITEMTYPE_BITE = "BITE"
     Friend Const ITEMTYPE_RATTAIL = "RATTAIL"
-    Friend ReadOnly ITEMTYPE_ATTACK_VALUE As IReadOnlyDictionary(Of String, Integer) = New Dictionary(Of String, Integer) From
-        {
-            {ITEMTYPE_FIST, 1},
-            {ITEMTYPE_BITE, 1}
-        }
-    Friend ReadOnly ITEMTYPE_ATTACK_MAXIMUM As IReadOnlyDictionary(Of String, Integer) = New Dictionary(Of String, Integer) From
-        {
-            {ITEMTYPE_FIST, 1},
-            {ITEMTYPE_BITE, 1}
-        }
-    Friend Function ITEMTYPE_ROLL_ATTACK(IT As String) As Integer
-        Dim D = 0
-        If ITEMTYPE_ATTACK_VALUE.ContainsKey(IT) Then
-            D = ITEMTYPE_ATTACK_VALUE(IT)
-        End If
-        Dim M = 0
-        If ITEMTYPE_ATTACK_MAXIMUM.ContainsKey(IT) Then
-            M = ITEMTYPE_ATTACK_MAXIMUM(IT)
-        End If
-        Return ROLL_DICE(D, M)
-    End Function
     Friend ReadOnly ALL_ITEMTYPES As IReadOnlyList(Of String) =
         New List(Of String) From
         {
