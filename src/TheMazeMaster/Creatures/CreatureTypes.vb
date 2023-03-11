@@ -6,21 +6,20 @@
                 CREATURETYPE_DUDE,
                 New CreatureType(
                     TILE_DUDE,
-                    minimumExitCount:=2)
+                    minimumExitCount:=2,
+                    defaultWeaponType:=ITEMTYPE_FIST)
             },
             {
                 CREATURETYPE_RAT,
                 New CreatureType(
                     TILE_RAT,
-                    spawnCount:=192)
+                    spawnCount:=192,
+                    defaultWeaponType:=ITEMTYPE_BITE)
             }
         }
     Friend Const CREATURETYPE_DUDE = "DUDE"
     Friend Const CREATURETYPE_RAT = "RAT"
     Friend ReadOnly ALL_CREATURETYPES As IReadOnlyList(Of String) = New List(Of String) From {CREATURETYPE_DUDE, CREATURETYPE_RAT}
-    Friend ReadOnly CREATURETYPE_DEFAULT_WEAPONTYPES As IReadOnlyDictionary(Of String, String) =
-        New Dictionary(Of String, String) From
-        {{CREATURETYPE_DUDE, ITEMTYPE_FIST}, {CREATURETYPE_RAT, ITEMTYPE_BITE}}
     Friend ReadOnly CREATURETYPE_HITPOINTS As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {{CREATURETYPE_DUDE, 3}, {CREATURETYPE_RAT, 1}}
