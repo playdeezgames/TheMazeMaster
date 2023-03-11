@@ -53,6 +53,7 @@
         End If
     End Sub
     Friend Sub FIGHT_ATTACK()
+        FIGHT_MESSAGES.Clear()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
         RESOLVE_ATTACK(AI, DI)

@@ -1,9 +1,9 @@
 ﻿Module CreatureTypes
-    Friend ReadOnly AllCreatureTypes As IReadOnlyDictionary(Of String, CreatureType) =
-        New Dictionary(Of String, CreatureType) From
+    Friend ReadOnly AllCreatureTypes As IReadOnlyDictionary(Of CreatureTypeIdentifier, CreatureType) =
+        New Dictionary(Of CreatureTypeIdentifier, CreatureType) From
         {
             {
-                CREATURETYPE_DUDE,
+                CreatureTypeIdentifier.Dude,
                 New CreatureType(
                     "Dude",
                     TILE_DUDE,
@@ -12,7 +12,7 @@
                     defaultWeaponType:=ITEMTYPE_FIST)
             },
             {
-                CREATURETYPE_RAT,
+                CreatureTypeIdentifier.Rat,
                 New CreatureType(
                     "Rat",
                     TILE_RAT,
@@ -23,8 +23,6 @@
                     drop:=ITEMTYPE_RATTAIL)
             }
         }
-    Friend Const CREATURETYPE_DUDE = "DUDE"
-    Friend Const CREATURETYPE_RAT = "RAT"
-    Friend ReadOnly ALL_CREATURETYPES As IReadOnlyList(Of String) = New List(Of String) From {CREATURETYPE_DUDE, CREATURETYPE_RAT}
+    Friend ReadOnly ALL_CREATURETYPES As IReadOnlyList(Of CreatureTypeIdentifier) = New List(Of CreatureTypeIdentifier) From {CreatureTypeIdentifier.Dude, CreatureTypeIdentifier.Rat}
 End Module
 

@@ -4,7 +4,7 @@
     Friend CREATURE_MAZE_ROW As New List(Of Integer)
     Friend CREATURE_ROOM_COLUMN As New List(Of Integer)
     Friend CREATURE_ROOM_ROW As New List(Of Integer)
-    Friend CREATURE_TYPE As New List(Of String)
+    Friend CREATURE_TYPE As New List(Of CreatureTypeIdentifier)
     Friend CREATURE_HITPOINTS As New List(Of Integer)
     Friend CREATURE_WOUNDS As New List(Of Integer)
     Friend CREATURE_WEAPONS As New Dictionary(Of Integer, Integer)
@@ -20,7 +20,7 @@
         Next
     End Sub
 
-    Friend Function GENERATE_CREATURE(cT As String) As Integer
+    Friend Function GENERATE_CREATURE(cT As CreatureTypeIdentifier) As Integer
         Dim L = AllCreatureTypes(cT).MinimumExitCount
         Dim H = AllCreatureTypes(cT).MaximumExitCount
         Dim LX = AllCreatureTypes(cT).MinimumX
@@ -49,7 +49,7 @@
         Return CREATE_CREATURE(cT, mx, m_y, x, y)
     End Function
 
-    Private Function CREATE_CREATURE(cT As String, mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
+    Private Function CREATE_CREATURE(cT As CreatureTypeIdentifier, mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
         'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
         Dim I = CREATURE_ALIVE.Count
         CREATURE_ALIVE.Add(True)
