@@ -22,7 +22,7 @@
 
     Friend Function GENERATE_CREATURE(cT As String) As Integer
         Dim L = AllCreatureTypes(cT).MinimumExitCount
-        Dim H = CREATURETYPE_MAXIMUM_EXIT_COUNTS(cT)
+        Dim H = AllCreatureTypes(cT).MaximumExitCount
         Dim LX = CREATURETYPE_MINIMUM_X(cT)
         Dim LY = CREATURETYPE_MINIMUM_Y(cT)
         Dim HX = CREATURETYPE_MAXIMUM_X(cT)
