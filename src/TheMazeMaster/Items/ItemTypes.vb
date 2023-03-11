@@ -1,10 +1,15 @@
 ﻿Friend Module ItemTypes
+    Friend AllItemTypes As IReadOnlyDictionary(Of String, ItemType) =
+        New Dictionary(Of String, ItemType) From
+        {
+            {ITEMTYPE_FIST, New ItemType},
+            {ITEMTYPE_BITE, New ItemType},
+            {ITEMTYPE_RATTAIL, New ItemType(stacks:=True)}
+        }
     Friend Const ITEMTYPE_NONE = ""
     Friend Const ITEMTYPE_FIST = "FIST"
     Friend Const ITEMTYPE_BITE = "BITE"
     Friend Const ITEMTYPE_RATTAIL = "RATTAIL"
-    Friend ReadOnly ITEMTYPE_STACKS As IReadOnlyList(Of String) =
-        New List(Of String) From {ITEMTYPE_RATTAIL}
     Friend ReadOnly ITEMTYPE_NAMES As IReadOnlyDictionary(Of String, String) =
         New Dictionary(Of String, String) From
         {

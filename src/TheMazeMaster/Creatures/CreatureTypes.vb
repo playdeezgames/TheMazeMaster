@@ -1,4 +1,4 @@
-﻿Module CreatureTypes
+﻿Friend Module CreatureTypes
     Friend ReadOnly AllCreatureTypes As IReadOnlyDictionary(Of CreatureTypeIdentifier, CreatureType) =
         New Dictionary(Of CreatureTypeIdentifier, CreatureType) From
         {

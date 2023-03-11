@@ -41,18 +41,19 @@
     Friend Sub PLAYER_TAKE_ITEM(II As Integer)
         ITEM_CLEAR_ROOM(II)
         Dim IT = ITEM_TYPES(II)
-        If ITEMTYPE_STACKS.contains(IT) Then
-            '    IF NOT EXISTS(PLAYER_STACKS,IT) THEN
-            '        IC=1
-            '    ELSE
-            '        IC=PLAYER_STACKS(IT)+1
-            '    END IF
-            '    PLAYER_STACKS(IT)=IC
-            '    ITEM_DESTROY(II)
+        Dim ic As Integer
+        If If(AllItemTypes(IT)?.Stacks, False) Then
+            If Not PLAYER_STACKS.ContainsKey(IT) Then
+                IC = 1
+            Else
+                IC = PLAYER_STACKS(IT) + 1
+            End If
+            PLAYER_STACKS(IT) = ic
+            ITEM_DESTROY(II)
         Else
-            '    IF NOT EXISTS(PLAYER_INVENTORY,II) THEN
-            '        PUSH(PLAYER_INVENTORY,II)
-            '    END IF
+            If Not PLAYER_INVENTORY.Contains(II) Then
+                PLAYER_INVENTORY.Add(II)
+            End If
         End If
     End Sub
 End Module
