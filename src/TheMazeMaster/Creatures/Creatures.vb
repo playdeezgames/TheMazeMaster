@@ -1,7 +1,5 @@
 ﻿Friend Module Creatures
     Friend AllCreatures As New List(Of Creature)
-    Friend CREATURE_TYPE As New List(Of CreatureTypeIdentifier)
-    Friend CREATURE_HITPOINTS As New List(Of Integer)
     Friend CREATURE_WOUNDS As New List(Of Integer)
     Friend CREATURE_WEAPONS As New Dictionary(Of Integer, Integer)
     Friend Sub Generate()
@@ -47,9 +45,7 @@
     Private Function CREATE_CREATURE(cT As CreatureTypeIdentifier, mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
         'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
         Dim I = AllCreatures.Count
-        AllCreatures.Add(New Creature(mX, m_y, x, y))
-        CREATURE_TYPE.Add(cT)
-        CREATURE_HITPOINTS.Add(AllCreatureTypes(cT).HitPoints)
+        AllCreatures.Add(New Creature(cT, mX, m_y, x, y))
         CREATURE_WOUNDS.Add(0)
         Dim WT = AllCreatureTypes(cT).DefaultWeaponType
         CREATURE_WEAPONS(I) = AllItemTypes(WT).Create
@@ -61,7 +57,7 @@
         Dim MX = AllCreatures(i).MazeColumn
         Dim My = AllCreatures(i).MazeRow
         Dim RM = GET_ROOM_MAP(MX, My)
-        Dim TI = AllCreatureTypes(CREATURE_TYPE(i)).TileIndex
+        Dim TI = AllCreatures(i).CreatureType.TileIndex
         MSET(RM, 2, AllCreatures(i).RoomColumn, AllCreatures(i).RoomRow, TI)
     End Sub
 
@@ -75,8 +71,6 @@
 
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
-        CREATURE_TYPE.Clear()
-        CREATURE_HITPOINTS.Clear()
         CREATURE_WOUNDS.Clear()
         CREATURE_WEAPONS.Clear()
     End Sub
@@ -135,24 +129,26 @@
     Friend Function FIND_CREATURE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         For I = 0 To AllCreatures.Count - 1
             If AllCreatures(I).Alive Then
-                If MX = AllCreatures(I).MazeColumn AndAlso M_Y = AllCreatures(I).RoomColumn AndAlso X = AllCreatures(I).RoomColumn AndAlso Y = AllCreatures(I).RoomRow Then
+                If MX = AllCreatures(I).MazeColumn AndAlso M_Y = AllCreatures(I).MazeRow AndAlso X = AllCreatures(I).RoomColumn AndAlso Y = AllCreatures(I).RoomRow Then
                     Return I
                 End If
             End If
         Next
         Return -1
     End Function
+    'TODO: move to creature
     Friend Function GET_CREATURE_NAME(I As Integer) As String
-        Dim CT = CREATURE_TYPE(I)
-        Return AllCreatureTypes(CT).Name
+        Return AllCreatures(I).CreatureType.Name
     End Function
+    'TODO: move to creature
     Friend Function GET_CREATURE_HEALTH(I As Integer) As Integer
-        Return CREATURE_HITPOINTS(I) - CREATURE_WOUNDS(I)
+        Return AllCreatures(I).HitPoints - CREATURE_WOUNDS(I)
     End Function
+    'TODO: move to creature
     Friend Function GET_CREATURE_XP(I As Integer) As Integer
-        Dim CT = CREATURE_TYPE(I)
-        Return AllCreatureTypes(CT).XP
+        Return AllCreatures(I).CreatureType.XP
     End Function
+    'TODO: move to creature
     Friend Function CREATURE_ROLL_ATTACK(I As Integer) As Integer
         If CREATURE_WEAPONS.ContainsKey(I) Then
             Dim W = CREATURE_WEAPONS(I)
@@ -160,24 +156,27 @@
         End If
         Return 0
     End Function
+    'TODO: move to creature
     Friend Function CREATURE_ROLL_DEFEND(I As Integer) As Integer
         'ARMOR
         Return 0
     End Function
+    'TODO: move to creature
     Friend Sub WOUND_CREATURE(I As Integer, D As Integer)
         If AllCreatures(I).Alive Then
             CREATURE_WOUNDS(I) = CREATURE_WOUNDS(I) + D
-            If CREATURE_WOUNDS(I) >= CREATURE_HITPOINTS(I) Then
+            If CREATURE_WOUNDS(I) >= AllCreatures(I).HitPoints Then
                 AllCreatures(I).Alive = False
-                CREATURE_WOUNDS(I) = CREATURE_HITPOINTS(I)
+                CREATURE_WOUNDS(I) = AllCreatures(I).HitPoints
             End If
         End If
     End Sub
+    'TODO: move to creature
     Friend Sub CREATURE_DROP_ITEM(I As Integer)
-        Dim CT = CREATURE_TYPE(I)
+        Dim CT = AllCreatures(I).CreatureType
         'TODO: CHANCE OF NOT DROPPING ITEM?
         'TODO: WEIGHTED GENERATOR FOR WHAT ITEM GETS DROPPED?
-        Dim IT = AllCreatureTypes(CT).Drop
+        Dim IT = CT.Drop
         If IT = ItemTypeIdentifier.None Then
             Return
         End If

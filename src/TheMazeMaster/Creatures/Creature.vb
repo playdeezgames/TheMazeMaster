@@ -1,5 +1,6 @@
 ﻿Friend Class Creature
     Sub New(
+           creatureTypeIdentifier As CreatureTypeIdentifier,
            mazeColumn As Integer,
            mazeRow As Integer,
            roomColumn As Integer,
@@ -10,10 +11,19 @@
         Me.MazeRow = mazeRow
         Me.RoomColumn = roomColumn
         Me.RoomRow = roomRow
+        Me.CreatureTypeIdentifier = creatureTypeIdentifier
+        Me.HitPoints = CreatureType.HitPoints
     End Sub
+    Private Property CreatureTypeIdentifier As CreatureTypeIdentifier
+    ReadOnly Property CreatureType As CreatureType
+        Get
+            Return AllCreatureTypes(CreatureTypeIdentifier)
+        End Get
+    End Property
     Property Alive As Boolean
     Property MazeColumn As Integer
     Property MazeRow As Integer
     Property RoomColumn As Integer
     Property RoomRow As Integer
+    Property HitPoints As Integer
 End Class
