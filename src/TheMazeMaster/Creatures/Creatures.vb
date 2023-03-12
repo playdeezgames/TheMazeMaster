@@ -67,7 +67,6 @@
 
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
-        CREATURE_WEAPONS.Clear()
     End Sub
     Friend Const MOVE_SUCCESS = "SUCCESS"
     Friend Const MOVE_FIGHT = "FIGHT"
@@ -145,8 +144,8 @@
     End Function
     'TODO: move to creature
     Friend Function CREATURE_ROLL_ATTACK(I As Integer) As Integer
-        If CREATURE_WEAPONS.ContainsKey(I) Then
-            Dim W = CREATURE_WEAPONS(I)
+        If AllCreatures(I).Weapon.HasValue Then
+            Dim W = AllCreatures(I).Weapon.Value
             Return AllItems(W).RollAttack
         End If
         Return 0

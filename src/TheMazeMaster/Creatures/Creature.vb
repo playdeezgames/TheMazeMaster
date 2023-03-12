@@ -29,5 +29,5 @@
     Property RoomRow As Integer
     Property HitPoints As Integer
     Property Wounds As Integer
-    Property Weapon As Integer
+    Property Weapon As Integer?
 End Class
