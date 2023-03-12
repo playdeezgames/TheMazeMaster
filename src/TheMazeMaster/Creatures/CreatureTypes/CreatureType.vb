@@ -49,7 +49,7 @@
         Dim I = AllCreatures.Count
         AllCreatures.Add(New Creature(Identifier, mX, m_y, x, y))
         Dim WT = AllCreatureTypes(Identifier).DefaultWeaponType
-        PLACE_CREATURE(I)
+        AllCreatures(I).Place()
         Return I
     End Function
 End Class

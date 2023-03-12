@@ -40,14 +40,6 @@
         Return AllCreatureTypes(cT).Create(mx, m_y, x, y)
     End Function
     'TODO: move to creature
-    Friend Sub PLACE_CREATURE(i As Integer)
-        Dim MX = AllCreatures(i).MazeColumn
-        Dim My = AllCreatures(i).MazeRow
-        Dim RM = GET_ROOM_MAP(MX, My)
-        Dim TI = AllCreatures(i).CreatureType.TileIndex
-        MSET(RM, 2, AllCreatures(i).RoomColumn, AllCreatures(i).RoomRow, TI)
-    End Sub
-    'TODO: move to creature
     Friend Sub REMOVE_CREATURE(i As Integer)
         Dim MX = AllCreatures(i).MazeColumn
         Dim My = AllCreatures(i).MazeRow
@@ -109,7 +101,7 @@
                     End If
                 End If
             End If
-            PLACE_CREATURE(i)
+            AllCreatures(i).Place()
         End If
         Return R
     End Function
