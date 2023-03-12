@@ -12,8 +12,7 @@
         PLAYER_STACKS.Clear()
     End Sub
     Friend Function MOVE_PLAYER(d As Integer) As MoveResult
-        Dim I = PLAYER_CREATURE_INDEX
-        Return MOVE_CREATURE(I, d)
+        Return AllCreatures(PLAYER_CREATURE_INDEX).Move(d)
     End Function
     Friend Function GET_PLAYER_ENEMY(D As Integer) As Integer
         Dim I = PLAYER_CREATURE_INDEX
@@ -26,7 +25,7 @@
         Return FIND_CREATURE(MX, MY, NX, NY)
     End Function
     Friend Sub PLAYER_ADD_XP(XP As Integer)
-        PLAYER_XP = PLAYER_XP + XP
+        PLAYER_XP += XP
     End Sub
     Friend Function GET_PLAYER_PICKUP(D As Integer) As Integer
         Dim I = PLAYER_CREATURE_INDEX

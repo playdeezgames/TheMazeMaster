@@ -39,67 +39,9 @@
         Loop Until e >= L And e <= H
         Return AllCreatureTypes(cT).Create(mx, m_y, x, y)
     End Function
-    'TODO: move to creature
-    Friend Sub REMOVE_CREATURE(i As Integer)
-        Dim MX = AllCreatures(i).MazeColumn
-        Dim My = AllCreatures(i).MazeRow
-        Dim RM = GET_ROOM_MAP(MX, My)
-        Dim TI = TILE_EMPTY
-        MSET(RM, 2, AllCreatures(i).RoomColumn, AllCreatures(i).RoomRow, TI)
-    End Sub
-
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
     End Sub
-    'TODO: move to creature
-    Function MOVE_CREATURE(i As Integer, d As Integer) As MoveResult
-        Dim R = MoveResult.Blocked
-        If AllCreatures(i).Alive Then
-            REMOVE_CREATURE(i)
-            Dim X = AllCreatures(i).RoomColumn
-            Dim Y = AllCreatures(i).RoomRow
-            Dim NX = STEP_X(d, X, Y)
-            Dim NY = STEP_Y(d, X, Y)
-            Dim MX = AllCreatures(i).MazeColumn
-            Dim M_Y = AllCreatures(i).MazeRow
-            If NX < 0 OrElse NY < 0 OrElse NX >= ROOM_COLUMNS OrElse NY >= ROOM_ROWS Then
-                AllCreatures(i).MazeColumn = STEP_X(d, MX, M_Y)
-                AllCreatures(i).MazeRow = STEP_Y(d, MX, M_Y)
-                If NX < 0 Then
-                    AllCreatures(i).RoomColumn = NX + ROOM_COLUMNS
-                ElseIf NX >= ROOM_COLUMNS Then
-                    AllCreatures(i).RoomColumn = NX - ROOM_COLUMNS
-                Else
-                    AllCreatures(i).RoomColumn = NX
-                End If
-                If NY < 0 Then
-                    AllCreatures(i).RoomRow = NY + ROOM_ROWS
-                ElseIf NY >= ROOM_ROWS Then
-                    AllCreatures(i).RoomRow = NY - ROOM_ROWS
-                Else
-                    AllCreatures(i).RoomRow = NY
-                End If
-            Else
-                Dim TL = GET_ROOM_TILE(MX, M_Y, NX, NY)
-                If CAN_WALK_ON_TILE(TL) Then
-                    TL = GET_ROOM_CREATURE_TILE(MX, M_Y, NX, NY)
-                    If TL = TILE_EMPTY Then
-                        AllCreatures(i).RoomColumn = NX
-                        AllCreatures(i).RoomRow = NY
-                        R = MoveResult.Success
-                    Else
-                        If IS_TILE_CREATURE(TL) Then
-                            R = MoveResult.Fight
-                        Else
-                            R = MoveResult.PickUp
-                        End If
-                    End If
-                End If
-            End If
-            AllCreatures(i).Place()
-        End If
-        Return R
-    End Function
     Friend Function FIND_CREATURE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         For I = 0 To AllCreatures.Count - 1
             If AllCreatures(I).Alive Then

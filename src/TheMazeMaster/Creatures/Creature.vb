@@ -87,4 +87,59 @@
         Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
         AllItems(II).Place()
     End Sub
+    Sub Remove()
+        Dim MX = MazeColumn
+        Dim My = MazeRow
+        Dim RM = GET_ROOM_MAP(MX, My)
+        Dim TI = TILE_EMPTY
+        MSET(RM, 2, RoomColumn, RoomRow, TI)
+    End Sub
+    Function Move(d As Integer) As MoveResult
+        Dim R = MoveResult.Blocked
+        If Alive Then
+            Remove()
+            Dim X = RoomColumn
+            Dim Y = RoomRow
+            Dim NX = STEP_X(d, X, Y)
+            Dim NY = STEP_Y(d, X, Y)
+            Dim MX = MazeColumn
+            Dim M_Y = MazeRow
+            If NX < 0 OrElse NY < 0 OrElse NX >= ROOM_COLUMNS OrElse NY >= ROOM_ROWS Then
+                MazeColumn = STEP_X(d, MX, M_Y)
+                MazeRow = STEP_Y(d, MX, M_Y)
+                If NX < 0 Then
+                    RoomColumn = NX + ROOM_COLUMNS
+                ElseIf NX >= ROOM_COLUMNS Then
+                    RoomColumn = NX - ROOM_COLUMNS
+                Else
+                    RoomColumn = NX
+                End If
+                If NY < 0 Then
+                    RoomRow = NY + ROOM_ROWS
+                ElseIf NY >= ROOM_ROWS Then
+                    RoomRow = NY - ROOM_ROWS
+                Else
+                    RoomRow = NY
+                End If
+            Else
+                Dim TL = GET_ROOM_TILE(MX, M_Y, NX, NY)
+                If CAN_WALK_ON_TILE(TL) Then
+                    TL = GET_ROOM_CREATURE_TILE(MX, M_Y, NX, NY)
+                    If TL = TILE_EMPTY Then
+                        RoomColumn = NX
+                        RoomRow = NY
+                        R = MoveResult.Success
+                    Else
+                        If IS_TILE_CREATURE(TL) Then
+                            R = MoveResult.Fight
+                        Else
+                            R = MoveResult.PickUp
+                        End If
+                    End If
+                End If
+            End If
+            Place()
+        End If
+        Return R
+    End Function
 End Class
