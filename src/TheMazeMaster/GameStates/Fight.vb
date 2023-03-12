@@ -17,7 +17,7 @@
         Next R
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
-        If CREATURE_ALIVE(AI) And CREATURE_ALIVE(DI) Then
+        If AllCreatures(AI).Alive And AllCreatures(DI).Alive Then
             Select Case Console.ReadKey(True).Key
                 Case ConsoleKey.R
                     Return STATE_IN_PLAY
@@ -26,7 +26,7 @@
                 Case ConsoleKey.U
                     'USE ITEM
             End Select
-        ElseIf CREATURE_ALIVE(AI) Then
+        ElseIf AllCreatures(AI).Alive Then
             If Console.ReadKey(True).Key = ConsoleKey.V Then
                 'CHECK FOR LEVELING!
                 Return STATE_IN_PLAY
@@ -41,11 +41,11 @@
     Friend Sub FIGHT_PROMPT()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
-        If CREATURE_ALIVE(AI) AndAlso CREATURE_ALIVE(DI) Then
+        If AllCreatures(AI).Alive AndAlso AllCreatures(DI).Alive Then
             FIGHT_MESSAGES.Add($"{GET_CREATURE_NAME(AI)} HAS {GET_CREATURE_HEALTH(AI)} HP")
             FIGHT_MESSAGES.Add($"{GET_CREATURE_NAME(DI)} HAS {GET_CREATURE_HEALTH(DI)} HP")
             FIGHT_MESSAGES.Add("(A)TTACK/(R)UN/(U)SE")
-        ElseIf CREATURE_ALIVE(AI) Then
+        ElseIf AllCreatures(AI).Alive Then
             PLAYER_ADD_XP(GET_CREATURE_XP(DI))
             FIGHT_MESSAGES.Add("(V)ICTORY!")
         Else
@@ -57,7 +57,7 @@
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
         RESOLVE_ATTACK(AI, DI)
-        If CREATURE_ALIVE(DI) Then
+        If AllCreatures(DI).Alive Then
             RESOLVE_ATTACK(DI, AI)
         End If
         FIGHT_PROMPT()
@@ -72,7 +72,7 @@
             Dim D = AR - DR
             WOUND_CREATURE(DI, D)
             FIGHT_MESSAGES.Add($"{GET_CREATURE_NAME(AI)} HITS FOR {D}")
-            If Not CREATURE_ALIVE(DI) Then
+            If Not AllCreatures(DI).Alive Then
                 FIGHT_MESSAGES.Add($"{GET_CREATURE_NAME(AI)} KILLS {GET_CREATURE_NAME(DI)}")
                 REMOVE_CREATURE(DI)
                 CREATURE_DROP_ITEM(DI)

@@ -1,5 +1,5 @@
 ﻿Friend Module Creatures
-    Friend CREATURE_ALIVE As New List(Of Boolean)
+    Friend AllCreatures As New List(Of Creature)
     Friend CREATURE_MAZE_COLUMN As New List(Of Integer)
     Friend CREATURE_MAZE_ROW As New List(Of Integer)
     Friend CREATURE_ROOM_COLUMN As New List(Of Integer)
@@ -50,8 +50,8 @@
 
     Private Function CREATE_CREATURE(cT As CreatureTypeIdentifier, mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
         'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
-        Dim I = CREATURE_ALIVE.Count
-        CREATURE_ALIVE.Add(True)
+        Dim I = AllCreatures.Count
+        AllCreatures.Add(New Creature)
         CREATURE_TYPE.Add(cT)
         CREATURE_MAZE_COLUMN.Add(mX)
         CREATURE_MAZE_ROW.Add(m_y)
@@ -82,7 +82,7 @@
     End Sub
 
     Private Sub CLEAR_CREATURES()
-        CREATURE_ALIVE.Clear()
+        AllCreatures.Clear()
         CREATURE_MAZE_COLUMN.Clear()
         CREATURE_MAZE_ROW.Clear()
         CREATURE_ROOM_COLUMN.Clear()
@@ -98,7 +98,7 @@
     Friend Const MOVE_BLOCKED = "BLOCKED"
     Function MOVE_CREATURE(i As Integer, d As Integer) As String
         Dim R = MOVE_BLOCKED
-        If CREATURE_ALIVE(i) Then
+        If AllCreatures(i).Alive Then
             REMOVE_CREATURE(i)
             Dim X = CREATURE_ROOM_COLUMN(i)
             Dim Y = CREATURE_ROOM_ROW(i)
@@ -145,8 +145,8 @@
         Return R
     End Function
     Friend Function FIND_CREATURE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
-        For I = 0 To CREATURE_ALIVE.Count - 1
-            If CREATURE_ALIVE(I) Then
+        For I = 0 To AllCreatures.Count - 1
+            If AllCreatures(I).Alive Then
                 If MX = CREATURE_MAZE_COLUMN(I) AndAlso M_Y = CREATURE_MAZE_ROW(I) AndAlso X = CREATURE_ROOM_COLUMN(I) AndAlso Y = CREATURE_ROOM_ROW(I) Then
                     Return I
                 End If
@@ -177,10 +177,10 @@
         Return 0
     End Function
     Friend Sub WOUND_CREATURE(I As Integer, D As Integer)
-        If CREATURE_ALIVE(I) Then
+        If AllCreatures(I).Alive Then
             CREATURE_WOUNDS(I) = CREATURE_WOUNDS(I) + D
             If CREATURE_WOUNDS(I) >= CREATURE_HITPOINTS(I) Then
-                CREATURE_ALIVE(I) = False
+                AllCreatures(I).Alive = False
                 CREATURE_WOUNDS(I) = CREATURE_HITPOINTS(I)
             End If
         End If
