@@ -30,4 +30,28 @@
     Friend Function RollAttack() As Integer
         Return ItemType.RollAttack
     End Function
+    Friend Sub Place()
+        If MazeColumn.HasValue Then
+            Dim IT = ItemType
+            Dim MX = MazeColumn.Value
+            Dim MY = MazeRow.Value
+            Dim X = RoomColumn.Value
+            Dim Y = RoomRow.Value
+            Dim TI = IT.TileIndex
+            Dim RM = GET_ROOM_MAP(MX, MY)
+            MSET(RM, 2, X, Y, TI)
+        End If
+    End Sub
+    Friend Sub Remove()
+        If MazeColumn.HasValue Then
+            Dim IT = ItemType
+            Dim MX = MazeColumn.Value
+            Dim MY = MazeRow.Value
+            Dim X = RoomColumn.Value
+            Dim Y = RoomRow.Value
+            Dim TI = TILE_EMPTY
+            Dim RM = GET_ROOM_MAP(MX, MY)
+            MSET(RM, 2, X, Y, TI)
+        End If
+    End Sub
 End Class

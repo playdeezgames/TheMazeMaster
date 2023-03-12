@@ -198,6 +198,6 @@
         Dim X = CREATURE_ROOM_COLUMN(I)
         Dim Y = CREATURE_ROOM_ROW(I)
         Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
-        PLACE_ITEM(II)
+        AllItems(II).Place()
     End Sub
 End Module
