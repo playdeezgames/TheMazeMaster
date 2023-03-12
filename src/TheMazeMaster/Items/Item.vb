@@ -14,4 +14,7 @@
     Friend Sub SetItemType(itemTypeIdentifier As ItemTypeIdentifier)
         Me.ItemTypeIdentifier = itemTypeIdentifier
     End Sub
+    Friend Function RollAttack() As Integer
+        Return ItemType.RollAttack
+    End Function
 End Class

@@ -7,10 +7,6 @@
     Friend Sub Clear()
         AllItems.Clear()
     End Sub
-    'TODO: move to item
-    Friend Function ITEM_ROLL_ATTACK(I As Integer) As Integer
-        Return AllItems(I).ItemType.RollAttack
-    End Function
     'TODO: move to itemtype
     Friend Function CREATE_ROOM_ITEM(IT As ItemTypeIdentifier, MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         Dim I = AllItemTypes(IT).Create()

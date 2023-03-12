@@ -168,7 +168,7 @@
     Friend Function CREATURE_ROLL_ATTACK(I As Integer) As Integer
         If CREATURE_WEAPONS.ContainsKey(I) Then
             Dim W = CREATURE_WEAPONS(I)
-            Return ITEM_ROLL_ATTACK(W)
+            Return AllItems(W).RollAttack
         End If
         Return 0
     End Function
