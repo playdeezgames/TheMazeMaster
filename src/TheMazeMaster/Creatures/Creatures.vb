@@ -110,20 +110,4 @@
         Next
         Return -1
     End Function
-    'TODO: move to creature
-    Friend Sub CREATURE_DROP_ITEM(I As Integer)
-        Dim CT = AllCreatures(I).CreatureType
-        'TODO: CHANCE OF NOT DROPPING ITEM?
-        'TODO: WEIGHTED GENERATOR FOR WHAT ITEM GETS DROPPED?
-        Dim IT = CT.Drop
-        If IT = ItemTypeIdentifier.None Then
-            Return
-        End If
-        Dim MX = AllCreatures(I).MazeColumn
-        Dim M_Y = AllCreatures(I).MazeRow
-        Dim X = AllCreatures(I).RoomColumn
-        Dim Y = AllCreatures(I).RoomRow
-        Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
-        AllItems(II).Place()
-    End Sub
 End Module

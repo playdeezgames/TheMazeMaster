@@ -65,7 +65,7 @@
             If Not AllCreatures(DI).Alive Then
                 AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} kills {AllCreatures(DI).Name}")
                 REMOVE_CREATURE(DI)
-                CREATURE_DROP_ITEM(DI)
+                AllCreatures(DI).Drop()
             End If
         Else
             AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} misses")

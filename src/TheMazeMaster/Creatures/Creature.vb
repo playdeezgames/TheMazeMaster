@@ -72,4 +72,19 @@
             End If
         End If
     End Sub
+    Sub Drop()
+        Dim CT = CreatureType
+        'TODO: CHANCE OF NOT DROPPING ITEM?
+        'TODO: WEIGHTED GENERATOR FOR WHAT ITEM GETS DROPPED?
+        Dim IT = CT.Drop
+        If IT = ItemTypeIdentifier.None Then
+            Return
+        End If
+        Dim MX = MazeColumn
+        Dim M_Y = MazeRow
+        Dim X = RoomColumn
+        Dim Y = RoomRow
+        Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
+        AllItems(II).Place()
+    End Sub
 End Class
