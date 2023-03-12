@@ -47,4 +47,9 @@
             Return HitPoints - Wounds
         End Get
     End Property
+    ReadOnly Property XP As Integer
+        Get
+            Return CreatureType.XP
+        End Get
+    End Property
 End Class

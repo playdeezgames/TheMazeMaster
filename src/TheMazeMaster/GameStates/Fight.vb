@@ -40,7 +40,7 @@
             AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} has {AllCreatures(AI).Health} HP")
             AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} has {AllCreatures(DI).Health} HP")
         ElseIf AllCreatures(AI).Alive Then
-            PLAYER_ADD_XP(GET_CREATURE_XP(DI))
+            PLAYER_ADD_XP(AllCreatures(DI).XP)
         End If
     End Sub
     Friend Sub FIGHT_ATTACK()

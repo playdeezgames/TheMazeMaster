@@ -116,10 +116,6 @@
         Return -1
     End Function
     'TODO: move to creature
-    Friend Function GET_CREATURE_XP(I As Integer) As Integer
-        Return AllCreatures(I).CreatureType.XP
-    End Function
-    'TODO: move to creature
     Friend Function CREATURE_ROLL_ATTACK(I As Integer) As Integer
         If AllCreatures(I).Weapon.HasValue Then
             Dim W = AllCreatures(I).Weapon.Value
