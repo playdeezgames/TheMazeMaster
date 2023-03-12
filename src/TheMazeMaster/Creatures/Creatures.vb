@@ -1,6 +1,5 @@
 ﻿Friend Module Creatures
     Friend AllCreatures As New List(Of Creature)
-    Friend CREATURE_WEAPONS As New Dictionary(Of Integer, Integer)
     Friend Sub Generate()
         CLEAR_CREATURES()
         For Each entry In AllCreatureTypes
@@ -46,7 +45,6 @@
         Dim I = AllCreatures.Count
         AllCreatures.Add(New Creature(cT, mX, m_y, x, y))
         Dim WT = AllCreatureTypes(cT).DefaultWeaponType
-        CREATURE_WEAPONS(I) = AllItemTypes(WT).Create
         PLACE_CREATURE(I)
         Return I
     End Function

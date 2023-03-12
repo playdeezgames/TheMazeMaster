@@ -14,6 +14,7 @@
         Me.CreatureTypeIdentifier = creatureTypeIdentifier
         Me.HitPoints = CreatureType.HitPoints
         Me.Wounds = 0
+        Me.Weapon = AllItemTypes(CreatureType.DefaultWeaponType).Create
     End Sub
     Private Property CreatureTypeIdentifier As CreatureTypeIdentifier
     ReadOnly Property CreatureType As CreatureType
@@ -28,4 +29,5 @@
     Property RoomRow As Integer
     Property HitPoints As Integer
     Property Wounds As Integer
+    Property Weapon As Integer
 End Class
