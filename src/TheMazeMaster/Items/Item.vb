@@ -60,4 +60,8 @@
         RoomColumn = Nothing
         RoomRow = Nothing
     End Sub
+    Friend Sub Destroy()
+        ClearRoom()
+        SetItemType(ItemTypeIdentifier.None)
+    End Sub
 End Class

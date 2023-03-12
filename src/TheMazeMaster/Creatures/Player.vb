@@ -49,7 +49,7 @@
                 ic = PLAYER_STACKS(IT.Identifier) + 1
             End If
             PLAYER_STACKS(IT.Identifier) = ic
-            ITEM_DESTROY(II)
+            AllItems(II).Destroy()
         Else
             If Not PLAYER_INVENTORY.Contains(II) Then
                 PLAYER_INVENTORY.Add(II)

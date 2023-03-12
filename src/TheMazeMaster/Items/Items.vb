@@ -18,9 +18,4 @@
         Next
         Return -1
     End Function
-    'TODO: move to item
-    Friend Sub ITEM_DESTROY(II As Integer)
-        AllItems(II).ClearRoom()
-        AllItems(II).SetItemType(ItemTypeIdentifier.None)
-    End Sub
 End Module
