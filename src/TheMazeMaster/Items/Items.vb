@@ -7,26 +7,20 @@
     Friend Sub Clear()
         AllItems.Clear()
     End Sub
-    Friend Sub Generate()
-        Clear()
-    End Sub
-    Function CREATE_ITEM(IT As ItemTypeIdentifier) As Integer
-        'TODO: FIRST LOOK FOR EMPTY ITEM
-        Dim I = AllItems.Count
-        AllItems.Add(New Item(IT))
-        Return I
-    End Function
+    'TODO: move to item
     Friend Function ITEM_ROLL_ATTACK(I As Integer) As Integer
         Return AllItems(I).ItemType.RollAttack
     End Function
+    'TODO: move to itemtype
     Friend Function CREATE_ROOM_ITEM(IT As ItemTypeIdentifier, MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
-        Dim I = CREATE_ITEM(IT)
+        Dim I = AllItemTypes(IT).Create()
         ITEM_MAZE_COLUMNS(I) = MX
         ITEM_MAZE_ROWS(I) = M_Y
         ITEM_ROOM_COLUMNS(I) = X
         ITEM_ROOM_ROWS(I) = Y
         Return I
     End Function
+    'TODO: move to item
     Friend Sub PLACE_ITEM(I As Integer)
         If ITEM_MAZE_COLUMNS.ContainsKey(I) Then
             Dim IT = AllItems(I).ItemType
@@ -52,6 +46,7 @@
         Next
         Return -1
     End Function
+    'TODO: move to item
     Friend Sub REMOVE_ITEM(I As Integer)
         If ITEM_MAZE_COLUMNS.ContainsKey(I) Then
             Dim IT = AllItems(I).ItemType
@@ -64,12 +59,14 @@
             MSET(RM, 2, X, Y, TI)
         End If
     End Sub
+    'TODO: move to item
     Friend Sub ITEM_CLEAR_ROOM(II As Integer)
         ITEM_MAZE_COLUMNS.Remove(II)
         ITEM_MAZE_ROWS.Remove(II)
         ITEM_ROOM_COLUMNS.Remove(II)
         ITEM_ROOM_ROWS.Remove(II)
     End Sub
+    'TODO: move to item
     Friend Sub ITEM_DESTROY(II As Integer)
         AllItems(II).SetItemType(ItemTypeIdentifier.None)
     End Sub

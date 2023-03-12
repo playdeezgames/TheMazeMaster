@@ -60,7 +60,7 @@
         CREATURE_HITPOINTS.Add(AllCreatureTypes(cT).HitPoints)
         CREATURE_WOUNDS.Add(0)
         Dim WT = AllCreatureTypes(cT).DefaultWeaponType
-        CREATURE_WEAPONS(I) = CREATE_ITEM(WT)
+        CREATURE_WEAPONS(I) = AllItemTypes(WT).Create
         PLACE_CREATURE(I)
         Return I
     End Function

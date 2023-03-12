@@ -22,4 +22,10 @@
     Public Function RollAttack() As Integer
         Return ROLL_DICE(AttackValue, AttackMaximum)
     End Function
+    Friend Function Create() As Integer
+        'TODO: FIRST LOOK FOR EMPTY ITEM
+        Dim I = AllItems.Count
+        AllItems.Add(New Item(Identifier))
+        Return I
+    End Function
 End Class
