@@ -51,7 +51,7 @@
     Private Function CREATE_CREATURE(cT As CreatureTypeIdentifier, mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
         'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
         Dim I = AllCreatures.Count
-        AllCreatures.Add(New Creature)
+        AllCreatures.Add(New Creature(mX, m_y, x, y))
         CREATURE_TYPE.Add(cT)
         CREATURE_MAZE_COLUMN.Add(mX)
         CREATURE_MAZE_ROW.Add(m_y)
