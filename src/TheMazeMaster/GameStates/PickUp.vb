@@ -3,16 +3,10 @@
     Friend Function Update() As String
         Dim II = PICKUP_ITEM_INDEX
         Dim IT = ITEM_TYPES(II)
-        AnsiConsole.MarkupLine($"PICK UP {AllItemTypes(IT).Name}?")
-        AnsiConsole.MarkUpLine("(Y)ES/(N)O")
-        Select Case Console.ReadKey(True).Key
-            Case ConsoleKey.N
-                Return STATE_IN_PLAY
-            Case ConsoleKey.Y
-                REMOVE_ITEM(II)
-                PLAYER_TAKE_ITEM(II)
-                Return STATE_IN_PLAY
-        End Select
-        Return STATE_PICKUP
+        If AnsiConsole.Confirm($"[olive]Pick up {AllItemTypes(IT).Name}?[/]", False) Then
+            REMOVE_ITEM(II)
+            PLAYER_TAKE_ITEM(II)
+        End If
+        Return STATE_IN_PLAY
     End Function
 End Module
