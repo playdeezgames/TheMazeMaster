@@ -13,6 +13,7 @@
         Me.RoomRow = roomRow
         Me.CreatureTypeIdentifier = creatureTypeIdentifier
         Me.HitPoints = CreatureType.HitPoints
+        Me.Wounds = 0
     End Sub
     Private Property CreatureTypeIdentifier As CreatureTypeIdentifier
     ReadOnly Property CreatureType As CreatureType
@@ -26,4 +27,5 @@
     Property RoomColumn As Integer
     Property RoomRow As Integer
     Property HitPoints As Integer
+    Property Wounds As Integer
 End Class

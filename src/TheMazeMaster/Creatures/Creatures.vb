@@ -1,6 +1,5 @@
 ﻿Friend Module Creatures
     Friend AllCreatures As New List(Of Creature)
-    Friend CREATURE_WOUNDS As New List(Of Integer)
     Friend CREATURE_WEAPONS As New Dictionary(Of Integer, Integer)
     Friend Sub Generate()
         CLEAR_CREATURES()
@@ -46,7 +45,6 @@
         'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
         Dim I = AllCreatures.Count
         AllCreatures.Add(New Creature(cT, mX, m_y, x, y))
-        CREATURE_WOUNDS.Add(0)
         Dim WT = AllCreatureTypes(cT).DefaultWeaponType
         CREATURE_WEAPONS(I) = AllItemTypes(WT).Create
         PLACE_CREATURE(I)
@@ -71,7 +69,6 @@
 
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
-        CREATURE_WOUNDS.Clear()
         CREATURE_WEAPONS.Clear()
     End Sub
     Friend Const MOVE_SUCCESS = "SUCCESS"
@@ -142,7 +139,7 @@
     End Function
     'TODO: move to creature
     Friend Function GET_CREATURE_HEALTH(I As Integer) As Integer
-        Return AllCreatures(I).HitPoints - CREATURE_WOUNDS(I)
+        Return AllCreatures(I).HitPoints - AllCreatures(I).Wounds
     End Function
     'TODO: move to creature
     Friend Function GET_CREATURE_XP(I As Integer) As Integer
@@ -164,10 +161,10 @@
     'TODO: move to creature
     Friend Sub WOUND_CREATURE(I As Integer, D As Integer)
         If AllCreatures(I).Alive Then
-            CREATURE_WOUNDS(I) = CREATURE_WOUNDS(I) + D
-            If CREATURE_WOUNDS(I) >= AllCreatures(I).HitPoints Then
+            AllCreatures(I).Wounds = AllCreatures(I).Wounds + D
+            If AllCreatures(I).Wounds >= AllCreatures(I).HitPoints Then
                 AllCreatures(I).Alive = False
-                CREATURE_WOUNDS(I) = AllCreatures(I).HitPoints
+                AllCreatures(I).Wounds = AllCreatures(I).HitPoints
             End If
         End If
     End Sub
