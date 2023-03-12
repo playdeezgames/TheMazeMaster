@@ -37,8 +37,8 @@
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
         If AllCreatures(AI).Alive AndAlso AllCreatures(DI).Alive Then
-            AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} has {GET_CREATURE_HEALTH(AI)} HP")
-            AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} has {GET_CREATURE_HEALTH(DI)} HP")
+            AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} has {AllCreatures(AI).Health} HP")
+            AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} has {AllCreatures(DI).Health} HP")
         ElseIf AllCreatures(AI).Alive Then
             PLAYER_ADD_XP(GET_CREATURE_XP(DI))
         End If

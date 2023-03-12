@@ -42,4 +42,9 @@
             Return CreatureType.Name
         End Get
     End Property
+    ReadOnly Property Health As Integer
+        Get
+            Return HitPoints - Wounds
+        End Get
+    End Property
 End Class
