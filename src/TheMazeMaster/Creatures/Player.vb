@@ -18,7 +18,7 @@
     Friend Function GET_PLAYER_ENEMY(D As Integer) As Integer
         Dim I = PLAYER_CREATURE_INDEX
         Dim X = AllCreatures(I).RoomColumn
-        Dim Y = CREATURE_ROOM_ROW(I)
+        Dim Y = AllCreatures(I).RoomRow
         Dim NX = STEP_X(D, X, Y)
         Dim NY = STEP_Y(D, X, Y)
         Dim MX = AllCreatures(I).MazeColumn
@@ -31,7 +31,7 @@
     Friend Function GET_PLAYER_PICKUP(D As Integer) As Integer
         Dim I = PLAYER_CREATURE_INDEX
         Dim X = AllCreatures(I).RoomColumn
-        Dim Y = CREATURE_ROOM_ROW(I)
+        Dim Y = AllCreatures(I).RoomRow
         Dim NX = STEP_X(D, X, Y)
         Dim NY = STEP_Y(D, X, Y)
         Dim MX = AllCreatures(I).MazeColumn
