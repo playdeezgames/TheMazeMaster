@@ -54,4 +54,10 @@
             MSET(RM, 2, X, Y, TI)
         End If
     End Sub
+    Friend Sub ClearRoom()
+        MazeColumn = Nothing
+        MazeRow = Nothing
+        RoomColumn = Nothing
+        RoomRow = Nothing
+    End Sub
 End Class

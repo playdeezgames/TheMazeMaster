@@ -39,7 +39,7 @@
         Return FIND_ITEM(MX, MY, NX, NY)
     End Function
     Friend Sub PLAYER_TAKE_ITEM(II As Integer)
-        ITEM_CLEAR_ROOM(II)
+        AllItems(II).ClearRoom()
         Dim IT = AllItems(II).ItemType
         Dim ic As Integer
         If If(IT?.Stacks, False) Then

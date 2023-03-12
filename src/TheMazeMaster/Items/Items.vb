@@ -19,15 +19,8 @@
         Return -1
     End Function
     'TODO: move to item
-    Friend Sub ITEM_CLEAR_ROOM(II As Integer)
-        AllItems(II).MazeColumn = Nothing
-        AllItems(II).MazeRow = Nothing
-        AllItems(II).RoomColumn = Nothing
-        AllItems(II).RoomRow = Nothing
-    End Sub
-    'TODO: move to item
     Friend Sub ITEM_DESTROY(II As Integer)
-        ITEM_CLEAR_ROOM(II)
+        AllItems(II).ClearRoom()
         AllItems(II).SetItemType(ItemTypeIdentifier.None)
     End Sub
 End Module
