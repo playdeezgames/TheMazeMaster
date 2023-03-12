@@ -116,10 +116,6 @@
         Return -1
     End Function
     'TODO: move to creature
-    Friend Function GET_CREATURE_NAME(I As Integer) As String
-        Return AllCreatures(I).CreatureType.Name
-    End Function
-    'TODO: move to creature
     Friend Function GET_CREATURE_HEALTH(I As Integer) As Integer
         Return AllCreatures(I).HitPoints - AllCreatures(I).Wounds
     End Function

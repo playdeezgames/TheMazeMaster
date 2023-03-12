@@ -3,7 +3,7 @@
     Friend Sub FIGHT_START()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
-        AnsiConsole.MarkupLine($"FIGHTING {GET_CREATURE_NAME(DI)}")
+        AnsiConsole.MarkupLine($"FIGHTING {AllCreatures(DI).Name}")
         FIGHT_PROMPT()
     End Sub
     Friend Function Update() As String
@@ -37,8 +37,8 @@
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
         If AllCreatures(AI).Alive AndAlso AllCreatures(DI).Alive Then
-            AnsiConsole.MarkupLine($"{GET_CREATURE_NAME(AI)} has {GET_CREATURE_HEALTH(AI)} HP")
-            AnsiConsole.MarkupLine($"{GET_CREATURE_NAME(DI)} has {GET_CREATURE_HEALTH(DI)} HP")
+            AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} has {GET_CREATURE_HEALTH(AI)} HP")
+            AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} has {GET_CREATURE_HEALTH(DI)} HP")
         ElseIf AllCreatures(AI).Alive Then
             PLAYER_ADD_XP(GET_CREATURE_XP(DI))
         End If
@@ -53,22 +53,22 @@
         FIGHT_PROMPT()
     End Sub
     Friend Sub RESOLVE_ATTACK(AI As Integer, DI As Integer)
-        AnsiConsole.MarkupLine($"{GET_CREATURE_NAME(AI)} attacks {GET_CREATURE_NAME(DI)}")
+        AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} attacks {AllCreatures(DI).Name}")
         Dim AR = CREATURE_ROLL_ATTACK(AI)
         Dim DR = CREATURE_ROLL_DEFEND(DI)
-        AnsiConsole.MarkupLine($"{GET_CREATURE_NAME(AI)} rolls {AR}")
-        AnsiConsole.MarkupLine($"{GET_CREATURE_NAME(DI)} rolls {DR}")
+        AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} rolls {AR}")
+        AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} rolls {DR}")
         If AR > DR Then
             Dim D = AR - DR
             WOUND_CREATURE(DI, D)
-            AnsiConsole.MarkupLine($"{GET_CREATURE_NAME(AI)} hits for {D}")
+            AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} hits for {D}")
             If Not AllCreatures(DI).Alive Then
-                AnsiConsole.MarkupLine($"{GET_CREATURE_NAME(AI)} kills {GET_CREATURE_NAME(DI)}")
+                AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} kills {AllCreatures(DI).Name}")
                 REMOVE_CREATURE(DI)
                 CREATURE_DROP_ITEM(DI)
             End If
         Else
-            AnsiConsole.MarkupLine($"{GET_CREATURE_NAME(AI)} misses")
+            AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} misses")
         End If
     End Sub
 End Module

@@ -37,4 +37,9 @@
         Dim TI = CreatureType.TileIndex
         MSET(RM, 2, RoomColumn, RoomRow, TI)
     End Sub
+    ReadOnly Property Name As String
+        Get
+            Return CreatureType.Name
+        End Get
+    End Property
 End Class
