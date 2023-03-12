@@ -5,7 +5,7 @@
     Friend PLAYER_INVENTORY As New List(Of Integer)
     Friend PLAYER_STACKS As New Dictionary(Of ItemTypeIdentifier, Integer)
     Friend Sub Generate()
-        PLAYER_CREATURE_INDEX = GENERATE_CREATURE(CreatureTypeIdentifier.Dude)
+        PLAYER_CREATURE_INDEX = AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate
         PLAYER_XP = 0
         PLAYER_XP_GOAL = 10
         PLAYER_INVENTORY.Clear()
