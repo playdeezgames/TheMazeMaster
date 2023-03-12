@@ -22,7 +22,7 @@
         Dim NX = STEP_X(D, X, Y)
         Dim NY = STEP_Y(D, X, Y)
         Dim MX = AllCreatures(I).MazeColumn
-        Dim MY = CREATURE_MAZE_ROW(I)
+        Dim MY = AllCreatures(I).MazeRow
         Return FIND_CREATURE(MX, MY, NX, NY)
     End Function
     Friend Sub PLAYER_ADD_XP(XP As Integer)
@@ -35,7 +35,7 @@
         Dim NX = STEP_X(D, X, Y)
         Dim NY = STEP_Y(D, X, Y)
         Dim MX = AllCreatures(I).MazeColumn
-        Dim MY = CREATURE_MAZE_ROW(I)
+        Dim MY = AllCreatures(I).MazeRow
         Return FIND_ITEM(MX, MY, NX, NY)
     End Function
     Friend Sub PLAYER_TAKE_ITEM(II As Integer)

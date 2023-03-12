@@ -1,6 +1,5 @@
 ﻿Friend Module Creatures
     Friend AllCreatures As New List(Of Creature)
-    Friend CREATURE_MAZE_ROW As New List(Of Integer)
     Friend CREATURE_ROOM_COLUMN As New List(Of Integer)
     Friend CREATURE_ROOM_ROW As New List(Of Integer)
     Friend CREATURE_TYPE As New List(Of CreatureTypeIdentifier)
@@ -52,7 +51,6 @@
         Dim I = AllCreatures.Count
         AllCreatures.Add(New Creature(mX, m_y, x, y))
         CREATURE_TYPE.Add(cT)
-        CREATURE_MAZE_ROW.Add(m_y)
         CREATURE_ROOM_COLUMN.Add(x)
         CREATURE_ROOM_ROW.Add(y)
         CREATURE_HITPOINTS.Add(AllCreatureTypes(cT).HitPoints)
@@ -65,7 +63,7 @@
 
     Private Sub PLACE_CREATURE(i As Integer)
         Dim MX = AllCreatures(i).MazeColumn
-        Dim My = CREATURE_MAZE_ROW(i)
+        Dim My = AllCreatures(i).MazeRow
         Dim RM = GET_ROOM_MAP(MX, My)
         Dim TI = AllCreatureTypes(CREATURE_TYPE(i)).TileIndex
         MSET(RM, 2, CREATURE_ROOM_COLUMN(i), CREATURE_ROOM_ROW(i), TI)
@@ -73,7 +71,7 @@
 
     Friend Sub REMOVE_CREATURE(i As Integer)
         Dim MX = AllCreatures(i).MazeColumn
-        Dim My = CREATURE_MAZE_ROW(i)
+        Dim My = AllCreatures(i).MazeRow
         Dim RM = GET_ROOM_MAP(MX, My)
         Dim TI = TILE_EMPTY
         MSET(RM, 2, CREATURE_ROOM_COLUMN(i), CREATURE_ROOM_ROW(i), TI)
@@ -81,7 +79,6 @@
 
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
-        CREATURE_MAZE_ROW.Clear()
         CREATURE_ROOM_COLUMN.Clear()
         CREATURE_ROOM_ROW.Clear()
         CREATURE_TYPE.Clear()
@@ -102,10 +99,10 @@
             Dim NX = STEP_X(d, X, Y)
             Dim NY = STEP_Y(d, X, Y)
             Dim MX = AllCreatures(i).MazeColumn
-            Dim M_Y = CREATURE_MAZE_ROW(i)
+            Dim M_Y = AllCreatures(i).MazeRow
             If NX < 0 OrElse NY < 0 OrElse NX >= ROOM_COLUMNS OrElse NY >= ROOM_ROWS Then
                 AllCreatures(i).MazeColumn = STEP_X(d, MX, M_Y)
-                CREATURE_MAZE_ROW(i) = STEP_Y(d, MX, M_Y)
+                AllCreatures(i).MazeRow = STEP_Y(d, MX, M_Y)
                 If NX < 0 Then
                     CREATURE_ROOM_COLUMN(i) = NX + ROOM_COLUMNS
                 ElseIf NX >= ROOM_COLUMNS Then
@@ -144,7 +141,7 @@
     Friend Function FIND_CREATURE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         For I = 0 To AllCreatures.Count - 1
             If AllCreatures(I).Alive Then
-                If MX = AllCreatures(I).MazeColumn AndAlso M_Y = CREATURE_MAZE_ROW(I) AndAlso X = CREATURE_ROOM_COLUMN(I) AndAlso Y = CREATURE_ROOM_ROW(I) Then
+                If MX = AllCreatures(I).MazeColumn AndAlso M_Y = AllCreatures(I).RoomColumn AndAlso X = CREATURE_ROOM_COLUMN(I) AndAlso Y = CREATURE_ROOM_ROW(I) Then
                     Return I
                 End If
             End If
@@ -191,7 +188,7 @@
             Return
         End If
         Dim MX = AllCreatures(I).MazeColumn
-        Dim M_Y = CREATURE_MAZE_ROW(I)
+        Dim M_Y = AllCreatures(I).MazeRow
         Dim X = CREATURE_ROOM_COLUMN(I)
         Dim Y = CREATURE_ROOM_ROW(I)
         Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
