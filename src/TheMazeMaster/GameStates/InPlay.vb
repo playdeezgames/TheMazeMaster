@@ -30,7 +30,7 @@
     End Function
 
     Private Sub DrawMap()
-        Dim MX = CREATURE_MAZE_COLUMN(PLAYER_CREATURE_INDEX)
+        Dim MX = AllCreatures(PLAYER_CREATURE_INDEX).MazeColumn
         Dim M_y = CREATURE_MAZE_ROW(PLAYER_CREATURE_INDEX)
         Dim ROOM_MAP = GET_ROOM_MAP(MX, M_y)
         MAP(ROOM_MAP, 0, 0)

@@ -21,7 +21,7 @@
         Dim Y = CREATURE_ROOM_ROW(I)
         Dim NX = STEP_X(D, X, Y)
         Dim NY = STEP_Y(D, X, Y)
-        Dim MX = CREATURE_MAZE_COLUMN(I)
+        Dim MX = AllCreatures(I).MazeColumn
         Dim MY = CREATURE_MAZE_ROW(I)
         Return FIND_CREATURE(MX, MY, NX, NY)
     End Function
@@ -34,7 +34,7 @@
         Dim Y = CREATURE_ROOM_ROW(I)
         Dim NX = STEP_X(D, X, Y)
         Dim NY = STEP_Y(D, X, Y)
-        Dim MX = CREATURE_MAZE_COLUMN(I)
+        Dim MX = AllCreatures(I).MazeColumn
         Dim MY = CREATURE_MAZE_ROW(I)
         Return FIND_ITEM(MX, MY, NX, NY)
     End Function
