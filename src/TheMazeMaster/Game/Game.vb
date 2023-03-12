@@ -4,5 +4,6 @@
         Rooms.Generate()
         Creatures.Generate()
         Player.Generate()
+        Items.Generate()
     End Sub
 End Module

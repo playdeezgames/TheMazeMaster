@@ -1,18 +1,23 @@
 ﻿Friend Module Items
-    Friend ITEM_TYPES As New List(Of ItemTypeIdentifier)
+    Friend AllItems As New List(Of Item)
     Friend ITEM_MAZE_COLUMNS As New Dictionary(Of Integer, Integer)
     Friend ITEM_MAZE_ROWS As New Dictionary(Of Integer, Integer)
     Friend ITEM_ROOM_COLUMNS As New Dictionary(Of Integer, Integer)
     Friend ITEM_ROOM_ROWS As New Dictionary(Of Integer, Integer)
+    Friend Sub Clear()
+        AllItems.Clear()
+    End Sub
+    Friend Sub Generate()
+        Clear()
+    End Sub
     Function CREATE_ITEM(IT As ItemTypeIdentifier) As Integer
         'TODO: FIRST LOOK FOR EMPTY ITEM
-        Dim I = ITEM_TYPES.Count
-        ITEM_TYPES.Add(IT)
+        Dim I = AllItems.Count
+        AllItems.Add(New Item(IT))
         Return I
     End Function
     Friend Function ITEM_ROLL_ATTACK(I As Integer) As Integer
-        Dim IT = ITEM_TYPES(I)
-        Return AllItemTypes(IT).RollAttack
+        Return AllItems(I).ItemType.RollAttack
     End Function
     Friend Function CREATE_ROOM_ITEM(IT As ItemTypeIdentifier, MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         Dim I = CREATE_ITEM(IT)
@@ -24,12 +29,12 @@
     End Function
     Friend Sub PLACE_ITEM(I As Integer)
         If ITEM_MAZE_COLUMNS.ContainsKey(I) Then
-            Dim IT = ITEM_TYPES(I)
+            Dim IT = AllItems(I).ItemType
             Dim MX = ITEM_MAZE_COLUMNS(I)
             Dim MY = ITEM_MAZE_ROWS(I)
             Dim X = ITEM_ROOM_COLUMNS(I)
             Dim Y = ITEM_ROOM_ROWS(I)
-            Dim TI = AllItemTypes(IT).TileIndex
+            Dim TI = IT.TileIndex
             Dim RM = GET_ROOM_MAP(MX, MY)
             MSET(RM, 2, X, Y, TI)
         End If
@@ -49,7 +54,7 @@
     End Function
     Friend Sub REMOVE_ITEM(I As Integer)
         If ITEM_MAZE_COLUMNS.ContainsKey(I) Then
-            Dim IT = ITEM_TYPES(I)
+            Dim IT = AllItems(I).ItemType
             Dim MX = ITEM_MAZE_COLUMNS(I)
             Dim MY = ITEM_MAZE_ROWS(I)
             Dim X = ITEM_ROOM_COLUMNS(I)
@@ -66,6 +71,6 @@
         ITEM_ROOM_ROWS.Remove(II)
     End Sub
     Friend Sub ITEM_DESTROY(II As Integer)
-        ITEM_TYPES(II) = ItemTypeIdentifier.None
+        AllItems(II).SetItemType(ItemTypeIdentifier.None)
     End Sub
 End Module

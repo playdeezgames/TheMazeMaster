@@ -40,15 +40,15 @@
     End Function
     Friend Sub PLAYER_TAKE_ITEM(II As Integer)
         ITEM_CLEAR_ROOM(II)
-        Dim IT = ITEM_TYPES(II)
+        Dim IT = AllItems(II).ItemType
         Dim ic As Integer
-        If If(AllItemTypes(IT)?.Stacks, False) Then
-            If Not PLAYER_STACKS.ContainsKey(IT) Then
-                IC = 1
+        If If(IT?.Stacks, False) Then
+            If Not PLAYER_STACKS.ContainsKey(IT.Identifier) Then
+                ic = 1
             Else
-                IC = PLAYER_STACKS(IT) + 1
+                ic = PLAYER_STACKS(IT.Identifier) + 1
             End If
-            PLAYER_STACKS(IT) = ic
+            PLAYER_STACKS(IT.Identifier) = ic
             ITEM_DESTROY(II)
         Else
             If Not PLAYER_INVENTORY.Contains(II) Then
