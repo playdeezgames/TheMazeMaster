@@ -37,16 +37,7 @@
                 cti = MGET(RM, 2, x, y)
             Loop Until ti = TILE_FLOOR And cti = TILE_EMPTY And x >= LX And x <= HX And y >= LY And y <= HY
         Loop Until e >= L And e <= H
-        Return CREATE_CREATURE(cT, mx, m_y, x, y)
-    End Function
-    'TODO: move to creature type
-    Private Function CREATE_CREATURE(cT As CreatureTypeIdentifier, mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
-        'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
-        Dim I = AllCreatures.Count
-        AllCreatures.Add(New Creature(cT, mX, m_y, x, y))
-        Dim WT = AllCreatureTypes(cT).DefaultWeaponType
-        PLACE_CREATURE(I)
-        Return I
+        Return AllCreatureTypes(cT).Create(mx, m_y, x, y)
     End Function
     'TODO: move to creature
     Friend Sub PLACE_CREATURE(i As Integer)
