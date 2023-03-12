@@ -10,7 +10,7 @@
             End While
         Next
     End Sub
-
+    'TODO: move to creature type
     Friend Function GENERATE_CREATURE(cT As CreatureTypeIdentifier) As Integer
         Dim L = AllCreatureTypes(cT).MinimumExitCount
         Dim H = AllCreatureTypes(cT).MaximumExitCount
@@ -39,7 +39,7 @@
         Loop Until e >= L And e <= H
         Return CREATE_CREATURE(cT, mx, m_y, x, y)
     End Function
-
+    'TODO: move to creature type
     Private Function CREATE_CREATURE(cT As CreatureTypeIdentifier, mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
         'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
         Dim I = AllCreatures.Count
@@ -48,7 +48,7 @@
         PLACE_CREATURE(I)
         Return I
     End Function
-
+    'TODO: move to creature
     Private Sub PLACE_CREATURE(i As Integer)
         Dim MX = AllCreatures(i).MazeColumn
         Dim My = AllCreatures(i).MazeRow
@@ -56,7 +56,7 @@
         Dim TI = AllCreatures(i).CreatureType.TileIndex
         MSET(RM, 2, AllCreatures(i).RoomColumn, AllCreatures(i).RoomRow, TI)
     End Sub
-
+    'TODO: move to creature
     Friend Sub REMOVE_CREATURE(i As Integer)
         Dim MX = AllCreatures(i).MazeColumn
         Dim My = AllCreatures(i).MazeRow
@@ -68,10 +68,12 @@
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
     End Sub
+    'TODO: make into enum
     Friend Const MOVE_SUCCESS = "SUCCESS"
     Friend Const MOVE_FIGHT = "FIGHT"
     Friend Const MOVE_PICKUP = "PICKUP"
     Friend Const MOVE_BLOCKED = "BLOCKED"
+    'TODO: move to creature
     Function MOVE_CREATURE(i As Integer, d As Integer) As String
         Dim R = MOVE_BLOCKED
         If AllCreatures(i).Alive Then
