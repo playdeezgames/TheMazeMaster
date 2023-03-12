@@ -30,4 +30,11 @@
     Property HitPoints As Integer
     Property Wounds As Integer
     Property Weapon As Integer?
+    Sub Place()
+        Dim MX = MazeColumn
+        Dim My = MazeRow
+        Dim RM = GET_ROOM_MAP(MX, My)
+        Dim TI = CreatureType.TileIndex
+        MSET(RM, 2, RoomColumn, RoomRow, TI)
+    End Sub
 End Class
