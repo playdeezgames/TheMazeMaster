@@ -51,14 +51,9 @@
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
     End Sub
-    'TODO: make into enum
-    Friend Const MOVE_SUCCESS = "SUCCESS"
-    Friend Const MOVE_FIGHT = "FIGHT"
-    Friend Const MOVE_PICKUP = "PICKUP"
-    Friend Const MOVE_BLOCKED = "BLOCKED"
     'TODO: move to creature
-    Function MOVE_CREATURE(i As Integer, d As Integer) As String
-        Dim R = MOVE_BLOCKED
+    Function MOVE_CREATURE(i As Integer, d As Integer) As MoveResult
+        Dim R = MoveResult.Blocked
         If AllCreatures(i).Alive Then
             REMOVE_CREATURE(i)
             Dim X = AllCreatures(i).RoomColumn
@@ -91,12 +86,12 @@
                     If TL = TILE_EMPTY Then
                         AllCreatures(i).RoomColumn = NX
                         AllCreatures(i).RoomRow = NY
-                        R = MOVE_SUCCESS
+                        R = MoveResult.Success
                     Else
                         If IS_TILE_CREATURE(TL) Then
-                            R = MOVE_FIGHT
+                            R = MoveResult.Fight
                         Else
-                            R = MOVE_PICKUP
+                            R = MoveResult.PickUp
                         End If
                     End If
                 End If

@@ -11,7 +11,7 @@
         PLAYER_INVENTORY.Clear()
         PLAYER_STACKS.Clear()
     End Sub
-    Friend Function MOVE_PLAYER(d As Integer) As String
+    Friend Function MOVE_PLAYER(d As Integer) As MoveResult
         Dim I = PLAYER_CREATURE_INDEX
         Return MOVE_CREATURE(I, d)
     End Function

@@ -17,11 +17,11 @@
         Dim R = STATE_IN_PLAY
         If d < DIRECTION_COUNT Then
             Dim MR = MOVE_PLAYER(d)
-            If MR = MOVE_FIGHT Then
+            If MR = MoveResult.Fight Then
                 FIGHT_CREATURE_INDEX = GET_PLAYER_ENEMY(d)
                 FIGHT_START()
                 Return STATE_FIGHT
-            ElseIf MR = MOVE_PICKUP Then
+            ElseIf MR = MoveResult.PickUp Then
                 PICKUP_ITEM_INDEX = GET_PLAYER_PICKUP(d)
                 Return STATE_PICKUP
             End If

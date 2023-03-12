@@ -60,7 +60,7 @@
         AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} rolls {DR}")
         If AR > DR Then
             Dim D = AR - DR
-            WOUND_CREATURE(DI, D)
+            AllCreatures(DI).AddWounds(D)
             AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} hits for {D}")
             If Not AllCreatures(DI).Alive Then
                 AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} kills {AllCreatures(DI).Name}")
