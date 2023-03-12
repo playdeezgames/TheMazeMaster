@@ -28,4 +28,12 @@
         AllItems.Add(New Item(Identifier))
         Return I
     End Function
+    Friend Function CreateInRoom(mx As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
+        Dim i = Create()
+        AllItems(i).MazeColumn = mx
+        AllItems(i).MazeRow = m_y
+        AllItems(i).RoomColumn = x
+        AllItems(i).RoomRow = y
+        Return i
+    End Function
 End Class

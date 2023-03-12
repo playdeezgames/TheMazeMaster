@@ -197,7 +197,7 @@
         Dim M_Y = CREATURE_MAZE_ROW(I)
         Dim X = CREATURE_ROOM_COLUMN(I)
         Dim Y = CREATURE_ROOM_ROW(I)
-        Dim II = CREATE_ROOM_ITEM(IT, MX, M_Y, X, Y)
+        Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
         PLACE_ITEM(II)
     End Sub
 End Module
