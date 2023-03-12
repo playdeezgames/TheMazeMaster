@@ -54,8 +54,8 @@
     End Sub
     Friend Sub RESOLVE_ATTACK(AI As Integer, DI As Integer)
         AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} attacks {AllCreatures(DI).Name}")
-        Dim AR = CREATURE_ROLL_ATTACK(AI)
-        Dim DR = CREATURE_ROLL_DEFEND(DI)
+        Dim AR = AllCreatures(AI).RollAttack
+        Dim DR = AllCreatures(DI).RollDefend
         AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} rolls {AR}")
         AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} rolls {DR}")
         If AR > DR Then

@@ -52,4 +52,24 @@
             Return CreatureType.XP
         End Get
     End Property
+    Function RollAttack() As Integer
+        If Weapon.HasValue Then
+            Dim W = Weapon.Value
+            Return AllItems(W).RollAttack
+        End If
+        Return 0
+    End Function
+    Function RollDefend() As Integer
+        'ARMOR
+        Return 0
+    End Function
+    Sub AddWounds(d As Integer)
+        If Alive Then
+            Wounds += d
+            If Wounds >= HitPoints Then
+                Alive = False
+                Wounds = HitPoints
+            End If
+        End If
+    End Sub
 End Class

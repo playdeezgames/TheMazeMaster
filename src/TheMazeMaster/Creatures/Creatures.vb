@@ -116,29 +116,6 @@
         Return -1
     End Function
     'TODO: move to creature
-    Friend Function CREATURE_ROLL_ATTACK(I As Integer) As Integer
-        If AllCreatures(I).Weapon.HasValue Then
-            Dim W = AllCreatures(I).Weapon.Value
-            Return AllItems(W).RollAttack
-        End If
-        Return 0
-    End Function
-    'TODO: move to creature
-    Friend Function CREATURE_ROLL_DEFEND(I As Integer) As Integer
-        'ARMOR
-        Return 0
-    End Function
-    'TODO: move to creature
-    Friend Sub WOUND_CREATURE(I As Integer, D As Integer)
-        If AllCreatures(I).Alive Then
-            AllCreatures(I).Wounds = AllCreatures(I).Wounds + D
-            If AllCreatures(I).Wounds >= AllCreatures(I).HitPoints Then
-                AllCreatures(I).Alive = False
-                AllCreatures(I).Wounds = AllCreatures(I).HitPoints
-            End If
-        End If
-    End Sub
-    'TODO: move to creature
     Friend Sub CREATURE_DROP_ITEM(I As Integer)
         Dim CT = AllCreatures(I).CreatureType
         'TODO: CHANCE OF NOT DROPPING ITEM?
