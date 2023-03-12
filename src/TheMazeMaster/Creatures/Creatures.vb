@@ -1,6 +1,5 @@
 ﻿Friend Module Creatures
     Friend AllCreatures As New List(Of Creature)
-    Friend CREATURE_ROOM_COLUMN As New List(Of Integer)
     Friend CREATURE_ROOM_ROW As New List(Of Integer)
     Friend CREATURE_TYPE As New List(Of CreatureTypeIdentifier)
     Friend CREATURE_HITPOINTS As New List(Of Integer)
@@ -51,7 +50,6 @@
         Dim I = AllCreatures.Count
         AllCreatures.Add(New Creature(mX, m_y, x, y))
         CREATURE_TYPE.Add(cT)
-        CREATURE_ROOM_COLUMN.Add(x)
         CREATURE_ROOM_ROW.Add(y)
         CREATURE_HITPOINTS.Add(AllCreatureTypes(cT).HitPoints)
         CREATURE_WOUNDS.Add(0)
@@ -66,7 +64,7 @@
         Dim My = AllCreatures(i).MazeRow
         Dim RM = GET_ROOM_MAP(MX, My)
         Dim TI = AllCreatureTypes(CREATURE_TYPE(i)).TileIndex
-        MSET(RM, 2, CREATURE_ROOM_COLUMN(i), CREATURE_ROOM_ROW(i), TI)
+        MSET(RM, 2, AllCreatures(i).RoomColumn, CREATURE_ROOM_ROW(i), TI)
     End Sub
 
     Friend Sub REMOVE_CREATURE(i As Integer)
@@ -74,12 +72,11 @@
         Dim My = AllCreatures(i).MazeRow
         Dim RM = GET_ROOM_MAP(MX, My)
         Dim TI = TILE_EMPTY
-        MSET(RM, 2, CREATURE_ROOM_COLUMN(i), CREATURE_ROOM_ROW(i), TI)
+        MSET(RM, 2, AllCreatures(i).RoomColumn, CREATURE_ROOM_ROW(i), TI)
     End Sub
 
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
-        CREATURE_ROOM_COLUMN.Clear()
         CREATURE_ROOM_ROW.Clear()
         CREATURE_TYPE.Clear()
         CREATURE_HITPOINTS.Clear()
@@ -94,7 +91,7 @@
         Dim R = MOVE_BLOCKED
         If AllCreatures(i).Alive Then
             REMOVE_CREATURE(i)
-            Dim X = CREATURE_ROOM_COLUMN(i)
+            Dim X = AllCreatures(i).RoomColumn
             Dim Y = CREATURE_ROOM_ROW(i)
             Dim NX = STEP_X(d, X, Y)
             Dim NY = STEP_Y(d, X, Y)
@@ -104,11 +101,11 @@
                 AllCreatures(i).MazeColumn = STEP_X(d, MX, M_Y)
                 AllCreatures(i).MazeRow = STEP_Y(d, MX, M_Y)
                 If NX < 0 Then
-                    CREATURE_ROOM_COLUMN(i) = NX + ROOM_COLUMNS
+                    AllCreatures(i).RoomColumn = NX + ROOM_COLUMNS
                 ElseIf NX >= ROOM_COLUMNS Then
-                    CREATURE_ROOM_COLUMN(i) = NX - ROOM_COLUMNS
+                    AllCreatures(i).RoomColumn = NX - ROOM_COLUMNS
                 Else
-                    CREATURE_ROOM_COLUMN(i) = NX
+                    AllCreatures(i).RoomColumn = NX
                 End If
                 If NY < 0 Then
                     CREATURE_ROOM_ROW(i) = NY + ROOM_ROWS
@@ -122,7 +119,7 @@
                 If CAN_WALK_ON_TILE(TL) Then
                     TL = GET_ROOM_CREATURE_TILE(MX, M_Y, NX, NY)
                     If TL = TILE_EMPTY Then
-                        CREATURE_ROOM_COLUMN(i) = NX
+                        AllCreatures(i).RoomColumn = NX
                         CREATURE_ROOM_ROW(i) = NY
                         R = MOVE_SUCCESS
                     Else
@@ -141,7 +138,7 @@
     Friend Function FIND_CREATURE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         For I = 0 To AllCreatures.Count - 1
             If AllCreatures(I).Alive Then
-                If MX = AllCreatures(I).MazeColumn AndAlso M_Y = AllCreatures(I).RoomColumn AndAlso X = CREATURE_ROOM_COLUMN(I) AndAlso Y = CREATURE_ROOM_ROW(I) Then
+                If MX = AllCreatures(I).MazeColumn AndAlso M_Y = AllCreatures(I).RoomColumn AndAlso X = AllCreatures(I).RoomColumn AndAlso Y = CREATURE_ROOM_ROW(I) Then
                     Return I
                 End If
             End If
@@ -189,7 +186,7 @@
         End If
         Dim MX = AllCreatures(I).MazeColumn
         Dim M_Y = AllCreatures(I).MazeRow
-        Dim X = CREATURE_ROOM_COLUMN(I)
+        Dim X = AllCreatures(I).RoomColumn
         Dim Y = CREATURE_ROOM_ROW(I)
         Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
         AllItems(II).Place()
