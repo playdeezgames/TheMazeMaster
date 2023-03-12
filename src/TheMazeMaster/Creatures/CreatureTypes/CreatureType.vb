@@ -1,5 +1,6 @@
 ﻿Friend Class CreatureType
     Public Sub New(
+                  identifier As CreatureTypeIdentifier,
                   name As String,
                   tileIndex As Integer,
                   hitPoints As Integer,
@@ -13,6 +14,7 @@
                   Optional defaultWeaponType As ItemTypeIdentifier = ItemTypeIdentifier.None,
                   Optional xp As Integer = 0,
                   Optional drop As ItemTypeIdentifier = ItemTypeIdentifier.None)
+        Me.Identifier = identifier
         Me.Name = name
         Me.TileIndex = tileIndex
         Me.MinimumExitCount = minimumExitCount
@@ -27,6 +29,8 @@
         Me.XP = xp
         Me.Drop = drop
     End Sub
+
+    Public ReadOnly Property Identifier As CreatureTypeIdentifier
     Public ReadOnly Name As String
     Public ReadOnly Property TileIndex As Integer
     Public ReadOnly Property MinimumExitCount As Integer
@@ -40,4 +44,12 @@
     Public ReadOnly Property MaximumY As Integer
     Public ReadOnly Property XP As Integer
     Public ReadOnly Property Drop As ItemTypeIdentifier
+    Function Create(mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
+        'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
+        Dim I = AllCreatures.Count
+        AllCreatures.Add(New Creature(Identifier, mX, m_y, x, y))
+        Dim WT = AllCreatureTypes(Identifier).DefaultWeaponType
+        PLACE_CREATURE(I)
+        Return I
+    End Function
 End Class

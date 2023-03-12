@@ -49,7 +49,7 @@
         Return I
     End Function
     'TODO: move to creature
-    Private Sub PLACE_CREATURE(i As Integer)
+    Friend Sub PLACE_CREATURE(i As Integer)
         Dim MX = AllCreatures(i).MazeColumn
         Dim My = AllCreatures(i).MazeRow
         Dim RM = GET_ROOM_MAP(MX, My)
