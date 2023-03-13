@@ -1,9 +1,9 @@
 ﻿Friend Module Player
     Friend PLAYER_CREATURE_INDEX As Integer = 0
-    Friend character As New Character
+    Friend character As Character
     Friend Sub Generate()
         PLAYER_CREATURE_INDEX = AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate
-        character = New Character
+        character = New Character(PLAYER_CREATURE_INDEX)
     End Sub
     Friend Function MOVE_PLAYER(d As Integer) As MoveResult
         Return AllCreatures(PLAYER_CREATURE_INDEX).Move(d)
