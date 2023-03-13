@@ -1,5 +1,5 @@
 ﻿Friend Module Chambers
-    Friend CHAMBER_MAPS As New List(Of MapData)
+    Friend CHAMBER_MAPS As New List(Of MapAssetData)
     Sub Initialize()
         CHAMBER_MAPS.Clear()
         CHAMBER_MAPS.Add(LOAD_RESOURCE("Assets/CHAMBER0.map"))

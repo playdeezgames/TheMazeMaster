@@ -1,5 +1,5 @@
 ﻿Friend Module ChamberDoors
-    Friend CHAMBERDOOR_MAPS As New List(Of MapData)
+    Friend CHAMBERDOOR_MAPS As New List(Of MapAssetData)
     Sub Initialize()
         CHAMBERDOOR_MAPS.Clear()
         CHAMBERDOOR_MAPS.Add(LOAD_RESOURCE("Assets/CHAMBERDOOR1.map"))

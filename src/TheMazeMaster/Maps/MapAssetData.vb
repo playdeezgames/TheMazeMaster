@@ -1,4 +1,4 @@
-﻿Friend Class MapLayerData
+﻿Friend Class MapLayerAssetData
     <JsonPropertyName("width")>
     Public Property Width As Integer
     <JsonPropertyName("height")>
@@ -8,7 +8,7 @@
     <JsonPropertyName("data")>
     Public Property Data As New List(Of Integer)
 End Class
-Friend Class LayerData
+Friend Class LayerAssetData
     <JsonPropertyName("type")>
     Public Property Type As String
     <JsonPropertyName("overlap_x")>
@@ -16,9 +16,9 @@ Friend Class LayerData
     <JsonPropertyName("overlap_y")>
     Public Property OverlapY As Integer
     <JsonPropertyName("data")>
-    Public Property Data() As MapLayerData
+    Public Property Data() As MapLayerAssetData
 End Class
-Friend Class MapData
+Friend Class MapAssetData
     <JsonPropertyName("layers")>
-    Public Property Layers As New List(Of LayerData)
+    Public Property Layers As New List(Of LayerAssetData)
 End Class

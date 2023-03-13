@@ -1,5 +1,5 @@
 ﻿Friend Module PassagewayDoors
-    Friend PASSAGEWAYDOOR_MAPS As New List(Of MapData)
+    Friend PASSAGEWAYDOOR_MAPS As New List(Of MapAssetData)
     Sub Initialize()
         PASSAGEWAYDOOR_MAPS.Clear()
         PASSAGEWAYDOOR_MAPS.Add(LOAD_RESOURCE("Assets/PASSAGEWAYDOOR1.map"))

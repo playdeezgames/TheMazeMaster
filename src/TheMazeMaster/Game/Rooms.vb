@@ -3,7 +3,7 @@
     Friend Const ROOM_COLUMNS = 15
     Friend Const ROOM_CELL_WIDTH = 8
     Friend Const ROOM_CELL_HEIGHT = 8
-    Private ROOM_MAPS As New List(Of MapData)
+    Private ROOM_MAPS As New List(Of MapAssetData)
     Private ROOM_CHAMBERS As New List(Of Boolean)
     Friend Sub Generate()
         ROOM_MAPS.Clear()
@@ -34,7 +34,7 @@
                         IS_CHAMBER = True
                     End If
                 End If
-                Dim ROOM_MAP As MapData
+                Dim ROOM_MAP As MapAssetData
                 If IS_CHAMBER Then
                     ROOM_MAP = CLONE(CHAMBER_MAPS(TEMP))
                 Else
@@ -56,7 +56,7 @@
                     While Not MAZE_CELL_DOORS(MX, M_y, D)
                         D = D + 1
                     End While
-                    Dim FM As MapData
+                    Dim FM As MapAssetData
                     If IS_ROOM_CHAMBER(MX, M_y) Then
                         FM = CHAMBERDOOR_MAPS(D)
                     Else
@@ -79,7 +79,7 @@
         Next
     End Sub
 
-    Private Sub BLIT_MAP(FROM_MAP As MapData, TO_MAP As MapData, L As Integer, TRANSPARENT_TILE As Integer)
+    Private Sub BLIT_MAP(FROM_MAP As MapAssetData, TO_MAP As MapAssetData, L As Integer, TRANSPARENT_TILE As Integer)
         For X = 0 To ROOM_COLUMNS - 1
             For Y = 0 To ROOM_ROWS - 1
                 Dim T = MGET(FROM_MAP, L, X, Y)
@@ -90,7 +90,7 @@
         Next
     End Sub
 
-    Friend Function GET_ROOM_MAP(COLUMN As Integer, ROW As Integer) As MapData
+    Friend Function GET_ROOM_MAP(COLUMN As Integer, ROW As Integer) As MapAssetData
         Return ROOM_MAPS(COLUMN + ROW * MAZE_COLUMNS)
     End Function
 
