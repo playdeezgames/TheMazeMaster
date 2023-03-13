@@ -5,6 +5,7 @@
         AnsiConsole.Write(figlet)
         AnsiConsole.MarkUpLine("By TheGrumpyGameDev")
         AnsiConsole.MarkupLine("For: Jam for All BASIC Dialects (#4)")
+        SfxHandler.HandleSfx(Sfx.Title)
         Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
         prompt.AddChoice("Start")
         AnsiConsole.Prompt(prompt)

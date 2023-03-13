@@ -21,11 +21,13 @@
                     FIGHT_ATTACK()
             End Select
         ElseIf AllCreatures(AI).Alive Then
+            SfxHandler.HandleSfx(Sfx.KillEnemy)
             Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
             prompt.AddChoice("Victory!")
             AnsiConsole.Prompt(prompt)
             Return STATE_IN_PLAY
         Else
+            SfxHandler.HandleSfx(Sfx.Death)
             Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
             prompt.AddChoice("Yer Dead!")
             AnsiConsole.Prompt(prompt)
@@ -46,13 +48,13 @@
     Friend Sub FIGHT_ATTACK()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
-        RESOLVE_ATTACK(AI, DI)
+        RESOLVE_ATTACK(AI, DI, Sfx.PlayerHit, Sfx.PlayerMiss)
         If AllCreatures(DI).Alive Then
-            RESOLVE_ATTACK(DI, AI)
+            RESOLVE_ATTACK(DI, AI, Sfx.EnemyHit, Sfx.EnemyMiss)
         End If
         FIGHT_PROMPT()
     End Sub
-    Friend Sub RESOLVE_ATTACK(AI As Integer, DI As Integer)
+    Friend Sub RESOLVE_ATTACK(AI As Integer, DI As Integer, hitSfx As Sfx, missSfx As Sfx)
         AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} attacks {AllCreatures(DI).Name}")
         Dim AR = AllCreatures(AI).RollAttack
         Dim DR = AllCreatures(DI).RollDefend
@@ -62,6 +64,7 @@
             Dim D = AR - DR
             AllCreatures(DI).AddWounds(D)
             AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} hits for {D}")
+            SfxHandler.HandleSfx(hitSfx)
             If Not AllCreatures(DI).Alive Then
                 AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} kills {AllCreatures(DI).Name}")
                 AllCreatures(DI).Remove()
@@ -69,6 +72,7 @@
             End If
         Else
             AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} misses")
+            SfxHandler.HandleSfx(missSfx)
         End If
     End Sub
 End Module
