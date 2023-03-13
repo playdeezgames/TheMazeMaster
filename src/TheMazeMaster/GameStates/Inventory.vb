@@ -3,9 +3,9 @@
         AnsiConsole.Clear()
         AnsiConsole.MarkupLine("Inventory:")
         Dim hasNothing = True
-        If PLAYER_STACKS.Any(Function(x) x.Value > 0) Then
+        If Player.character.ItemStacks.Any(Function(x) x.Value > 0) Then
             hasNothing = False
-            For Each itemStack In PLAYER_STACKS.Where(Function(x) x.Value > 0)
+            For Each itemStack In Player.character.ItemStacks.Where(Function(x) x.Value > 0)
                 AnsiConsole.MarkupLine($"{AllItemTypes(itemStack.Key).Name} x{itemStack.Value}")
             Next
         End If

@@ -1,12 +1,9 @@
 ﻿Friend Module Player
     Friend PLAYER_CREATURE_INDEX As Integer = 0
     Friend character As New Character
-    Friend PLAYER_STACKS As New Dictionary(Of ItemTypeIdentifier, Integer)
     Friend Sub Generate()
         PLAYER_CREATURE_INDEX = AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate
         character = New Character
-        PLAYER_INVENTORY.Clear()
-        PLAYER_STACKS.Clear()
     End Sub
     Friend Function MOVE_PLAYER(d As Integer) As MoveResult
         Return AllCreatures(PLAYER_CREATURE_INDEX).Move(d)
@@ -34,21 +31,22 @@
         Dim MY = AllCreatures(I).MazeRow
         Return FIND_ITEM(MX, MY, NX, NY)
     End Function
+    'TODO: push down into character
     Friend Sub PLAYER_TAKE_ITEM(II As Integer)
         AllItems(II).ClearRoom()
         Dim IT = AllItems(II).ItemType
         Dim ic As Integer
         If If(IT?.Stacks, False) Then
-            If Not PLAYER_STACKS.ContainsKey(IT.Identifier) Then
+            If Not character.ItemStacks.ContainsKey(IT.Identifier) Then
                 ic = 1
             Else
-                ic = PLAYER_STACKS(IT.Identifier) + 1
+                ic = character.ItemStacks(IT.Identifier) + 1
             End If
-            PLAYER_STACKS(IT.Identifier) = ic
+            character.ItemStacks(IT.Identifier) = ic
             AllItems(II).Destroy()
         Else
-            If Not PLAYER_INVENTORY.Contains(II) Then
-                PLAYER_INVENTORY.Add(II)
+            If Not character.Inventory.Contains(II) Then
+                character.Inventory.Add(II)
             End If
         End If
     End Sub
