@@ -2,13 +2,13 @@
     Friend FIGHT_CREATURE_INDEX As Integer = -1
     Friend Sub FIGHT_START()
         Dim DI = FIGHT_CREATURE_INDEX
-        Dim AI = PLAYER_CREATURE_INDEX
+        Dim AI = Player.character.CreatureIndex
         AnsiConsole.MarkupLine($"FIGHTING {AllCreatures(DI).Name}")
         FIGHT_PROMPT()
     End Sub
     Friend Function Update() As StateIdentifier
         Dim DI = FIGHT_CREATURE_INDEX
-        Dim AI = PLAYER_CREATURE_INDEX
+        Dim AI = Player.character.CreatureIndex
         If AllCreatures(AI).Alive And AllCreatures(DI).Alive Then
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
             Const AttackText = "Attack"
@@ -37,7 +37,7 @@
     End Function
     Friend Sub FIGHT_PROMPT()
         Dim DI = FIGHT_CREATURE_INDEX
-        Dim AI = PLAYER_CREATURE_INDEX
+        Dim AI = Player.character.CreatureIndex
         If AllCreatures(AI).Alive AndAlso AllCreatures(DI).Alive Then
             AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} has {AllCreatures(AI).Health} HP")
             AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} has {AllCreatures(DI).Health} HP")
@@ -47,7 +47,7 @@
     End Sub
     Friend Sub FIGHT_ATTACK()
         Dim DI = FIGHT_CREATURE_INDEX
-        Dim AI = PLAYER_CREATURE_INDEX
+        Dim AI = Player.character.CreatureIndex
         RESOLVE_ATTACK(AI, DI, Sfx.PlayerHit, Sfx.PlayerMiss)
         If AllCreatures(DI).Alive Then
             RESOLVE_ATTACK(DI, AI, Sfx.EnemyHit, Sfx.EnemyMiss)

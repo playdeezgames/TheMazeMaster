@@ -1,15 +1,13 @@
 ﻿Friend Module Player
-    Friend PLAYER_CREATURE_INDEX As Integer = 0
     Friend character As Character
     Friend Sub Generate()
-        PLAYER_CREATURE_INDEX = AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate
-        character = New Character(PLAYER_CREATURE_INDEX)
+        character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate)
     End Sub
     Friend Function MOVE_PLAYER(d As Integer) As MoveResult
-        Return AllCreatures(PLAYER_CREATURE_INDEX).Move(d)
+        Return character.Creature.Move(d)
     End Function
     Friend Function GET_PLAYER_ENEMY(D As Integer) As Integer
-        Dim I = PLAYER_CREATURE_INDEX
+        Dim I = character.CreatureIndex
         Dim X = AllCreatures(I).RoomColumn
         Dim Y = AllCreatures(I).RoomRow
         Dim NX = STEP_X(D, X, Y)
@@ -22,7 +20,7 @@
         character.XP += XP
     End Sub
     Friend Function GET_PLAYER_PICKUP(D As Integer) As Integer
-        Dim I = PLAYER_CREATURE_INDEX
+        Dim I = character.CreatureIndex
         Dim X = AllCreatures(I).RoomColumn
         Dim Y = AllCreatures(I).RoomRow
         Dim NX = STEP_X(D, X, Y)
@@ -51,6 +49,3 @@
         End If
     End Sub
 End Module
-' DEF HAS_PLAYER_LEVELED()
-'     RETURN PLAYER_XP>=PLAYER_XP_GOAL
-' ENDDEF
