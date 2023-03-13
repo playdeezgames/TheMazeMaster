@@ -2,7 +2,7 @@
     Friend Function Update() As StateIdentifier
         AnsiConsole.Clear()
         DrawMap()
-        AnsiConsole.MarkupLine("▲▼►◄ - Navigate")
+        AnsiConsole.MarkupLine("[olive]▲▼►◄[/] - Navigate | [olive]Esc[/] - Menu")
         Return MovePlayer()
     End Function
 
@@ -27,7 +27,7 @@
             End If
         End If
         If key = ConsoleKey.Escape Then
-
+            Return StateIdentifier.GameMenu
         End If
         Return R
     End Function

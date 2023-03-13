@@ -3,4 +3,5 @@
     Fight
     InPlay
     PickUp
+    GameMenu
 End Enum
