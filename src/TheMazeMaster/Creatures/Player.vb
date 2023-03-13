@@ -1,13 +1,10 @@
 ﻿Friend Module Player
     Friend PLAYER_CREATURE_INDEX As Integer = 0
-    Friend PLAYER_XP As Integer = 0
-    Friend PLAYER_XP_GOAL As Integer = 10
-    Friend PLAYER_INVENTORY As New List(Of Integer)
+    Friend character As New Character
     Friend PLAYER_STACKS As New Dictionary(Of ItemTypeIdentifier, Integer)
     Friend Sub Generate()
         PLAYER_CREATURE_INDEX = AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate
-        PLAYER_XP = 0
-        PLAYER_XP_GOAL = 10
+        character = New Character
         PLAYER_INVENTORY.Clear()
         PLAYER_STACKS.Clear()
     End Sub
@@ -25,7 +22,7 @@
         Return FIND_CREATURE(MX, MY, NX, NY)
     End Function
     Friend Sub PLAYER_ADD_XP(XP As Integer)
-        PLAYER_XP += XP
+        character.XP += XP
     End Sub
     Friend Function GET_PLAYER_PICKUP(D As Integer) As Integer
         Dim I = PLAYER_CREATURE_INDEX
