@@ -6,7 +6,7 @@
         AnsiConsole.MarkupLine($"FIGHTING {AllCreatures(DI).Name}")
         FIGHT_PROMPT()
     End Sub
-    Friend Function Update() As String
+    Friend Function Update() As StateIdentifier
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = PLAYER_CREATURE_INDEX
         If AllCreatures(AI).Alive And AllCreatures(DI).Alive Then
@@ -16,7 +16,7 @@
             prompt.AddChoices(AttackText, RunText)
             Select Case AnsiConsole.Prompt(prompt)
                 Case RunText
-                    Return STATE_IN_PLAY
+                    Return StateIdentifier.InPlay
                 Case AttackText
                     FIGHT_ATTACK()
             End Select
@@ -25,15 +25,15 @@
             Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
             prompt.AddChoice("Victory!")
             AnsiConsole.Prompt(prompt)
-            Return STATE_IN_PLAY
+            Return StateIdentifier.InPlay
         Else
             SfxHandler.HandleSfx(Sfx.Death)
             Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
             prompt.AddChoice("Yer Dead!")
             AnsiConsole.Prompt(prompt)
-            Return STATE_TITLE
+            Return StateIdentifier.Title
         End If
-        Return STATE_FIGHT
+        Return StateIdentifier.Fight
     End Function
     Friend Sub FIGHT_PROMPT()
         Dim DI = FIGHT_CREATURE_INDEX

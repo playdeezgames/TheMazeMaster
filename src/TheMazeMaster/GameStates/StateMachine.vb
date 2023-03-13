@@ -1,16 +1,12 @@
 ﻿Friend Module StateMachine
-    Friend Const STATE_TITLE = "TITLE"
-    Friend Const STATE_FIGHT = "FIGHT"
-    Friend Const STATE_IN_PLAY = "INPLAY"
-    Friend Const STATE_PICKUP = "PICKUP"
-    Friend CURRENT_STATE As String = STATE_TITLE
-    Private ReadOnly table As IReadOnlyDictionary(Of String, Func(Of String)) =
-        New Dictionary(Of String, Func(Of String)) From
+    Friend CURRENT_STATE As StateIdentifier = StateIdentifier.Title
+    Private ReadOnly table As IReadOnlyDictionary(Of StateIdentifier, Func(Of StateIdentifier)) =
+        New Dictionary(Of StateIdentifier, Func(Of StateIdentifier)) From
         {
-            {STATE_TITLE, AddressOf Title.Update},
-            {STATE_FIGHT, AddressOf Fight.Update},
-            {STATE_IN_PLAY, AddressOf InPlay.Update},
-            {STATE_PICKUP, AddressOf PickUp.Update}
+            {StateIdentifier.Title, AddressOf Title.Update},
+            {StateIdentifier.Fight, AddressOf Fight.Update},
+            {StateIdentifier.InPlay, AddressOf InPlay.Update},
+            {StateIdentifier.PickUp, AddressOf PickUp.Update}
         }
     Friend Sub Update()
         CURRENT_STATE = table(CURRENT_STATE)()
