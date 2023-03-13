@@ -4,4 +4,5 @@
     InPlay
     PickUp
     GameMenu
+    Inventory
 End Enum
