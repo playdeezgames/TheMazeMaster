@@ -34,6 +34,8 @@
     Friend Const TILE_SOLID = 32
     Friend Const TILE_FLOOR = 33
     Friend Const TILE_BLOOD = 34
+    Friend Const TILE_TERRAIN_START = TILE_WALL_NORTH
+    Friend Const TILE_TERRAIN_END = TILE_BLOOD
 
     Friend Const TILE_RATTAIL = 80
     Friend Const TILE_ITEM_START = TILE_RATTAIL

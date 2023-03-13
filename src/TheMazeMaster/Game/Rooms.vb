@@ -3,10 +3,11 @@
     Friend Const ROOM_COLUMNS = 15
     Friend Const ROOM_CELL_WIDTH = 8
     Friend Const ROOM_CELL_HEIGHT = 8
-    Private ROOM_MAPS As New List(Of MapAssetData)
+    Private ROOM_ASSET_MAPS As New List(Of MapAssetData)
+    Private RoomMaps As New List(Of Map)
     Private ROOM_CHAMBERS As New List(Of Boolean)
     Friend Sub Generate()
-        ROOM_MAPS.Clear()
+        ROOM_ASSET_MAPS.Clear()
         ROOM_CHAMBERS.Clear()
         Dim TEMP As Integer = 0
         For ROW = 0 To MAZE_ROWS - 1
@@ -41,7 +42,8 @@
                     ROOM_MAP = CLONE(PASSAGEWAY_MAPS(TEMP))
                 End If
                 ROOM_CHAMBERS.Add(IS_CHAMBER)
-                ROOM_MAPS.Add(ROOM_MAP)
+                ROOM_ASSET_MAPS.Add(ROOM_MAP)
+                RoomMaps.Add(ROOM_MAP.ToMap)
             Next
         Next
         PLACE_ROOM_DOORS()
@@ -91,7 +93,7 @@
     End Sub
 
     Friend Function GET_ROOM_MAP(COLUMN As Integer, ROW As Integer) As MapAssetData
-        Return ROOM_MAPS(COLUMN + ROW * MAZE_COLUMNS)
+        Return ROOM_ASSET_MAPS(COLUMN + ROW * MAZE_COLUMNS)
     End Function
 
     Function IS_ROOM_CHAMBER(MX As Integer, M_Y As Integer) As Boolean
