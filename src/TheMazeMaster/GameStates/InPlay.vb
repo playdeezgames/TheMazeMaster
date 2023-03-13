@@ -26,6 +26,9 @@
                 Return STATE_PICKUP
             End If
         End If
+        If key = ConsoleKey.Escape Then
+
+        End If
         Return R
     End Function
 
