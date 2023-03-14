@@ -9,6 +9,7 @@
     Friend Sub Generate()
         ROOM_ASSET_MAPS.Clear()
         ROOM_CHAMBERS.Clear()
+        RoomMaps.Clear()
         Dim TEMP As Integer = 0
         For ROW = 0 To MAZE_ROWS - 1
             For COLUMN = 0 To MAZE_COLUMNS - 1
