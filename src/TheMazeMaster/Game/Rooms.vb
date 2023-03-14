@@ -93,17 +93,6 @@
             Next
         Next
     End Sub
-
-    Private Sub BLIT_MAP_ASSET(FROM_MAP As MapAssetData, TO_MAP As MapAssetData, L As Integer, TRANSPARENT_TILE As Integer)
-        For X = 0 To ROOM_COLUMNS - 1
-            For Y = 0 To ROOM_ROWS - 1
-                Dim T = MGET(FROM_MAP, L, X, Y)
-                If T <> TRANSPARENT_TILE Then
-                    MSET(TO_MAP, L, X, Y, T)
-                End If
-            Next
-        Next
-    End Sub
     Friend Function GetRoomMap(COLUMN As Integer, ROW As Integer) As Map
         Return RoomMaps(COLUMN + ROW * MAZE_COLUMNS)
     End Function
