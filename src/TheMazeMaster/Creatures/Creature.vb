@@ -1,11 +1,13 @@
 ﻿Friend Class Creature
     Sub New(
+           creatureIndex As Integer,
            creatureTypeIdentifier As CreatureTypeIdentifier,
            mazeColumn As Integer,
            mazeRow As Integer,
            roomColumn As Integer,
            roomRow As Integer,
            Optional alive As Boolean = True)
+        Me.CreatureIndex = creatureIndex
         Me.Alive = alive
         Me.MazeColumn = mazeColumn
         Me.MazeRow = mazeRow
@@ -16,6 +18,7 @@
         Me.Wounds = 0
         Me.Weapon = AllItemTypes(CreatureType.DefaultWeaponType).Create
     End Sub
+    ReadOnly Property CreatureIndex As Integer
     Private Property CreatureTypeIdentifier As CreatureTypeIdentifier
     ReadOnly Property CreatureType As CreatureType
         Get
@@ -36,6 +39,7 @@
         Dim RM = GET_ROOM_MAP_ASSET(MX, My)
         Dim TI = CreatureType.TileIndex
         MSET(RM, 2, RoomColumn, RoomRow, TI)
+        GetRoomMap(MazeColumn, MazeRow).GetCell(RoomColumn, RoomRow).Creature = CreatureIndex
     End Sub
     ReadOnly Property Name As String
         Get
@@ -93,6 +97,7 @@
         Dim RM = GET_ROOM_MAP_ASSET(MX, My)
         Dim TI = TILE_EMPTY
         MSET(RM, 2, RoomColumn, RoomRow, TI)
+        GetRoomMap(MazeColumn, MazeRow).GetCell(RoomColumn, RoomRow).Creature = Nothing
     End Sub
     Function Move(d As Integer) As MoveResult
         Dim R = MoveResult.Blocked
@@ -122,16 +127,17 @@
                     RoomRow = NY
                 End If
             Else
-                Dim TL = GET_ROOM_TILE(MX, M_Y, NX, NY)
-                If CAN_WALK_ON_TILE(TL) Then
-                    TL = GET_ROOM_CREATURE_TILE(MX, M_Y, NX, NY)
-                    If TL = TILE_EMPTY Then
-                        RoomColumn = NX
-                        RoomRow = NY
-                        R = MoveResult.Success
+                Dim terrain = AllTerrains(GetRoomMap(MX, M_Y).GetCell(NX, NY).Terrain)
+                If terrain.CanWalk Then
+                    Dim creatureIndex = GetRoomMap(MX, M_Y).GetCell(NX, NY).Creature
+                    If creatureIndex.HasValue Then
+                        R = MoveResult.Fight
                     Else
-                        If IS_TILE_CREATURE(TL) Then
-                            R = MoveResult.Fight
+                        Dim TL = GET_ROOM_CREATURE_TILE(MX, M_Y, NX, NY)
+                        If TL = TILE_EMPTY Then
+                            RoomColumn = NX
+                            RoomRow = NY
+                            R = MoveResult.Success
                         Else
                             R = MoveResult.PickUp
                         End If

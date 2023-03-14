@@ -1,5 +1,7 @@
 ﻿Friend Class MapCell
     Property Terrain As TerrainIdentifier
+    Property Creature As Integer?
+    Property Item As Integer?
 End Class
 Friend Class Map
     Friend ReadOnly Property Columns As Integer

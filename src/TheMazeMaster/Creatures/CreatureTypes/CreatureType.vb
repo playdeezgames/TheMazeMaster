@@ -47,7 +47,7 @@
     Function Create(mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
         'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
         Dim I = AllCreatures.Count
-        AllCreatures.Add(New Creature(Identifier, mX, m_y, x, y))
+        AllCreatures.Add(New Creature(I, Identifier, mX, m_y, x, y))
         Dim WT = AllCreatureTypes(Identifier).DefaultWeaponType
         AllCreatures(I).Place()
         Return I
