@@ -1,4 +1,5 @@
 ﻿Friend Enum TerrainIdentifier
+    EMPTY
     SOLID
     FLOOR
     BLOOD

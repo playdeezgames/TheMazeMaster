@@ -42,7 +42,8 @@ Friend Class MapAssetData
             {TILE_DOOR_WEST, TerrainIdentifier.DOOR_WEST},
             {TILE_SOLID, TerrainIdentifier.SOLID},
             {TILE_FLOOR, TerrainIdentifier.FLOOR},
-            {TILE_BLOOD, TerrainIdentifier.BLOOD}
+            {TILE_BLOOD, TerrainIdentifier.BLOOD},
+            {TILE_EMPTY, TerrainIdentifier.EMPTY}
         }
     Friend Function ToMap() As Map
         Dim columns = Layers.First.Data.Width
@@ -60,6 +61,8 @@ Friend Class MapAssetData
                         Continue For
                     ElseIf tileIndex >= TILE_TERRAIN_START AndAlso tileIndex <= TILE_TERRAIN_END Then
                         cell.Terrain = terrainTable(tileIndex)
+                    Else
+                        Throw New NotImplementedException
                     End If
                 Next
             Next

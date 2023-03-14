@@ -73,7 +73,7 @@
             Do
                 x = Rnd(0, ROOM_COLUMNS - 1)
                 y = Rnd(0, ROOM_ROWS - 1)
-                Dim RM = GET_ROOM_MAP(mx, m_y)
+                Dim RM = GET_ROOM_MAP_ASSET(mx, m_y)
                 ti = MGET(RM, 1, x, y)
                 cti = MGET(RM, 2, x, y)
             Loop Until ti = TILE_FLOOR And cti = TILE_EMPTY And x >= LX And x <= HX And y >= LY And y <= HY

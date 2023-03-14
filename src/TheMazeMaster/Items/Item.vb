@@ -38,7 +38,7 @@
             Dim X = RoomColumn.Value
             Dim Y = RoomRow.Value
             Dim TI = IT.TileIndex
-            Dim RM = GET_ROOM_MAP(MX, MY)
+            Dim RM = GET_ROOM_MAP_ASSET(MX, MY)
             MSET(RM, 2, X, Y, TI)
         End If
     End Sub
@@ -50,7 +50,7 @@
             Dim X = RoomColumn.Value
             Dim Y = RoomRow.Value
             Dim TI = TILE_EMPTY
-            Dim RM = GET_ROOM_MAP(MX, MY)
+            Dim RM = GET_ROOM_MAP_ASSET(MX, MY)
             MSET(RM, 2, X, Y, TI)
         End If
     End Sub

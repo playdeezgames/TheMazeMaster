@@ -59,13 +59,17 @@
                         D = D + 1
                     End While
                     Dim FM As MapAssetData
+
                     If IS_ROOM_CHAMBER(MX, M_y) Then
                         FM = CHAMBERDOOR_MAPS(D)
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
                     End If
-                    Dim TM = GET_ROOM_MAP(MX, M_y)
-                    BLIT_MAP(FM, TM, 1, TILE_EMPTY)
+                    Dim TM = GET_ROOM_MAP_ASSET(MX, M_y)
+                    BLIT_MAP_ASSET(FM, TM, 1, TILE_EMPTY)
+                    Dim toMap = GetRoomMap(MX, M_y)
+                    BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
+
                     Dim NX = STEP_X(D, MX, M_y)
                     Dim NY = STEP_Y(D, MX, M_y)
                     D = OPPOSITE_DIRECTION(D)
@@ -74,14 +78,27 @@
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
                     End If
-                    TM = GET_ROOM_MAP(NX, NY)
-                    BLIT_MAP(FM, TM, 1, TILE_EMPTY)
+                    TM = GET_ROOM_MAP_ASSET(NX, NY)
+                    BLIT_MAP_ASSET(FM, TM, 1, TILE_EMPTY)
+
                 End If
             Next
         Next
     End Sub
 
-    Private Sub BLIT_MAP(FROM_MAP As MapAssetData, TO_MAP As MapAssetData, L As Integer, TRANSPARENT_TILE As Integer)
+    Private Sub BlitTerrain(fromMap As Map, toMap As Map, transparent As TerrainIdentifier)
+        For column = 0 To toMap.Columns - 1
+            For row = 0 To toMap.Rows - 1
+                Dim terrain = fromMap.GetCell(column, row).Terrain
+                If terrain = transparent Then
+                    Continue For
+                End If
+                toMap.GetCell(column, row).Terrain = terrain
+            Next
+        Next
+    End Sub
+
+    Private Sub BLIT_MAP_ASSET(FROM_MAP As MapAssetData, TO_MAP As MapAssetData, L As Integer, TRANSPARENT_TILE As Integer)
         For X = 0 To ROOM_COLUMNS - 1
             For Y = 0 To ROOM_ROWS - 1
                 Dim T = MGET(FROM_MAP, L, X, Y)
@@ -92,19 +109,22 @@
         Next
     End Sub
 
-    Friend Function GET_ROOM_MAP(COLUMN As Integer, ROW As Integer) As MapAssetData
+    Friend Function GET_ROOM_MAP_ASSET(COLUMN As Integer, ROW As Integer) As MapAssetData
         Return ROOM_ASSET_MAPS(COLUMN + ROW * MAZE_COLUMNS)
+    End Function
+    Friend Function GetRoomMap(COLUMN As Integer, ROW As Integer) As Map
+        Return RoomMaps(COLUMN + ROW * MAZE_COLUMNS)
     End Function
 
     Function IS_ROOM_CHAMBER(MX As Integer, M_Y As Integer) As Boolean
         Return ROOM_CHAMBERS(MX + M_Y * MAZE_COLUMNS)
     End Function
     Friend Function GET_ROOM_TILE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
-        Dim MP = GET_ROOM_MAP(MX, M_Y)
+        Dim MP = GET_ROOM_MAP_ASSET(MX, M_Y)
         Return MGET(MP, 1, X, Y)
     End Function
     Friend Function GET_ROOM_CREATURE_TILE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
-        Dim MP = GET_ROOM_MAP(MX, M_Y)
+        Dim MP = GET_ROOM_MAP_ASSET(MX, M_Y)
         Return MGET(MP, 2, X, Y)
     End Function
 End Module

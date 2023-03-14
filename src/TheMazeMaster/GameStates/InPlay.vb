@@ -35,7 +35,7 @@
     Private Sub DrawMap()
         Dim MX = AllCreatures(Player.character.CreatureIndex).MazeColumn
         Dim M_y = AllCreatures(Player.character.CreatureIndex).MazeRow
-        Dim ROOM_MAP = GET_ROOM_MAP(MX, M_y)
+        Dim ROOM_MAP = GET_ROOM_MAP_ASSET(MX, M_y)
         Driver.MAP(ROOM_MAP, 0, 0)
     End Sub
 End Module
