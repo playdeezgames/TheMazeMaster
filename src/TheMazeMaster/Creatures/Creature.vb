@@ -133,13 +133,13 @@
                     If creatureIndex.HasValue Then
                         R = MoveResult.Fight
                     Else
-                        Dim TL = GET_ROOM_CREATURE_TILE(MX, M_Y, NX, NY)
-                        If TL = TILE_EMPTY Then
+                        Dim itemIndex = GetRoomMap(MX, M_Y).GetCell(NX, NY).Item
+                        If itemIndex.HasValue Then
+                            R = MoveResult.PickUp
+                        Else
                             RoomColumn = NX
                             RoomRow = NY
                             R = MoveResult.Success
-                        Else
-                            R = MoveResult.PickUp
                         End If
                     End If
                 End If

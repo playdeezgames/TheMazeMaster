@@ -1,5 +1,6 @@
 ﻿Friend Class Item
     Friend Sub New(
+                  itemIndex As Integer,
                   itemTypeIdentifier As ItemTypeIdentifier,
                   Optional mazeColumn As Integer? = Nothing,
                   Optional mazeRow As Integer? = Nothing,
@@ -10,7 +11,9 @@
         Me.MazeRow = mazeRow
         Me.RoomColumn = roomColumn
         Me.RoomRow = roomRow
+        Me.ItemIndex = itemIndex
     End Sub
+    Friend ReadOnly Property ItemIndex As Integer
     Private Property ItemTypeIdentifier As ItemTypeIdentifier
     Friend Property MazeColumn As Integer?
     Friend Property MazeRow As Integer?
@@ -40,6 +43,7 @@
             Dim TI = IT.TileIndex
             Dim RM = GET_ROOM_MAP_ASSET(MX, MY)
             MSET(RM, 2, X, Y, TI)
+            GetRoomMap(MX, MY).GetCell(X, Y).Item = ItemIndex
         End If
     End Sub
     Friend Sub Remove()
@@ -52,6 +56,7 @@
             Dim TI = TILE_EMPTY
             Dim RM = GET_ROOM_MAP_ASSET(MX, MY)
             MSET(RM, 2, X, Y, TI)
+            GetRoomMap(MX, MY).GetCell(X, Y).Item = Nothing
         End If
     End Sub
     Friend Sub ClearRoom()

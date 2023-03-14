@@ -25,7 +25,7 @@
     Friend Function Create() As Integer
         'TODO: FIRST LOOK FOR EMPTY ITEM
         Dim I = AllItems.Count
-        AllItems.Add(New Item(Identifier))
+        AllItems.Add(New Item(I, Identifier))
         Return I
     End Function
     Friend Function CreateInRoom(mx As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
