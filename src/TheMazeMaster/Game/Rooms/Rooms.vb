@@ -4,10 +4,8 @@
     Friend Const ROOM_CELL_WIDTH = 8
     Friend Const ROOM_CELL_HEIGHT = 8
     Private AllRooms As New List(Of Room)
-    Private RoomMaps As New List(Of Map)
     Friend Sub Generate()
         AllRooms.Clear()
-        RoomMaps.Clear()
         Dim TEMP As Integer = 0
         For ROW = 0 To MAZE_ROWS - 1
             For COLUMN = 0 To MAZE_COLUMNS - 1
@@ -41,7 +39,6 @@
                     ROOM_MAP = CLONE(PASSAGEWAY_MAPS(TEMP))
                 End If
                 AllRooms.Add(New Room(ROOM_MAP.ToMap, IS_CHAMBER))
-                RoomMaps.Add(ROOM_MAP.ToMap)
             Next
         Next
         PLACE_ROOM_DOORS()
@@ -76,7 +73,6 @@
                     End If
                     toMap = GetRoomMap(NX, NY)
                     BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
-
                 End If
             Next
         Next
@@ -94,7 +90,7 @@
         Next
     End Sub
     Friend Function GetRoomMap(COLUMN As Integer, ROW As Integer) As Map
-        Return RoomMaps(COLUMN + ROW * MAZE_COLUMNS)
+        Return GetRoom(COLUMN, ROW).Map
     End Function
     Friend Function GetRoom(COLUMN As Integer, ROW As Integer) As Room
         Return AllRooms(COLUMN + ROW * MAZE_COLUMNS)
