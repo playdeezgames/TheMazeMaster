@@ -20,6 +20,23 @@
     Friend Sub MSET(map As MapAssetData, layer As Integer, x As Integer, y As Integer, t As Integer)
         map.Layers(layer).Data.Data(x + y * map.Layers(layer).Data.Width) = t
     End Sub
+    Friend Sub DrawMap(map As Map)
+        For y = 0 To map.Rows - 1
+            For x = 0 To map.Columns - 1
+                Dim cell = map.GetCell(x, y)
+                Dim ti As Integer
+                If cell.Creature.HasValue Then
+                    ti = AllCreatures(cell.Creature.Value).CreatureType.TileIndex
+                ElseIf cell.Item.HasValue Then
+                    ti = AllItems(cell.Item.Value).ItemType.TileIndex
+                Else
+                    ti = AllTerrains(cell.Terrain).TileIndex
+                End If
+                AnsiConsole.Markup(TILE_TABLE(Ti))
+            Next
+            AnsiConsole.WriteLine()
+        Next
+    End Sub
     Friend Sub MAP(map As MapAssetData, offsetx As Integer, offsety As Integer)
         For y = 0 To map.Layers(0).Data.Height - 1
             For x = 0 To map.Layers(0).Data.Width - 1
