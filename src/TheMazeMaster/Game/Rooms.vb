@@ -3,11 +3,9 @@
     Friend Const ROOM_COLUMNS = 15
     Friend Const ROOM_CELL_WIDTH = 8
     Friend Const ROOM_CELL_HEIGHT = 8
-    Private ROOM_ASSET_MAPS As New List(Of MapAssetData)
     Private RoomMaps As New List(Of Map)
     Private ROOM_CHAMBERS As New List(Of Boolean)
     Friend Sub Generate()
-        ROOM_ASSET_MAPS.Clear()
         ROOM_CHAMBERS.Clear()
         RoomMaps.Clear()
         Dim TEMP As Integer = 0
@@ -43,7 +41,6 @@
                     ROOM_MAP = CLONE(PASSAGEWAY_MAPS(TEMP))
                 End If
                 ROOM_CHAMBERS.Add(IS_CHAMBER)
-                ROOM_ASSET_MAPS.Add(ROOM_MAP)
                 RoomMaps.Add(ROOM_MAP.ToMap)
             Next
         Next
@@ -66,8 +63,6 @@
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
                     End If
-                    Dim TM = GET_ROOM_MAP_ASSET(MX, M_y)
-                    BLIT_MAP_ASSET(FM, TM, 1, TILE_EMPTY)
                     Dim toMap = GetRoomMap(MX, M_y)
                     BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
 
@@ -79,8 +74,8 @@
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
                     End If
-                    TM = GET_ROOM_MAP_ASSET(NX, NY)
-                    BLIT_MAP_ASSET(FM, TM, 1, TILE_EMPTY)
+                    toMap = GetRoomMap(NX, NY)
+                    BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
 
                 End If
             Next
@@ -109,23 +104,11 @@
             Next
         Next
     End Sub
-
-    Friend Function GET_ROOM_MAP_ASSET(COLUMN As Integer, ROW As Integer) As MapAssetData
-        Return ROOM_ASSET_MAPS(COLUMN + ROW * MAZE_COLUMNS)
-    End Function
     Friend Function GetRoomMap(COLUMN As Integer, ROW As Integer) As Map
         Return RoomMaps(COLUMN + ROW * MAZE_COLUMNS)
     End Function
 
     Function IS_ROOM_CHAMBER(MX As Integer, M_Y As Integer) As Boolean
         Return ROOM_CHAMBERS(MX + M_Y * MAZE_COLUMNS)
-    End Function
-    Friend Function GET_ROOM_TILE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
-        Dim MP = GET_ROOM_MAP_ASSET(MX, M_Y)
-        Return MGET(MP, 1, X, Y)
-    End Function
-    Friend Function GET_ROOM_CREATURE_TILE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
-        Dim MP = GET_ROOM_MAP_ASSET(MX, M_Y)
-        Return MGET(MP, 2, X, Y)
     End Function
 End Module

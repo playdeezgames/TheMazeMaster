@@ -36,9 +36,7 @@
     Sub Place()
         Dim MX = MazeColumn
         Dim My = MazeRow
-        Dim RM = GET_ROOM_MAP_ASSET(MX, My)
         Dim TI = CreatureType.TileIndex
-        MSET(RM, 2, RoomColumn, RoomRow, TI)
         GetRoomMap(MazeColumn, MazeRow).GetCell(RoomColumn, RoomRow).Creature = CreatureIndex
     End Sub
     ReadOnly Property Name As String
@@ -94,9 +92,7 @@
     Sub Remove()
         Dim MX = MazeColumn
         Dim My = MazeRow
-        Dim RM = GET_ROOM_MAP_ASSET(MX, My)
         Dim TI = TILE_EMPTY
-        MSET(RM, 2, RoomColumn, RoomRow, TI)
         GetRoomMap(MazeColumn, MazeRow).GetCell(RoomColumn, RoomRow).Creature = Nothing
     End Sub
     Function Move(d As Integer) As MoveResult

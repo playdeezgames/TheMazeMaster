@@ -41,8 +41,6 @@
             Dim X = RoomColumn.Value
             Dim Y = RoomRow.Value
             Dim TI = IT.TileIndex
-            Dim RM = GET_ROOM_MAP_ASSET(MX, MY)
-            MSET(RM, 2, X, Y, TI)
             GetRoomMap(MX, MY).GetCell(X, Y).Item = ItemIndex
         End If
     End Sub
@@ -53,9 +51,6 @@
             Dim MY = MazeRow.Value
             Dim X = RoomColumn.Value
             Dim Y = RoomRow.Value
-            Dim TI = TILE_EMPTY
-            Dim RM = GET_ROOM_MAP_ASSET(MX, MY)
-            MSET(RM, 2, X, Y, TI)
             GetRoomMap(MX, MY).GetCell(X, Y).Item = Nothing
         End If
     End Sub

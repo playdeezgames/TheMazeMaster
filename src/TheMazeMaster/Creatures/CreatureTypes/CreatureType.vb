@@ -68,15 +68,12 @@
             mx = Rnd(0, MAZE_COLUMNS - 1)
             m_y = Rnd(0, MAZE_ROWS - 1)
             e = GET_MAZE_CELL_EXITS(mx, m_y)
-            Dim ti As Integer
-            Dim cti As Integer
+            Dim cell As MapCell
             Do
                 x = Rnd(0, ROOM_COLUMNS - 1)
                 y = Rnd(0, ROOM_ROWS - 1)
-                Dim RM = GET_ROOM_MAP_ASSET(mx, m_y)
-                ti = MGET(RM, 1, x, y)
-                cti = MGET(RM, 2, x, y)
-            Loop Until ti = TILE_FLOOR And cti = TILE_EMPTY And x >= LX And x <= HX And y >= LY And y <= HY
+                Cell = GetRoomMap(mx, m_y).GetCell(x, y)
+            Loop Until cell.CanSpawn And x >= LX And x <= HX And y >= LY And y <= HY
         Loop Until e >= L And e <= H
         Return Create(mx, m_y, x, y)
     End Function

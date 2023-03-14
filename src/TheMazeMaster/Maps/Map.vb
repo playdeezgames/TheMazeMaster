@@ -2,6 +2,12 @@
     Property Terrain As TerrainIdentifier
     Property Creature As Integer?
     Property Item As Integer?
+
+    Friend ReadOnly Property CanSpawn As Boolean
+        Get
+            Return Not Creature.HasValue AndAlso Not Item.HasValue AndAlso AllTerrains(Terrain).CanWalk
+        End Get
+    End Property
 End Class
 Friend Class Map
     Friend ReadOnly Property Columns As Integer
