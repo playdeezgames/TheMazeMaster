@@ -25,6 +25,10 @@
                     "Rat Tail",
                     stacks:=True,
                     tileIndex:=TILE_RATTAIL)
+            },
+            {
+                ItemTypeIdentifier.Köttbulle,
+                New ItemType(ItemTypeIdentifier.Köttbulle, "Köttbulle", tileIndex:=TILE_Köttbulle, stacks:=True)
             }
         }
 End Module

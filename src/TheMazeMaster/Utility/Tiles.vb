@@ -38,8 +38,9 @@
     Friend Const TILE_TERRAIN_END = TILE_BLOOD
 
     Friend Const TILE_RATTAIL = 80
+    Friend Const tile_köttbulle = 81
     Friend Const TILE_ITEM_START = TILE_RATTAIL
-    Friend Const TILE_ITEM_END = TILE_RATTAIL
+    Friend Const TILE_ITEM_END = TILE_Köttbulle
 
     Friend Const TILE_RAT = 237
     Friend Const TILE_DUDE = 238
@@ -48,7 +49,6 @@
 
     Friend Const TILE_EMPTY = 239
 
-    '╔╗╚╝
     Friend ReadOnly TILE_TABLE As IReadOnlyDictionary(Of Integer, String) =
         New Dictionary(Of Integer, String) From
         {
@@ -73,25 +73,8 @@
             {TILE_BLOOD, "[red],[/]"},
             {TILE_RATTAIL, "[fuchsia])[/]"},
             {TILE_RAT, "[fuchsia]r[/]"},
-            {TILE_DUDE, "[white]☻[/]"}
+            {TILE_DUDE, "[white]☻[/]"},
+            {tile_köttbulle, "[olive]∙[/]"}
         }
-    Friend Function CAN_WALK_ON_TILE(T As Integer) As Boolean
-        If T = TILE_FLOOR OrElse T = TILE_DOOR_EAST OrElse T = TILE_DOOR_WEST OrElse T = TILE_DOOR_NORTH OrElse T = TILE_DOOR_SOUTH OrElse T = TILE_BLOOD Then
-            Return True
-        End If
-        Return False
-    End Function
-    Friend Function IS_TILE_CREATURE(T As Integer) As Boolean
-        If T >= TILE_CREATURE_START AndAlso T <= TILE_CREATURE_END Then
-            Return True
-        End If
-        Return False
-    End Function
-    Friend Function IS_TILE_ITEM(T As Integer) As Boolean
-        If T >= TILE_ITEM_START AndAlso T <= TILE_ITEM_END Then
-            Return True
-        End If
-        Return False
-    End Function
 End Module
 

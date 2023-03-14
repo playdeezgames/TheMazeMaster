@@ -3,4 +3,5 @@
     Fist
     Bite
     RatTail
+    Köttbulle
 End Enum
