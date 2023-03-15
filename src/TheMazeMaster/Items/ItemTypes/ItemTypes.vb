@@ -28,7 +28,12 @@
             },
             {
                 ItemTypeIdentifier.Köttbulle,
-                New ItemType(ItemTypeIdentifier.Köttbulle, "Köttbulle", tileIndex:=TILE_Köttbulle, stacks:=True)
+                New ItemType(
+                    ItemTypeIdentifier.Köttbulle,
+                    "Köttbulle",
+                    tileIndex:=tile_köttbulle,
+                    stacks:=True,
+                    spawnCount:=128)
             }
         }
 End Module

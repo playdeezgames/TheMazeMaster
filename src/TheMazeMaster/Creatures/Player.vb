@@ -7,14 +7,14 @@
         Return character.Creature.Move(d)
     End Function
     Friend Function GET_PLAYER_ENEMY(D As Integer) As Integer
-        Dim I = character.CreatureIndex
-        Dim X = AllCreatures(I).RoomColumn
-        Dim Y = AllCreatures(I).RoomRow
+        Dim creature = character.Creature
+        Dim X = creature.RoomColumn
+        Dim Y = creature.RoomRow
         Dim NX = STEP_X(D, X, Y)
         Dim NY = STEP_Y(D, X, Y)
-        Dim MX = AllCreatures(I).MazeColumn
-        Dim MY = AllCreatures(I).MazeRow
-        Return FIND_CREATURE(MX, MY, NX, NY)
+        Dim MX = creature.MazeColumn
+        Dim MY = creature.MazeRow
+        Return GetRoomMap(MX, MY).GetCell(NX, NY).Creature.Value
     End Function
     Friend Sub PLAYER_ADD_XP(XP As Integer)
         character.XP += XP

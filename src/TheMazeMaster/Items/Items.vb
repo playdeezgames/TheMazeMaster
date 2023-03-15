@@ -3,6 +3,18 @@
     Friend Sub Clear()
         AllItems.Clear()
     End Sub
+
+    Friend Sub Generate()
+        Clear()
+        For Each entry In AllItemTypes
+            Dim spawnCount = entry.Value.SpawnCount
+            While spawnCount > 0
+                entry.Value.Generate()
+                spawnCount -= 1
+            End While
+        Next
+    End Sub
+
     Friend Function FIND_ITEM(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
         For ii = 0 To AllItems.Count - 1
             Dim CMX = AllItems(ii).MazeColumn

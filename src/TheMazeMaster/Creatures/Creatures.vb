@@ -13,14 +13,4 @@
     Private Sub CLEAR_CREATURES()
         AllCreatures.Clear()
     End Sub
-    Friend Function FIND_CREATURE(MX As Integer, M_Y As Integer, X As Integer, Y As Integer) As Integer
-        For I = 0 To AllCreatures.Count - 1
-            If AllCreatures(I).Alive Then
-                If MX = AllCreatures(I).MazeColumn AndAlso M_Y = AllCreatures(I).MazeRow AndAlso X = AllCreatures(I).RoomColumn AndAlso Y = AllCreatures(I).RoomRow Then
-                    Return I
-                End If
-            End If
-        Next
-        Return -1
-    End Function
 End Module
