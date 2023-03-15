@@ -12,13 +12,13 @@
         Clear()
         Dim COLUMN = Rnd(0, MAZE_COLUMNS - 1)
         Dim ROW = Rnd(0, MAZE_ROWS - 1)
-        Dim d As Integer
         Dim NEXT_COL As Integer
         Dim NEXT_ROW As Integer
+        Dim direction As DirectionIdentifier
         MAZE_CELL_STATES(COLUMN, ROW) = MAZE_CELL_INSIDE
-        For d = DIRECTION_FIRST To DIRECTION_LAST
-            NEXT_COL = STEP_X(d, COLUMN, ROW)
-            NEXT_ROW = STEP_Y(d, COLUMN, ROW)
+        For Each direction In AllDirections
+            NEXT_COL = direction.StepX(COLUMN)
+            NEXT_ROW = direction.StepY(ROW)
             If NEXT_COL >= 0 AndAlso NEXT_ROW >= 0 AndAlso NEXT_COL < MAZE_COLUMNS AndAlso NEXT_ROW < MAZE_ROWS Then
                 MAZE_CELL_STATES(NEXT_COL, NEXT_ROW) = MAZE_CELL_FRONTIER
             End If
@@ -28,27 +28,27 @@
                 COLUMN = Rnd(0, MAZE_COLUMNS - 1)
                 ROW = Rnd(0, MAZE_ROWS - 1)
             Loop Until MAZE_CELL_STATES(COLUMN, ROW) = MAZE_CELL_FRONTIER
-            For d = DIRECTION_FIRST To DIRECTION_LAST
-                CANDIDATES(d) = False
-                NEXT_COL = STEP_X(d, COLUMN, ROW)
-                NEXT_ROW = STEP_Y(d, COLUMN, ROW)
+            For Each direction In AllDirections
+                CANDIDATES(direction) = False
+                NEXT_COL = direction.StepX(COLUMN)
+                NEXT_ROW = direction.StepY(ROW)
                 If NEXT_COL >= 0 AndAlso NEXT_ROW >= 0 AndAlso NEXT_COL < MAZE_COLUMNS AndAlso NEXT_ROW < MAZE_ROWS Then
                     If MAZE_CELL_STATES(NEXT_COL, NEXT_ROW) = MAZE_CELL_INSIDE Then
-                        CANDIDATES(d) = True
+                        CANDIDATES(direction) = True
                     End If
                 End If
             Next
             Do
-                d = Rnd(DIRECTION_FIRST, DIRECTION_LAST)
-            Loop Until CANDIDATES(d) = True
+                direction = Rnd(AllDirections)
+            Loop Until CANDIDATES(direction) = True
             MAZE_CELL_STATES(COLUMN, ROW) = MAZE_CELL_INSIDE
-            MAZE_CELL_DOORS(COLUMN, ROW, d) = True
-            NEXT_COL = STEP_X(d, COLUMN, ROW)
-            NEXT_ROW = STEP_Y(d, COLUMN, ROW)
-            MAZE_CELL_DOORS(NEXT_COL, NEXT_ROW, OPPOSITE_DIRECTION(d)) = True
-            For d = DIRECTION_FIRST To DIRECTION_LAST
-                NEXT_COL = STEP_X(d, COLUMN, ROW)
-                NEXT_ROW = STEP_Y(d, COLUMN, ROW)
+            MAZE_CELL_DOORS(COLUMN, ROW, direction) = True
+            NEXT_COL = direction.StepX(COLUMN)
+            NEXT_ROW = direction.StepY(ROW)
+            MAZE_CELL_DOORS(NEXT_COL, NEXT_ROW, OPPOSITE_DIRECTION(direction)) = True
+            For Each direction In AllDirections
+                NEXT_COL = direction.StepX(COLUMN)
+                NEXT_ROW = direction.StepY(ROW)
                 If NEXT_COL >= 0 AndAlso NEXT_ROW >= 0 AndAlso NEXT_COL < MAZE_COLUMNS AndAlso NEXT_ROW < MAZE_ROWS Then
                     If MAZE_CELL_STATES(NEXT_COL, NEXT_ROW) = MAZE_CELL_OUTSIDE Then
                         MAZE_CELL_STATES(NEXT_COL, NEXT_ROW) = MAZE_CELL_FRONTIER

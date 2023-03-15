@@ -8,6 +8,10 @@
     Friend Function Rnd(low As Integer, high As Integer) As Integer
         Return random.Next(low, high + 1)
     End Function
+    Friend Function Rnd(Of T)(items As IReadOnlyList(Of T)) As T
+        Dim i = Rnd(0, items.Count - 1)
+        Return items(i)
+    End Function
     Friend Function CLONE(map As MapAssetData) As MapAssetData
         Return JsonSerializer.Deserialize(Of MapAssetData)(JsonSerializer.Serialize(map))
     End Function
