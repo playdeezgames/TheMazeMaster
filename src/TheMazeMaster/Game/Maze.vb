@@ -75,6 +75,7 @@
                 For d = DIRECTION_FIRST To DIRECTION_LAST
                     MAZE_CELL_DOORS(COLUMN, ROW, d) = False
                 Next
+                MAZE_CELL_STATES(COLUMN, ROW) = MAZE_CELL_OUTSIDE
             Next
         Next
     End Sub
