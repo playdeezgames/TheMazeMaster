@@ -14,7 +14,7 @@
         Me.RoomColumn = roomColumn
         Me.RoomRow = roomRow
         Me.CreatureTypeIdentifier = creatureTypeIdentifier
-        Me.HitPoints = CreatureType.HitPoints
+        Me.MaximumHitPoints = CreatureType.MaximumHitPoints
         Me.Wounds = 0
         Me.Weapon = AllItemTypes(CreatureType.DefaultWeaponType).Create
     End Sub
@@ -30,7 +30,7 @@
     Property MazeRow As Integer
     Property RoomColumn As Integer
     Property RoomRow As Integer
-    Property HitPoints As Integer
+    Property MaximumHitPoints As Integer
     Property Wounds As Integer
     Property Weapon As Integer?
     Sub Place()
@@ -46,7 +46,7 @@
     End Property
     ReadOnly Property Health As Integer
         Get
-            Return HitPoints - Wounds
+            Return MaximumHitPoints - Wounds
         End Get
     End Property
     ReadOnly Property XP As Integer
@@ -68,9 +68,9 @@
     Sub AddWounds(d As Integer)
         If Alive Then
             Wounds += d
-            If Wounds >= HitPoints Then
+            If Wounds >= MaximumHitPoints Then
                 Alive = False
-                Wounds = HitPoints
+                Wounds = MaximumHitPoints
             End If
         End If
     End Sub

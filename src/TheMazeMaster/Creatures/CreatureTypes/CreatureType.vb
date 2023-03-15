@@ -25,7 +25,7 @@
         Me.MaximumX = maximumX
         Me.MinimumY = minimumY
         Me.MaximumY = maximumY
-        Me.HitPoints = hitPoints
+        Me.MaximumHitPoints = hitPoints
         Me.XP = xp
         Me.Drop = drop
     End Sub
@@ -37,7 +37,7 @@
     Public ReadOnly Property MaximumExitCount As Integer
     Public ReadOnly Property SpawnCount As Integer
     Public ReadOnly Property DefaultWeaponType As ItemTypeIdentifier
-    Public ReadOnly Property HitPoints As Integer
+    Public ReadOnly Property MaximumHitPoints As Integer
     Public ReadOnly Property MinimumX As Integer
     Public ReadOnly Property MinimumY As Integer
     Public ReadOnly Property MaximumX As Integer
