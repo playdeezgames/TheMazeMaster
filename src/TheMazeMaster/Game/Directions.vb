@@ -1,4 +1,12 @@
 ﻿Friend Module Directions
+    Friend ReadOnly AllDirections As IReadOnlyList(Of DirectionIdentifier) =
+        New List(Of DirectionIdentifier) From
+        {
+            DirectionIdentifier.North,
+            DirectionIdentifier.East,
+            DirectionIdentifier.South,
+            DirectionIdentifier.West
+        }
     Friend Const DIRECTION_NORTH = 0
     Friend Const DIRECTION_EAST = 1
     Friend Const DIRECTION_SOUTH = 2
@@ -46,29 +54,3 @@
         End If
     End Function
 End Module
-' DEF NEXT_DIRECTION(d)
-'     IF d=DIRECTION_NORTH THEN
-'         RETURN DIRECTION_EAST
-'     ELSEIF d=DIRECTION_EAST THEN
-'         RETURN DIRECTION_SOUTH
-'     ELSEIF d=DIRECTION_SOUTH THEN
-'         RETURN DIRECTION_WEST
-'     ELSEIF d=DIRECTION_WEST THEN
-'         RETURN DIRECTION_NORTH
-'     ELSE
-'         ASSERT(FALSE,"INVALID DIRECTION")
-'     ENDIF    
-' ENDDEF
-' DEF PREVIOUS_DIRECTION(d)
-'     IF d=DIRECTION_NORTH THEN
-'         RETURN DIRECTION_WEST
-'     ELSEIF d=DIRECTION_EAST THEN
-'         RETURN DIRECTION_NORTH
-'     ELSEIF d=DIRECTION_SOUTH THEN
-'         RETURN DIRECTION_EAST
-'     ELSEIF d=DIRECTION_WEST THEN
-'         RETURN DIRECTION_SOUTH
-'     ELSE
-'         ASSERT(FALSE,"INVALID DIRECTION")
-'     ENDIF    
-' ENDDEF
