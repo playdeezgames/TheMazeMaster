@@ -1,20 +1,4 @@
 ﻿Friend Module Tiles
-    Friend Const TILE_MAZE_0 = 0
-    Friend Const TILE_MAZE_1 = 1
-    Friend Const TILE_MAZE_2 = 2
-    Friend Const TILE_MAZE_3 = 3
-    Friend Const TILE_MAZE_4 = 4
-    Friend Const TILE_MAZE_5 = 5
-    Friend Const TILE_MAZE_6 = 6
-    Friend Const TILE_MAZE_7 = 7
-    Friend Const TILE_MAZE_8 = 8
-    Friend Const TILE_MAZE_9 = 9
-    Friend Const TILE_MAZE_10 = 10
-    Friend Const TILE_MAZE_11 = 11
-    Friend Const TILE_MAZE_12 = 12
-    Friend Const TILE_MAZE_13 = 13
-    Friend Const TILE_MAZE_14 = 14
-    Friend Const TILE_MAZE_15 = 15
     Friend Const TILE_WALL_NORTH = 16
     Friend Const TILE_WALL_EAST = 17
     Friend Const TILE_WALL_SOUTH = 18
@@ -39,13 +23,10 @@
 
     Friend Const TILE_RATTAIL = 80
     Friend Const tile_köttbulle = 81
-    Friend Const TILE_ITEM_START = TILE_RATTAIL
-    Friend Const TILE_ITEM_END = TILE_Köttbulle
+    Friend Const TILE_PENNY = 82
 
     Friend Const TILE_RAT = 237
     Friend Const TILE_DUDE = 238
-    Friend Const TILE_CREATURE_START = TILE_RAT
-    Friend Const TILE_CREATURE_END = TILE_DUDE
 
     Friend Const TILE_EMPTY = 239
 
@@ -74,7 +55,8 @@
             {TILE_RATTAIL, "[fuchsia])[/]"},
             {TILE_RAT, "[fuchsia]r[/]"},
             {TILE_DUDE, "[white]☻[/]"},
-            {tile_köttbulle, "[olive]∙[/]"}
+            {tile_köttbulle, "[olive]∙[/]"},
+            {TILE_PENNY, "[olive]¢[/]"}
         }
 End Module
 

@@ -4,4 +4,5 @@
     Bite
     RatTail
     Köttbulle
+    Penny
 End Enum

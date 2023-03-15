@@ -34,6 +34,15 @@
                     tileIndex:=tile_köttbulle,
                     stacks:=True,
                     spawnCount:=128)
+            },
+            {
+                ItemTypeIdentifier.Penny,
+                New ItemType(
+                    ItemTypeIdentifier.Penny,
+                    "Penny",
+                    tileIndex:=TILE_PENNY,
+                    stacks:=True,
+                    spawnCount:=256)
             }
         }
 End Module
