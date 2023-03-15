@@ -95,19 +95,19 @@
         Dim TI = TILE_EMPTY
         GetRoomMap(MazeColumn, MazeRow).GetCell(RoomColumn, RoomRow).Creature = Nothing
     End Sub
-    Function Move(d As Integer) As MoveResult
+    Function Move(d As DirectionIdentifier) As MoveResult
         Dim R = MoveResult.Blocked
         If Alive Then
             Remove()
             Dim X = RoomColumn
             Dim Y = RoomRow
-            Dim NX = STEP_X(d, X, Y)
-            Dim NY = STEP_Y(d, X, Y)
+            Dim NX = d.StepX(X)
+            Dim NY = d.StepY(Y)
             Dim MX = MazeColumn
             Dim M_Y = MazeRow
             If NX < 0 OrElse NY < 0 OrElse NX >= ROOM_COLUMNS OrElse NY >= ROOM_ROWS Then
-                MazeColumn = STEP_X(d, MX, M_Y)
-                MazeRow = STEP_Y(d, MX, M_Y)
+                MazeColumn = d.StepX(MX)
+                MazeRow = d.StepY(M_Y)
                 If NX < 0 Then
                     RoomColumn = NX + ROOM_COLUMNS
                 ElseIf NX >= ROOM_COLUMNS Then

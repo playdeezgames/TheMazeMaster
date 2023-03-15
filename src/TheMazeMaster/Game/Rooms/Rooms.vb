@@ -10,7 +10,7 @@
         For ROW = 0 To MAZE_ROWS - 1
             For COLUMN = 0 To MAZE_COLUMNS - 1
                 TEMP = 0
-                For d = DIRECTION_FIRST To DIRECTION_LAST
+                For Each d In AllDirections
                     If MAZE_CELL_DOORS(COLUMN, ROW, d) Then
                         TEMP = TEMP Or (1 << d)
                     End If
@@ -49,9 +49,9 @@
             For M_y = 0 To MAZE_ROWS - 1
                 Dim EXIT_COUNT = GET_MAZE_CELL_EXITS(MX, M_y)
                 If EXIT_COUNT = 1 Then
-                    Dim D = 0
+                    Dim D As DirectionIdentifier = DirectionIdentifier.North
                     While Not MAZE_CELL_DOORS(MX, M_y, D)
-                        D = D + 1
+                        D = D.NextDirection
                     End While
                     Dim FM As MapAssetData
 
@@ -63,9 +63,9 @@
                     Dim toMap = GetRoomMap(MX, M_y)
                     BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
 
-                    Dim NX = STEP_X(D, MX, M_y)
-                    Dim NY = STEP_Y(D, MX, M_y)
-                    D = OPPOSITE_DIRECTION(D)
+                    Dim NX = D.StepX(MX)
+                    Dim NY = D.StepY(M_y)
+                    D = D.Opposite
                     If IS_ROOM_CHAMBER(NX, NY) Then
                         FM = CHAMBERDOOR_MAPS(D)
                     Else

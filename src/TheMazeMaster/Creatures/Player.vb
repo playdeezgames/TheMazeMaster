@@ -3,15 +3,15 @@
     Friend Sub Generate()
         character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate)
     End Sub
-    Friend Function MOVE_PLAYER(d As Integer) As MoveResult
+    Friend Function MOVE_PLAYER(d As DirectionIdentifier) As MoveResult
         Return character.Creature.Move(d)
     End Function
-    Friend Function GET_PLAYER_ENEMY(D As Integer) As Integer
+    Friend Function GET_PLAYER_ENEMY(D As DirectionIdentifier) As Integer
         Dim creature = character.Creature
         Dim X = creature.RoomColumn
         Dim Y = creature.RoomRow
-        Dim NX = STEP_X(D, X, Y)
-        Dim NY = STEP_Y(D, X, Y)
+        Dim NX = D.StepX(X)
+        Dim NY = D.StepY(Y)
         Dim MX = creature.MazeColumn
         Dim MY = creature.MazeRow
         Return GetRoomMap(MX, MY).GetCell(NX, NY).Creature.Value
@@ -19,12 +19,12 @@
     Friend Sub PLAYER_ADD_XP(XP As Integer)
         character.XP += XP
     End Sub
-    Friend Function GET_PLAYER_PICKUP(D As Integer) As Integer
+    Friend Function GET_PLAYER_PICKUP(D As DirectionIdentifier) As Integer
         Dim I = character.CreatureIndex
         Dim X = AllCreatures(I).RoomColumn
         Dim Y = AllCreatures(I).RoomRow
-        Dim NX = STEP_X(D, X, Y)
-        Dim NY = STEP_Y(D, X, Y)
+        Dim NX = D.StepX(X)
+        Dim NY = D.StepY(Y)
         Dim MX = AllCreatures(I).MazeColumn
         Dim MY = AllCreatures(I).MazeRow
         Return FIND_ITEM(MX, MY, NX, NY)

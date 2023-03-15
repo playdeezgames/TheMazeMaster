@@ -45,7 +45,7 @@
             MAZE_CELL_DOORS(COLUMN, ROW, direction) = True
             NEXT_COL = direction.StepX(COLUMN)
             NEXT_ROW = direction.StepY(ROW)
-            MAZE_CELL_DOORS(NEXT_COL, NEXT_ROW, OPPOSITE_DIRECTION(direction)) = True
+            MAZE_CELL_DOORS(NEXT_COL, NEXT_ROW, direction.Opposite) = True
             For Each direction In AllDirections
                 NEXT_COL = direction.StepX(COLUMN)
                 NEXT_ROW = direction.StepY(ROW)
@@ -72,7 +72,7 @@
     Private Sub Clear()
         For COLUMN = 0 To MAZE_COLUMNS - 1
             For ROW = 0 To MAZE_ROWS - 1
-                For d = DIRECTION_FIRST To DIRECTION_LAST
+                For Each d In AllDirections
                     MAZE_CELL_DOORS(COLUMN, ROW, d) = False
                 Next
                 MAZE_CELL_STATES(COLUMN, ROW) = MAZE_CELL_OUTSIDE
@@ -81,7 +81,7 @@
     End Sub
     Friend Function GET_MAZE_CELL_EXITS(MX As Integer, MY As Integer) As Integer
         Dim C As Integer = 0
-        For d = DIRECTION_FIRST To DIRECTION_LAST
+        For Each d In AllDirections
             If MAZE_CELL_DOORS(MX, MY, d) Then
                 C += 1
             End If

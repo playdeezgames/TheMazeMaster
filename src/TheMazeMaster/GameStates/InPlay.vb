@@ -8,21 +8,21 @@
 
     Private Function MovePlayer() As StateIdentifier
         Dim key = Console.ReadKey(True).Key
-        Dim d =
-            If(key = ConsoleKey.UpArrow, DIRECTION_NORTH,
-            If(key = ConsoleKey.DownArrow, DIRECTION_SOUTH,
-            If(key = ConsoleKey.LeftArrow, DIRECTION_WEST,
-            If(key = ConsoleKey.RightArrow, DIRECTION_EAST,
-            DIRECTION_COUNT))))
+        Dim d As DirectionIdentifier? =
+            If(key = ConsoleKey.UpArrow, DirectionIdentifier.North,
+            If(key = ConsoleKey.DownArrow, DirectionIdentifier.South,
+            If(key = ConsoleKey.LeftArrow, DirectionIdentifier.West,
+            If(key = ConsoleKey.RightArrow, DirectionIdentifier.East,
+            Nothing))))
         Dim R = StateIdentifier.InPlay
-        If d < DIRECTION_COUNT Then
-            Dim MR = MOVE_PLAYER(d)
+        If d.HasValue Then
+            Dim MR = MOVE_PLAYER(d.Value)
             If MR = MoveResult.Fight Then
-                FIGHT_CREATURE_INDEX = GET_PLAYER_ENEMY(d)
+                FIGHT_CREATURE_INDEX = GET_PLAYER_ENEMY(d.Value)
                 FIGHT_START()
                 Return StateIdentifier.Fight
             ElseIf MR = MoveResult.PickUp Then
-                PICKUP_ITEM_INDEX = GET_PLAYER_PICKUP(d)
+                PICKUP_ITEM_INDEX = GET_PLAYER_PICKUP(d.Value)
                 Return StateIdentifier.PickUp
             End If
         End If

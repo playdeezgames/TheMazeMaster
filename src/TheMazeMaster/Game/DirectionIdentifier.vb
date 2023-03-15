@@ -7,6 +7,18 @@ Public Enum DirectionIdentifier
     West
 End Enum
 Friend Module DirectionIdentifierExtensions
+    Private ReadOnly nextDirections As IReadOnlyDictionary(Of DirectionIdentifier, DirectionIdentifier) =
+        New Dictionary(Of DirectionIdentifier, DirectionIdentifier) From
+        {
+            {DirectionIdentifier.North, DirectionIdentifier.East},
+            {DirectionIdentifier.East, DirectionIdentifier.South},
+            {DirectionIdentifier.South, DirectionIdentifier.West},
+            {DirectionIdentifier.West, DirectionIdentifier.North}
+        }
+    <Extension>
+    Friend Function NextDirection(directionIdentifier As DirectionIdentifier) As DirectionIdentifier
+        Return nextDirections(directionIdentifier)
+    End Function
     Private ReadOnly opposites As IReadOnlyDictionary(Of DirectionIdentifier, DirectionIdentifier) =
         New Dictionary(Of DirectionIdentifier, DirectionIdentifier) From
         {
