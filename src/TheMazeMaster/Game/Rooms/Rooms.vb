@@ -11,7 +11,7 @@
             For COLUMN = 0 To MAZE_COLUMNS - 1
                 TEMP = 0
                 For Each d In AllDirections
-                    If MAZE_CELL_DOORS(COLUMN, ROW, d) Then
+                    If Mazes.maze.GetCell(COLUMN, ROW).HasDoor(d) Then
                         TEMP = TEMP Or (1 << d)
                     End If
                 Next
@@ -50,7 +50,7 @@
                 Dim EXIT_COUNT = GET_MAZE_CELL_EXITS(MX, M_y)
                 If EXIT_COUNT = 1 Then
                     Dim D As DirectionIdentifier = DirectionIdentifier.North
-                    While Not MAZE_CELL_DOORS(MX, M_y, D)
+                    While Not Mazes.maze.GetCell(MX, M_y).HasDoor(D)
                         D = D.NextDirection
                     End While
                     Dim FM As MapAssetData
