@@ -66,7 +66,7 @@
                     End While
                     Dim FM As MapAssetData
 
-                    If IS_ROOM_CHAMBER(MX, M_y) Then
+                    If GetRoom(MX, M_y).IsChamber Then
                         FM = CHAMBERDOOR_MAPS(D)
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
@@ -77,7 +77,7 @@
                     Dim NX = D.StepX(MX)
                     Dim NY = D.StepY(M_y)
                     D = D.Opposite
-                    If IS_ROOM_CHAMBER(NX, NY) Then
+                    If GetRoom(NX, NY).IsChamber Then
                         FM = CHAMBERDOOR_MAPS(D)
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
