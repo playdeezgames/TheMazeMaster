@@ -14,4 +14,9 @@
     Friend Function HasDoor(d As DirectionIdentifier) As Boolean
         Return Doors.Contains(d)
     End Function
+    Friend ReadOnly Property ExitCount As Integer
+        Get
+            Return Doors.Count
+        End Get
+    End Property
 End Class

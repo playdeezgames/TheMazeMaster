@@ -15,7 +15,7 @@
                         TEMP = TEMP Or (1 << d)
                     End If
                 Next
-                Dim EXIT_COUNT As Integer = Mazes.GET_MAZE_CELL_EXITS(COLUMN, ROW)
+                Dim EXIT_COUNT As Integer = Mazes.maze.GetCell(COLUMN, ROW).ExitCount
                 Dim IS_CHAMBER As Boolean = False
                 If EXIT_COUNT = 1 Then
                     IS_CHAMBER = True
@@ -47,7 +47,7 @@
     Private Sub PLACE_ROOM_DOORS()
         For MX = 0 To MAZE_COLUMNS - 1
             For M_y = 0 To MAZE_ROWS - 1
-                Dim EXIT_COUNT = GET_MAZE_CELL_EXITS(MX, M_y)
+                Dim EXIT_COUNT = Mazes.maze.GetCell(MX, M_y).ExitCount
                 If EXIT_COUNT = 1 Then
                     Dim D As DirectionIdentifier = DirectionIdentifier.North
                     While Not Mazes.maze.GetCell(MX, M_y).HasDoor(D)

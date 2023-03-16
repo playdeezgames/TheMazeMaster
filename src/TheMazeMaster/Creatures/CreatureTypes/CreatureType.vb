@@ -67,7 +67,7 @@
         Do
             mx = Rnd(0, MAZE_COLUMNS - 1)
             m_y = Rnd(0, MAZE_ROWS - 1)
-            e = GET_MAZE_CELL_EXITS(mx, m_y)
+            e = Mazes.maze.GetCell(mx, m_y).ExitCount
             Dim cell As MapCell
             Do
                 x = Rnd(0, ROOM_COLUMNS - 1)
