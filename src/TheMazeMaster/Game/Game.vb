@@ -1,6 +1,6 @@
 ﻿Friend Module Game
     Friend Sub Start()
-        Mazes.Generate()
+        Mazes.maze.Generate()
         Rooms.Generate()
         Items.Generate()
         Creatures.Generate()
