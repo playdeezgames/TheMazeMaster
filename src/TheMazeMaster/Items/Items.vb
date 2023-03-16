@@ -4,12 +4,12 @@
         AllItems.Clear()
     End Sub
 
-    Friend Sub Generate()
+    Friend Sub Generate(maze As Maze)
         Clear()
         For Each entry In AllItemTypes
             Dim spawnCount = entry.Value.SpawnCount
             While spawnCount > 0
-                entry.Value.Generate()
+                entry.Value.Generate(maze)
                 spawnCount -= 1
             End While
         Next

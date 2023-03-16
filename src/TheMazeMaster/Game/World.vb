@@ -4,7 +4,7 @@
         Dim maze As New Maze(MAZE_COLUMNS, MAZE_ROWS)
         maze.Generate()
         rooms = GenerateRooms(maze)
-        Items.Generate()
+        Items.Generate(maze)
         Creatures.Generate(maze)
         Player.Generate(maze)
     End Sub
@@ -14,7 +14,7 @@
         End If
         Return rooms(column + row * MAZE_COLUMNS)
     End Function
-    Friend Function GenerateRooms(maze As Maze) As List(Of Room)
+    Private Function GenerateRooms(maze As Maze) As List(Of Room)
         rooms = New List(Of Room)
         rooms.Clear()
         Dim TEMP As Integer = 0
