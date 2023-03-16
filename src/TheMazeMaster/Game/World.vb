@@ -71,7 +71,7 @@
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
                     End If
-                    Dim toMap = GetRoomMap(MX, M_y)
+                    Dim toMap = Worlds.world.GetRoom(MX, M_y).Map
                     BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
 
                     Dim NX = D.StepX(MX)
@@ -82,7 +82,7 @@
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
                     End If
-                    toMap = GetRoomMap(NX, NY)
+                    toMap = Worlds.world.GetRoom(NX, NY).Map
                     BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
                 End If
             Next

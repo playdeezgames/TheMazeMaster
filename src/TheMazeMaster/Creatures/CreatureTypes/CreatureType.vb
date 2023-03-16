@@ -72,7 +72,7 @@
             Do
                 x = Rnd(0, ROOM_COLUMNS - 1)
                 y = Rnd(0, ROOM_ROWS - 1)
-                cell = GetRoomMap(mx, m_y).GetCell(x, y)
+                cell = Worlds.world.GetRoom(mx, m_y).Map.GetCell(x, y)
             Loop Until cell.CanSpawn And x >= LX And x <= HX And y >= LY And y <= HY
         Loop Until e >= L And e <= H
         Return Create(mx, m_y, x, y)

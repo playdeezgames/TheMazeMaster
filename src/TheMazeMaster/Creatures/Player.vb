@@ -14,7 +14,7 @@
         Dim NY = D.StepY(Y)
         Dim MX = creature.MazeColumn
         Dim MY = creature.MazeRow
-        Return GetRoomMap(MX, MY).GetCell(NX, NY).Creature.Value
+        Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Creature.Value
     End Function
     Friend Sub PLAYER_ADD_XP(XP As Integer)
         character.XP += XP

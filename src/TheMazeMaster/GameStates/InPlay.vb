@@ -35,6 +35,6 @@
     Private Sub DrawMap()
         Dim MX = AllCreatures(Player.character.CreatureIndex).MazeColumn
         Dim M_y = AllCreatures(Player.character.CreatureIndex).MazeRow
-        Driver.DrawMap(GetRoomMap(MX, M_y))
+        Driver.DrawMap(Worlds.world.GetRoom(MX, M_y).Map)
     End Sub
 End Module

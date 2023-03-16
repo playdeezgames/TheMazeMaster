@@ -51,7 +51,7 @@
             mazeRow = Rnd(0, MAZE_ROWS - 1)
             roomColumn = Rnd(0, ROOM_COLUMNS - 1)
             roomRow = Rnd(0, ROOM_ROWS - 1)
-        Loop Until GetRoomMap(mazeColumn, mazeRow).GetCell(roomColumn, roomRow).CanSpawn
+        Loop Until Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow).CanSpawn
         Dim itemIndex = CreateInRoom(mazeColumn, mazeRow, roomColumn, roomRow)
         AllItems(itemIndex).Place()
     End Sub
