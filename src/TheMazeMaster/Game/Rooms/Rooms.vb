@@ -15,7 +15,7 @@
                         TEMP = TEMP Or (1 << d)
                     End If
                 Next
-                Dim EXIT_COUNT As Integer = Maze.GET_MAZE_CELL_EXITS(COLUMN, ROW)
+                Dim EXIT_COUNT As Integer = Mazes.GET_MAZE_CELL_EXITS(COLUMN, ROW)
                 Dim IS_CHAMBER As Boolean = False
                 If EXIT_COUNT = 1 Then
                     IS_CHAMBER = True

@@ -1,4 +1,4 @@
-﻿Friend Module Maze
+﻿Friend Module Mazes
     Friend Const MAZE_COLUMNS = 8
     Friend Const MAZE_ROWS = 8
     Friend Const MAZE_CELL_OUTSIDE = 0
@@ -88,7 +88,6 @@
         Next
         Return C
     End Function
-
 End Module
 
 
