@@ -4,18 +4,18 @@
     Friend Const ROOM_CELL_WIDTH = 8
     Friend Const ROOM_CELL_HEIGHT = 8
     Private AllRooms As New List(Of Room)
-    Friend Sub Generate()
+    Friend Sub Generate(maze As Maze)
         AllRooms.Clear()
         Dim TEMP As Integer = 0
         For ROW = 0 To MAZE_ROWS - 1
             For COLUMN = 0 To MAZE_COLUMNS - 1
                 TEMP = 0
                 For Each d In AllDirections
-                    If Mazes.maze.GetCell(COLUMN, ROW).HasDoor(d) Then
+                    If maze.GetCell(COLUMN, ROW).HasDoor(d) Then
                         TEMP = TEMP Or (1 << d)
                     End If
                 Next
-                Dim EXIT_COUNT As Integer = Mazes.maze.GetCell(COLUMN, ROW).ExitCount
+                Dim EXIT_COUNT As Integer = maze.GetCell(COLUMN, ROW).ExitCount
                 Dim IS_CHAMBER As Boolean = False
                 If EXIT_COUNT = 1 Then
                     IS_CHAMBER = True
@@ -41,16 +41,16 @@
                 AllRooms.Add(New Room(ROOM_MAP.ToMap, IS_CHAMBER))
             Next
         Next
-        PLACE_ROOM_DOORS()
+        PLACE_ROOM_DOORS(maze)
     End Sub
 
-    Private Sub PLACE_ROOM_DOORS()
+    Private Sub PLACE_ROOM_DOORS(maze As Maze)
         For MX = 0 To MAZE_COLUMNS - 1
             For M_y = 0 To MAZE_ROWS - 1
-                Dim EXIT_COUNT = Mazes.maze.GetCell(MX, M_y).ExitCount
+                Dim EXIT_COUNT = maze.GetCell(MX, M_y).ExitCount
                 If EXIT_COUNT = 1 Then
                     Dim D As DirectionIdentifier = DirectionIdentifier.North
-                    While Not Mazes.maze.GetCell(MX, M_y).HasDoor(D)
+                    While Not maze.GetCell(MX, M_y).HasDoor(D)
                         D = D.NextDirection
                     End While
                     Dim FM As MapAssetData

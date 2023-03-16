@@ -1,7 +1,7 @@
 ﻿Friend Module Player
     Friend character As Character
-    Friend Sub Generate()
-        character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate)
+    Friend Sub Generate(maze As Maze)
+        character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate(maze))
     End Sub
     Friend Function MOVE_PLAYER(d As DirectionIdentifier) As MoveResult
         Return character.Creature.Move(d)

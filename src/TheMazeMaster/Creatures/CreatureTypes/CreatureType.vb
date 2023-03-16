@@ -52,7 +52,7 @@
         AllCreatures(I).Place()
         Return I
     End Function
-    Function Generate() As Integer
+    Function Generate(maze As Maze) As Integer
         Dim L = MinimumExitCount
         Dim H = MaximumExitCount
         Dim LX = MinimumX
@@ -67,12 +67,12 @@
         Do
             mx = Rnd(0, MAZE_COLUMNS - 1)
             m_y = Rnd(0, MAZE_ROWS - 1)
-            e = Mazes.maze.GetCell(mx, m_y).ExitCount
+            e = maze.GetCell(mx, m_y).ExitCount
             Dim cell As MapCell
             Do
                 x = Rnd(0, ROOM_COLUMNS - 1)
                 y = Rnd(0, ROOM_ROWS - 1)
-                Cell = GetRoomMap(mx, m_y).GetCell(x, y)
+                cell = GetRoomMap(mx, m_y).GetCell(x, y)
             Loop Until cell.CanSpawn And x >= LX And x <= HX And y >= LY And y <= HY
         Loop Until e >= L And e <= H
         Return Create(mx, m_y, x, y)
