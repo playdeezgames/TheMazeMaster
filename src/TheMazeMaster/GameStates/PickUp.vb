@@ -2,9 +2,9 @@
     Friend PICKUP_ITEM_INDEX As Integer = -1
     Friend Function Update() As StateIdentifier
         Dim II = PICKUP_ITEM_INDEX
-        Dim IT = AllItems(II).ItemType
+        Dim IT = Worlds.world.GetItem(II).ItemType
         If AnsiConsole.Confirm($"[olive]Pick up {IT.Name}?[/]", True) Then
-            AllItems(II).Remove()
+            Worlds.world.GetItem(II).Remove()
             PLAYER_TAKE_ITEM(II)
         End If
         Return StateIdentifier.InPlay

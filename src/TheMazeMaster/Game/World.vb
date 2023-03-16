@@ -1,13 +1,28 @@
 ﻿Friend Class World
     Private rooms As List(Of Room)
+    Private items As List(Of Item)
+    Function GetItem(i As Integer) As Item
+        Return items(i)
+    End Function
     Friend Sub Start()
         Dim maze As New Maze(MAZE_COLUMNS, MAZE_ROWS)
         maze.Generate()
         rooms = GenerateRooms(maze)
-        Items.Generate(maze)
+        GenerateItems(maze)
         Creatures.Generate(maze)
         Player.Generate(maze)
     End Sub
+    Private Sub GenerateItems(maze As Maze)
+        items = New List(Of Item)
+        For Each entry In AllItemTypes
+            Dim spawnCount = entry.Value.SpawnCount
+            While spawnCount > 0
+                entry.Value.Generate(maze)
+                spawnCount -= 1
+            End While
+        Next
+    End Sub
+
     Friend Function GetRoom(column As Integer, row As Integer) As Room
         If column < 0 OrElse row < 0 OrElse column >= MAZE_COLUMNS OrElse row >= MAZE_ROWS Then
             Return Nothing
@@ -99,4 +114,11 @@
             Next
         Next
     End Sub
+
+    Friend Function AddItem(identifier As ItemTypeIdentifier) As Integer
+        'TODO: FIRST LOOK FOR EMPTY ITEM
+        Dim I = items.Count
+        items.Add(New Item(I, identifier))
+        Return I
+    End Function
 End Class

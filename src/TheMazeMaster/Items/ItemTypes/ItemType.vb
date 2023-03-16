@@ -45,17 +45,14 @@
         Return ROLL_DICE(AttackValue, AttackMaximum)
     End Function
     Friend Function Create() As Integer
-        'TODO: FIRST LOOK FOR EMPTY ITEM
-        Dim I = AllItems.Count
-        AllItems.Add(New Item(I, Identifier))
-        Return I
+        Return Worlds.world.AddItem(Identifier)
     End Function
     Friend Function CreateInRoom(mazeColumn As Integer, mazeRow As Integer, roomColumn As Integer, roomRow As Integer) As Integer
         Dim i = Create()
-        AllItems(i).MazeColumn = mazeColumn
-        AllItems(i).MazeRow = mazeRow
-        AllItems(i).RoomColumn = roomColumn
-        AllItems(i).RoomRow = roomRow
+        Worlds.world.GetItem(i).MazeColumn = mazeColumn
+        Worlds.world.GetItem(i).MazeRow = mazeRow
+        Worlds.world.GetItem(i).RoomColumn = roomColumn
+        Worlds.world.GetItem(i).RoomRow = roomRow
         Return i
     End Function
 
@@ -73,6 +70,6 @@
             roomRow = Rnd(MinimumY, MaximumY)
         Loop Until e >= MinimumExitCount AndAlso e <= MaximumExitCount AndAlso Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow).CanSpawn
         Dim itemIndex = CreateInRoom(mazeColumn, mazeRow, roomColumn, roomRow)
-        AllItems(itemIndex).Place()
+        Worlds.world.GetItem(itemIndex).Place()
     End Sub
 End Class

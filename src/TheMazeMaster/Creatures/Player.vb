@@ -27,12 +27,12 @@
         Dim NY = D.StepY(Y)
         Dim MX = AllCreatures(I).MazeColumn
         Dim MY = AllCreatures(I).MazeRow
-        Return FIND_ITEM(MX, MY, NX, NY)
+        Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Item.Value
     End Function
     'TODO: push down into character
     Friend Sub PLAYER_TAKE_ITEM(II As Integer)
-        AllItems(II).ClearRoom()
-        Dim IT = AllItems(II).ItemType
+        Worlds.world.GetItem(II).ClearRoom()
+        Dim IT = Worlds.world.GetItem(II).ItemType
         Dim ic As Integer
         If If(IT?.Stacks, False) Then
             If Not character.ItemStacks.ContainsKey(IT.Identifier) Then
@@ -41,7 +41,7 @@
                 ic = character.ItemStacks(IT.Identifier) + 1
             End If
             character.ItemStacks(IT.Identifier) = ic
-            AllItems(II).Destroy()
+            Worlds.world.GetItem(II).Destroy()
         Else
             If Not character.Inventory.Contains(II) Then
                 character.Inventory.Add(II)

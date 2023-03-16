@@ -26,7 +26,7 @@
                 If cell.Creature.HasValue Then
                     ti = AllCreatures(cell.Creature.Value).CreatureType.TileIndex
                 ElseIf cell.Item.HasValue Then
-                    ti = AllItems(cell.Item.Value).ItemType.TileIndex
+                    ti = Worlds.world.GetItem(cell.Item.Value).ItemType.TileIndex
                 Else
                     ti = AllTerrains(cell.Terrain).TileIndex
                 End If

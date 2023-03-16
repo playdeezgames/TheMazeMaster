@@ -57,7 +57,7 @@
     Function RollAttack() As Integer
         If Weapon.HasValue Then
             Dim W = Weapon.Value
-            Return AllItems(W).RollAttack
+            Return Worlds.world.GetItem(W).RollAttack
         End If
         Return 0
     End Function
@@ -87,7 +87,7 @@
         Dim X = RoomColumn
         Dim Y = RoomRow
         Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
-        AllItems(II).Place()
+        Worlds.world.GetItem(II).Place()
     End Sub
     Sub Remove()
         Worlds.world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature = Nothing
