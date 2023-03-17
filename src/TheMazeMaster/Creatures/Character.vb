@@ -12,22 +12,22 @@
             Return Worlds.world.GetCreature(CreatureIndex)
         End Get
     End Property
-    Friend Function MOVE_PLAYER(d As DirectionIdentifier) As MoveResult
+    Friend Function Move(d As DirectionIdentifier) As MoveResult
         Return Creature.Move(d)
     End Function
-    Friend Function GET_PLAYER_ENEMY(D As DirectionIdentifier) As Integer
+    Friend Function GetEnemy(D As DirectionIdentifier) As Integer
         Dim X = Creature.RoomColumn
-        Dim Y = creature.RoomRow
+        Dim Y = Creature.RoomRow
         Dim NX = D.StepX(X)
         Dim NY = D.StepY(Y)
-        Dim MX = creature.MazeColumn
-        Dim MY = creature.MazeRow
+        Dim MX = Creature.MazeColumn
+        Dim MY = Creature.MazeRow
         Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Creature.Value
     End Function
-    Friend Sub PLAYER_ADD_XP(XP As Integer)
+    Friend Sub AddXP(XP As Integer)
         XP += XP
     End Sub
-    Friend Function GET_PLAYER_PICKUP(D As DirectionIdentifier) As Integer
+    Friend Function GetPickUp(D As DirectionIdentifier) As Integer
         Dim I = CreatureIndex
         Dim X = Worlds.world.GetCreature(I).RoomColumn
         Dim Y = Worlds.world.GetCreature(I).RoomRow
@@ -38,7 +38,7 @@
         Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Item.Value
     End Function
     'TODO: push down into character
-    Friend Sub PLAYER_TAKE_ITEM(II As Integer)
+    Friend Sub TakeItem(II As Integer)
         Worlds.world.GetItem(II).ClearRoom()
         Dim IT = Worlds.world.GetItem(II).ItemType
         Dim ic As Integer

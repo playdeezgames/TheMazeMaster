@@ -2,13 +2,13 @@
     Friend FIGHT_CREATURE_INDEX As Integer = -1
     Friend Sub FIGHT_START()
         Dim DI = FIGHT_CREATURE_INDEX
-        Dim AI = Player.character.CreatureIndex
+        Dim AI = Worlds.world.character.CreatureIndex
         AnsiConsole.MarkupLine($"FIGHTING {Worlds.world.GetCreature(DI).Name}")
         FIGHT_PROMPT()
     End Sub
     Friend Function Update() As StateIdentifier
         Dim DI = FIGHT_CREATURE_INDEX
-        Dim AI = Player.character.CreatureIndex
+        Dim AI = Worlds.world.character.CreatureIndex
         If Worlds.world.GetCreature(AI).Alive And Worlds.world.GetCreature(DI).Alive Then
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
             Const AttackText = "Attack"
@@ -37,17 +37,17 @@
     End Function
     Friend Sub FIGHT_PROMPT()
         Dim DI = FIGHT_CREATURE_INDEX
-        Dim AI = Player.character.CreatureIndex
+        Dim AI = Worlds.world.character.CreatureIndex
         If Worlds.world.GetCreature(AI).Alive AndAlso Worlds.world.GetCreature(DI).Alive Then
             AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(AI).Name} has {Worlds.world.GetCreature(AI).Health} HP")
             AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(DI).Name} has {Worlds.world.GetCreature(DI).Health} HP")
         ElseIf Worlds.world.GetCreature(AI).Alive Then
-            Player.character.PLAYER_ADD_XP(Worlds.world.GetCreature(DI).XP)
+            Worlds.world.character.AddXP(Worlds.world.GetCreature(DI).XP)
         End If
     End Sub
     Friend Sub FIGHT_ATTACK()
         Dim DI = FIGHT_CREATURE_INDEX
-        Dim AI = Player.character.CreatureIndex
+        Dim AI = Worlds.world.character.CreatureIndex
         RESOLVE_ATTACK(AI, DI, Sfx.PlayerHit, Sfx.PlayerMiss)
         If Worlds.world.GetCreature(DI).Alive Then
             RESOLVE_ATTACK(DI, AI, Sfx.EnemyHit, Sfx.EnemyMiss)

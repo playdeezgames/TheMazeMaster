@@ -16,13 +16,13 @@
             Nothing))))
         Dim R = StateIdentifier.InPlay
         If d.HasValue Then
-            Dim MR = Player.character.MOVE_PLAYER(d.Value)
+            Dim MR = Worlds.world.character.Move(d.Value)
             If MR = MoveResult.Fight Then
-                FIGHT_CREATURE_INDEX = Player.character.GET_PLAYER_ENEMY(d.Value)
+                FIGHT_CREATURE_INDEX = Worlds.world.character.GetEnemy(d.Value)
                 FIGHT_START()
                 Return StateIdentifier.Fight
             ElseIf MR = MoveResult.PickUp Then
-                PICKUP_ITEM_INDEX = Player.character.GET_PLAYER_PICKUP(d.Value)
+                PICKUP_ITEM_INDEX = Worlds.world.character.GetPickUp(d.Value)
                 Return StateIdentifier.PickUp
             End If
         End If
@@ -33,8 +33,8 @@
     End Function
 
     Private Sub DrawMap()
-        Dim MX = Worlds.world.GetCreature(Player.character.CreatureIndex).MazeColumn
-        Dim M_y = Worlds.world.GetCreature(Player.character.CreatureIndex).MazeRow
+        Dim MX = Worlds.world.GetCreature(Worlds.world.character.CreatureIndex).MazeColumn
+        Dim M_y = Worlds.world.GetCreature(Worlds.world.character.CreatureIndex).MazeRow
         Driver.DrawMap(Worlds.world.GetRoom(MX, M_y).Map)
     End Sub
 End Module

@@ -14,7 +14,7 @@
         rooms = GenerateRooms(maze)
         GenerateItems(maze)
         GenerateCreatures(maze)
-        Player.GeneratePlayer(maze)
+        GeneratePlayer(maze)
     End Sub
     Private Sub GenerateItems(maze As Maze)
         items = New List(Of Item)
@@ -148,4 +148,8 @@
         creatures(I).Place()
         Return I
     End Function
+    Friend character As Character
+    Friend Sub GeneratePlayer(maze As Maze)
+        character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate(maze))
+    End Sub
 End Class
