@@ -22,7 +22,7 @@
                 FIGHT_START()
                 Return StateIdentifier.Fight
             ElseIf MR = MoveResult.PickUp Then
-                PICKUP_ITEM_INDEX = GET_PLAYER_PICKUP(d.Value)
+                PICKUP_ITEM_INDEX = Player.character.GET_PLAYER_PICKUP(d.Value)
                 Return StateIdentifier.PickUp
             End If
         End If

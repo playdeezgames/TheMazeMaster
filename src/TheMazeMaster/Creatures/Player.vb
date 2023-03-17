@@ -3,16 +3,6 @@
     Friend Sub GeneratePlayer(maze As Maze)
         character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate(maze))
     End Sub
-    Friend Function GET_PLAYER_PICKUP(D As DirectionIdentifier) As Integer
-        Dim I = character.CreatureIndex
-        Dim X = Worlds.world.GetCreature(I).RoomColumn
-        Dim Y = Worlds.world.GetCreature(I).RoomRow
-        Dim NX = D.StepX(X)
-        Dim NY = D.StepY(Y)
-        Dim MX = Worlds.world.GetCreature(I).MazeColumn
-        Dim MY = Worlds.world.GetCreature(I).MazeRow
-        Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Item.Value
-    End Function
     'TODO: push down into character
     Friend Sub PLAYER_TAKE_ITEM(II As Integer)
         Worlds.world.GetItem(II).ClearRoom()
