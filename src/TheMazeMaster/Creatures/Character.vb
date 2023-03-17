@@ -44,7 +44,6 @@
         Dim MY = Worlds.world.GetCreature(I).MazeRow
         Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Item.Value
     End Function
-    'TODO: push down into character
     Friend Sub TakeItem(II As Integer)
         Worlds.world.GetItem(II).ClearRoom()
         Dim IT = Worlds.world.GetItem(II).ItemType
