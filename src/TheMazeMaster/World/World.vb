@@ -31,7 +31,7 @@
         For Each entry In AllCreatureTypes
             Dim SC = entry.Value.SpawnCount
             While SC > 0
-                AllCreatureTypes(entry.Key).Generate(maze)
+                AllCreatureTypes(entry.Key).GenerateCreatureType(maze)
                 SC -= 1
             End While
         Next
@@ -150,6 +150,25 @@
     End Function
     Friend character As Character
     Friend Sub GeneratePlayer(maze As Maze)
-        character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate(maze))
+        character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).GenerateCreatureType(maze))
     End Sub
+    Function GenerateCreatureType(creatureType As CreatureType, maze As Maze) As Integer
+        Dim exitCount As Integer
+        Dim roomColumn As Integer
+        Dim roomRow As Integer
+        Dim mazeColumn As Integer
+        Dim mazeRow As Integer
+        Do
+            mazeColumn = Rnd(0, MAZE_COLUMNS - 1)
+            mazeRow = Rnd(0, MAZE_ROWS - 1)
+            exitCount = maze.GetCell(mazeColumn, mazeRow).ExitCount
+            Dim cell As MapCell
+            Do
+                roomColumn = Rnd(0, ROOM_COLUMNS - 1)
+                roomRow = Rnd(0, ROOM_ROWS - 1)
+                cell = Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow)
+            Loop Until cell.CanSpawn AndAlso roomColumn >= creatureType.MinimumX AndAlso roomColumn <= creatureType.MaximumX AndAlso roomRow >= creatureType.MinimumY AndAlso roomRow <= creatureType.MaximumY
+        Loop Until exitCount >= creatureType.MinimumExitCount AndAlso exitCount <= creatureType.MaximumExitCount
+        Return Worlds.world.AddCreature(creatureType.Identifier, mazeColumn, mazeRow, roomColumn, roomRow)
+    End Function
 End Class

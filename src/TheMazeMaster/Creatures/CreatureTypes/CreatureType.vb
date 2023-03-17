@@ -44,7 +44,7 @@
     Public ReadOnly Property MaximumY As Integer
     Public ReadOnly Property XP As Integer
     Public ReadOnly Property Drop As ItemTypeIdentifier
-    Function Generate(maze As Maze) As Integer
+    Function GenerateCreatureType(maze As Maze) As Integer
         Dim exitCount As Integer
         Dim roomColumn As Integer
         Dim roomRow As Integer
