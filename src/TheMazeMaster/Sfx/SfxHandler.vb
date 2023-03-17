@@ -69,6 +69,6 @@
     End Sub
 
     Private Sub PlayTitle()
-        PlayStatement.Play("L500;C4;E4;G4;C5;G4;E4;C4")
+        PlayStatement.Play("L500;C5;G4;E4;C4;E4;G4;C5")
     End Sub
 End Module
