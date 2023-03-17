@@ -23,10 +23,10 @@
             For x = 0 To map.Columns - 1
                 Dim cell = map.GetCell(x, y)
                 Dim ti As Integer
-                If cell.Creature.HasValue Then
-                    ti = Worlds.world.GetCreature(cell.Creature.Value).CreatureType.TileIndex
-                ElseIf cell.Item.HasValue Then
-                    ti = Worlds.world.GetItem(cell.Item.Value).ItemType.TileIndex
+                If cell.CreatureIndex.HasValue Then
+                    ti = Worlds.world.GetCreature(cell.CreatureIndex.Value).CreatureType.TileIndex
+                ElseIf cell.ItemIndex.HasValue Then
+                    ti = Worlds.world.GetItem(cell.ItemIndex.Value).ItemType.TileIndex
                 Else
                     ti = AllTerrains(cell.Terrain).TileIndex
                 End If

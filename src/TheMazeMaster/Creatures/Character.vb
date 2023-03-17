@@ -22,14 +22,11 @@
     Friend Function Move(d As DirectionIdentifier) As MoveResult
         Return Creature.Move(d)
     End Function
-    Friend Function GetEnemy(D As DirectionIdentifier) As Integer
-        Dim X = Creature.RoomColumn
-        Dim Y = Creature.RoomRow
-        Dim NX = D.StepX(X)
-        Dim NY = D.StepY(Y)
-        Dim MX = Creature.MazeColumn
-        Dim MY = Creature.MazeRow
-        Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Creature.Value
+    Friend Function GetEnemy(direction As DirectionIdentifier) As Integer
+        Return Worlds.world.
+            GetRoom(Creature.MazeColumn, Creature.MazeRow).Map.
+            GetCell(direction.StepX(Creature.RoomColumn), direction.StepY(Creature.RoomRow)).
+            CreatureIndex.Value
     End Function
     Friend Sub AddXP(XP As Integer)
         XP += XP
@@ -42,7 +39,7 @@
         Dim NY = D.StepY(Y)
         Dim MX = Worlds.world.GetCreature(I).MazeColumn
         Dim MY = Worlds.world.GetCreature(I).MazeRow
-        Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Item.Value
+        Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).ItemIndex.Value
     End Function
     Friend Sub TakeItem(II As Integer)
         Worlds.world.GetItem(II).ClearRoom()

@@ -1,11 +1,11 @@
 ﻿Friend Class MapCell
     Property Terrain As TerrainIdentifier
-    Property Creature As Integer?
-    Property Item As Integer?
+    Property CreatureIndex As Integer?
+    Property ItemIndex As Integer?
 
     Friend ReadOnly Property CanSpawn As Boolean
         Get
-            Return Not Creature.HasValue AndAlso Not Item.HasValue AndAlso AllTerrains(Terrain).CanWalk
+            Return Not CreatureIndex.HasValue AndAlso Not ItemIndex.HasValue AndAlso AllTerrains(Terrain).CanWalk
         End Get
     End Property
 End Class

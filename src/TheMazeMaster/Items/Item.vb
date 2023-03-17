@@ -41,7 +41,7 @@
             Dim X = RoomColumn.Value
             Dim Y = RoomRow.Value
             Dim TI = IT.TileIndex
-            Worlds.world.GetRoom(MX, MY).Map.GetCell(X, Y).Item = ItemIndex
+            Worlds.world.GetRoom(MX, MY).Map.GetCell(X, Y).ItemIndex = ItemIndex
         End If
     End Sub
     Friend Sub Remove()
@@ -51,7 +51,7 @@
             Dim MY = MazeRow.Value
             Dim X = RoomColumn.Value
             Dim Y = RoomRow.Value
-            Worlds.world.GetRoom(MX, MY).Map.GetCell(X, Y).Item = Nothing
+            Worlds.world.GetRoom(MX, MY).Map.GetCell(X, Y).ItemIndex = Nothing
         End If
     End Sub
     Friend Sub ClearRoom()
