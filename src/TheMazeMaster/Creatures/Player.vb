@@ -3,9 +3,6 @@
     Friend Sub GeneratePlayer(maze As Maze)
         character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate(maze))
     End Sub
-    Friend Sub PLAYER_ADD_XP(XP As Integer)
-        character.XP += XP
-    End Sub
     Friend Function GET_PLAYER_PICKUP(D As DirectionIdentifier) As Integer
         Dim I = character.CreatureIndex
         Dim X = Worlds.world.GetCreature(I).RoomColumn

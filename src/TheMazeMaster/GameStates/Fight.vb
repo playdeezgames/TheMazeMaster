@@ -42,7 +42,7 @@
             AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(AI).Name} has {Worlds.world.GetCreature(AI).Health} HP")
             AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(DI).Name} has {Worlds.world.GetCreature(DI).Health} HP")
         ElseIf Worlds.world.GetCreature(AI).Alive Then
-            PLAYER_ADD_XP(Worlds.world.GetCreature(DI).XP)
+            Player.character.PLAYER_ADD_XP(Worlds.world.GetCreature(DI).XP)
         End If
     End Sub
     Friend Sub FIGHT_ATTACK()
