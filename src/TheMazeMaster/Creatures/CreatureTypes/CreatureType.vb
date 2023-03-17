@@ -45,28 +45,22 @@
     Public ReadOnly Property XP As Integer
     Public ReadOnly Property Drop As ItemTypeIdentifier
     Function Generate(maze As Maze) As Integer
-        Dim L = MinimumExitCount
-        Dim H = MaximumExitCount
-        Dim LX = MinimumX
-        Dim LY = MinimumY
-        Dim HX = MaximumX
-        Dim HY = MaximumY
-        Dim e As Integer
-        Dim x As Integer
-        Dim y As Integer
-        Dim mx As Integer
-        Dim m_y As Integer
+        Dim exitCount As Integer
+        Dim roomColumn As Integer
+        Dim roomRow As Integer
+        Dim mazeColumn As Integer
+        Dim mazeRow As Integer
         Do
-            mx = Rnd(0, MAZE_COLUMNS - 1)
-            m_y = Rnd(0, MAZE_ROWS - 1)
-            e = maze.GetCell(mx, m_y).ExitCount
+            mazeColumn = Rnd(0, MAZE_COLUMNS - 1)
+            mazeRow = Rnd(0, MAZE_ROWS - 1)
+            exitCount = maze.GetCell(mazeColumn, mazeRow).ExitCount
             Dim cell As MapCell
             Do
-                x = Rnd(0, ROOM_COLUMNS - 1)
-                y = Rnd(0, ROOM_ROWS - 1)
-                cell = Worlds.world.GetRoom(mx, m_y).Map.GetCell(x, y)
-            Loop Until cell.CanSpawn And x >= LX And x <= HX And y >= LY And y <= HY
-        Loop Until e >= L And e <= H
-        Return Worlds.world.AddCreature(Identifier, mx, m_y, x, y)
+                roomColumn = Rnd(0, ROOM_COLUMNS - 1)
+                roomRow = Rnd(0, ROOM_ROWS - 1)
+                cell = Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow)
+            Loop Until cell.CanSpawn AndAlso roomColumn >= MinimumX AndAlso roomColumn <= MaximumX AndAlso roomRow >= MinimumY AndAlso roomRow <= MaximumY
+        Loop Until exitCount >= MinimumExitCount AndAlso exitCount <= MaximumExitCount
+        Return Worlds.world.AddCreature(Identifier, mazeColumn, mazeRow, roomColumn, roomRow)
     End Function
 End Class
