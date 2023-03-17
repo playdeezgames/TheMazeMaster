@@ -34,10 +34,7 @@
     Property Wounds As Integer
     Property Weapon As Integer?
     Sub Place()
-        Dim MX = MazeColumn
-        Dim My = MazeRow
-        Dim TI = CreatureType.TileIndex
-        Worlds.world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).CreatureIndex = CreatureIndex
+        Worlds.world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature = Me
     End Sub
     ReadOnly Property Name As String
         Get
@@ -90,7 +87,7 @@
         Worlds.world.GetItem(II).Place()
     End Sub
     Sub Remove()
-        Worlds.world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).CreatureIndex = Nothing
+        Worlds.world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature = Nothing
     End Sub
     Function Move(d As DirectionIdentifier) As MoveResult
         Dim R = MoveResult.Blocked
@@ -122,8 +119,8 @@
             Else
                 Dim terrain = AllTerrains(Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).Terrain)
                 If terrain.CanWalk Then
-                    Dim creatureIndex = Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).CreatureIndex
-                    If creatureIndex.HasValue Then
+                    Dim creature = Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).Creature
+                    If creature IsNot Nothing Then
                         R = MoveResult.Fight
                     Else
                         Dim itemIndex = Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).ItemIndex

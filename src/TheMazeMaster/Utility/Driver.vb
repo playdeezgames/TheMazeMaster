@@ -23,8 +23,8 @@
             For x = 0 To map.Columns - 1
                 Dim cell = map.GetCell(x, y)
                 Dim ti As Integer
-                If cell.CreatureIndex.HasValue Then
-                    ti = Worlds.world.GetCreature(cell.CreatureIndex.Value).CreatureType.TileIndex
+                If cell.Creature IsNot Nothing Then
+                    ti = cell.Creature.CreatureType.TileIndex
                 ElseIf cell.ItemIndex.HasValue Then
                     ti = Worlds.world.GetItem(cell.ItemIndex.Value).ItemType.TileIndex
                 Else

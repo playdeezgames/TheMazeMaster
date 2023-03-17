@@ -26,7 +26,7 @@
         Return Worlds.world.
             GetRoom(Creature.MazeColumn, Creature.MazeRow).Map.
             GetCell(direction.StepX(Creature.RoomColumn), direction.StepY(Creature.RoomRow)).
-            CreatureIndex.Value
+            Creature.CreatureIndex
     End Function
     Friend Sub AddXP(XP As Integer)
         XP += XP
