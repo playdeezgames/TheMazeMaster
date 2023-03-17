@@ -18,7 +18,7 @@
         If d.HasValue Then
             Dim MR = Player.character.MOVE_PLAYER(d.Value)
             If MR = MoveResult.Fight Then
-                FIGHT_CREATURE_INDEX = GET_PLAYER_ENEMY(d.Value)
+                FIGHT_CREATURE_INDEX = Player.character.GET_PLAYER_ENEMY(d.Value)
                 FIGHT_START()
                 Return StateIdentifier.Fight
             ElseIf MR = MoveResult.PickUp Then

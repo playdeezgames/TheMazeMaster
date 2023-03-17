@@ -3,16 +3,6 @@
     Friend Sub GeneratePlayer(maze As Maze)
         character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).Generate(maze))
     End Sub
-    Friend Function GET_PLAYER_ENEMY(D As DirectionIdentifier) As Integer
-        Dim creature = character.Creature
-        Dim X = creature.RoomColumn
-        Dim Y = creature.RoomRow
-        Dim NX = D.StepX(X)
-        Dim NY = D.StepY(Y)
-        Dim MX = creature.MazeColumn
-        Dim MY = creature.MazeRow
-        Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Creature.Value
-    End Function
     Friend Sub PLAYER_ADD_XP(XP As Integer)
         character.XP += XP
     End Sub
