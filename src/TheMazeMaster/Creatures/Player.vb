@@ -21,12 +21,12 @@
     End Sub
     Friend Function GET_PLAYER_PICKUP(D As DirectionIdentifier) As Integer
         Dim I = character.CreatureIndex
-        Dim X = AllCreatures(I).RoomColumn
-        Dim Y = AllCreatures(I).RoomRow
+        Dim X = Worlds.world.GetCreature(I).RoomColumn
+        Dim Y = Worlds.world.GetCreature(I).RoomRow
         Dim NX = D.StepX(X)
         Dim NY = D.StepY(Y)
-        Dim MX = AllCreatures(I).MazeColumn
-        Dim MY = AllCreatures(I).MazeRow
+        Dim MX = Worlds.world.GetCreature(I).MazeColumn
+        Dim MY = Worlds.world.GetCreature(I).MazeRow
         Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).Item.Value
     End Function
     'TODO: push down into character

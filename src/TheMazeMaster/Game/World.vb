@@ -1,6 +1,10 @@
 ﻿Friend Class World
     Private rooms As List(Of Room)
     Private items As List(Of Item)
+    Private creatures As List(Of Creature)
+    Function GetCreature(i As Integer) As Creature
+        Return creatures(i)
+    End Function
     Function GetItem(i As Integer) As Item
         Return items(i)
     End Function
@@ -9,7 +13,8 @@
         maze.Generate()
         rooms = GenerateRooms(maze)
         GenerateItems(maze)
-        Creatures.Generate(maze)
+        'TODO: finish moving generation into world
+        GenerateCreatures(maze)
         Player.Generate(maze)
     End Sub
     Private Sub GenerateItems(maze As Maze)
@@ -19,6 +24,16 @@
             While spawnCount > 0
                 entry.Value.Generate(maze)
                 spawnCount -= 1
+            End While
+        Next
+    End Sub
+    Friend Sub GenerateCreatures(maze As Maze)
+        creatures = New List(Of Creature)
+        For Each entry In AllCreatureTypes
+            Dim SC = entry.Value.SpawnCount
+            While SC > 0
+                AllCreatureTypes(entry.Key).Generate(maze)
+                SC -= 1
             End While
         Next
     End Sub
@@ -119,6 +134,19 @@
         'TODO: FIRST LOOK FOR EMPTY ITEM
         Dim I = items.Count
         items.Add(New Item(I, identifier))
+        Return I
+    End Function
+    Friend Function AddCreature(
+                               identifier As CreatureTypeIdentifier,
+                               mazeColumn As Integer,
+                               mazeRow As Integer,
+                               roomColumn As Integer,
+                               roomRow As Integer) As Integer
+        'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
+        Dim I = creatures.Count
+        creatures.Add(New Creature(I, identifier, mazeColumn, mazeRow, roomColumn, roomRow))
+        Dim WT = AllCreatureTypes(identifier).DefaultWeaponType
+        creatures(I).Place()
         Return I
     End Function
 End Class

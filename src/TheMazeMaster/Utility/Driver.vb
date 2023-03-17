@@ -24,7 +24,7 @@
                 Dim cell = map.GetCell(x, y)
                 Dim ti As Integer
                 If cell.Creature.HasValue Then
-                    ti = AllCreatures(cell.Creature.Value).CreatureType.TileIndex
+                    ti = Worlds.world.GetCreature(cell.Creature.Value).CreatureType.TileIndex
                 ElseIf cell.Item.HasValue Then
                     ti = Worlds.world.GetItem(cell.Item.Value).ItemType.TileIndex
                 Else

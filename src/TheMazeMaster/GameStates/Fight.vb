@@ -3,13 +3,13 @@
     Friend Sub FIGHT_START()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = Player.character.CreatureIndex
-        AnsiConsole.MarkupLine($"FIGHTING {AllCreatures(DI).Name}")
+        AnsiConsole.MarkupLine($"FIGHTING {Worlds.world.GetCreature(DI).Name}")
         FIGHT_PROMPT()
     End Sub
     Friend Function Update() As StateIdentifier
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = Player.character.CreatureIndex
-        If AllCreatures(AI).Alive And AllCreatures(DI).Alive Then
+        If Worlds.world.GetCreature(AI).Alive And Worlds.world.GetCreature(DI).Alive Then
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
             Const AttackText = "Attack"
             Const RunText = "Run"
@@ -20,7 +20,7 @@
                 Case AttackText
                     FIGHT_ATTACK()
             End Select
-        ElseIf AllCreatures(AI).Alive Then
+        ElseIf Worlds.world.GetCreature(AI).Alive Then
             SfxHandler.HandleSfx(Sfx.KillEnemy)
             Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
             prompt.AddChoice("Victory!")
@@ -38,40 +38,40 @@
     Friend Sub FIGHT_PROMPT()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = Player.character.CreatureIndex
-        If AllCreatures(AI).Alive AndAlso AllCreatures(DI).Alive Then
-            AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} has {AllCreatures(AI).Health} HP")
-            AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} has {AllCreatures(DI).Health} HP")
-        ElseIf AllCreatures(AI).Alive Then
-            PLAYER_ADD_XP(AllCreatures(DI).XP)
+        If Worlds.world.GetCreature(AI).Alive AndAlso Worlds.world.GetCreature(DI).Alive Then
+            AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(AI).Name} has {Worlds.world.GetCreature(AI).Health} HP")
+            AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(DI).Name} has {Worlds.world.GetCreature(DI).Health} HP")
+        ElseIf Worlds.world.GetCreature(AI).Alive Then
+            PLAYER_ADD_XP(Worlds.world.GetCreature(DI).XP)
         End If
     End Sub
     Friend Sub FIGHT_ATTACK()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = Player.character.CreatureIndex
         RESOLVE_ATTACK(AI, DI, Sfx.PlayerHit, Sfx.PlayerMiss)
-        If AllCreatures(DI).Alive Then
+        If Worlds.world.GetCreature(DI).Alive Then
             RESOLVE_ATTACK(DI, AI, Sfx.EnemyHit, Sfx.EnemyMiss)
         End If
         FIGHT_PROMPT()
     End Sub
     Friend Sub RESOLVE_ATTACK(AI As Integer, DI As Integer, hitSfx As Sfx, missSfx As Sfx)
-        AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} attacks {AllCreatures(DI).Name}")
-        Dim AR = AllCreatures(AI).RollAttack
-        Dim DR = AllCreatures(DI).RollDefend
-        AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} rolls {AR}")
-        AnsiConsole.MarkupLine($"{AllCreatures(DI).Name} rolls {DR}")
+        AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(AI).Name} attacks {Worlds.world.GetCreature(DI).Name}")
+        Dim AR = Worlds.world.GetCreature(AI).RollAttack
+        Dim DR = Worlds.world.GetCreature(DI).RollDefend
+        AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(AI).Name} rolls {AR}")
+        AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(DI).Name} rolls {DR}")
         If AR > DR Then
             Dim D = AR - DR
-            AllCreatures(DI).AddWounds(D)
-            AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} hits for {D}")
+            Worlds.world.GetCreature(DI).AddWounds(D)
+            AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(AI).Name} hits for {D}")
             SfxHandler.HandleSfx(hitSfx)
-            If Not AllCreatures(DI).Alive Then
-                AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} kills {AllCreatures(DI).Name}")
-                AllCreatures(DI).Remove()
-                AllCreatures(DI).Drop()
+            If Not Worlds.world.GetCreature(DI).Alive Then
+                AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(AI).Name} kills {Worlds.world.GetCreature(DI).Name}")
+                Worlds.world.GetCreature(DI).Remove()
+                Worlds.world.GetCreature(DI).Drop()
             End If
         Else
-            AnsiConsole.MarkupLine($"{AllCreatures(AI).Name} misses")
+            AnsiConsole.MarkupLine($"{Worlds.world.GetCreature(AI).Name} misses")
             SfxHandler.HandleSfx(missSfx)
         End If
     End Sub

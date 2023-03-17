@@ -9,7 +9,7 @@
     Friend ReadOnly Property CreatureIndex As Integer
     Friend ReadOnly Property Creature As Creature
         Get
-            Return AllCreatures(CreatureIndex)
+            Return Worlds.world.GetCreature(CreatureIndex)
         End Get
     End Property
 End Class

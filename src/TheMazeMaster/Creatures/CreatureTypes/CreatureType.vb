@@ -44,14 +44,6 @@
     Public ReadOnly Property MaximumY As Integer
     Public ReadOnly Property XP As Integer
     Public ReadOnly Property Drop As ItemTypeIdentifier
-    Function Create(mX As Integer, m_y As Integer, x As Integer, y As Integer) As Integer
-        'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
-        Dim I = AllCreatures.Count
-        AllCreatures.Add(New Creature(I, Identifier, mX, m_y, x, y))
-        Dim WT = AllCreatureTypes(Identifier).DefaultWeaponType
-        AllCreatures(I).Place()
-        Return I
-    End Function
     Function Generate(maze As Maze) As Integer
         Dim L = MinimumExitCount
         Dim H = MaximumExitCount
@@ -75,6 +67,6 @@
                 cell = Worlds.world.GetRoom(mx, m_y).Map.GetCell(x, y)
             Loop Until cell.CanSpawn And x >= LX And x <= HX And y >= LY And y <= HY
         Loop Until e >= L And e <= H
-        Return Create(mx, m_y, x, y)
+        Return Worlds.world.AddCreature(Identifier, mx, m_y, x, y)
     End Function
 End Class
