@@ -12,6 +12,13 @@
             Return Worlds.world.GetCreature(CreatureIndex)
         End Get
     End Property
+
+    Public ReadOnly Property UsableItemTypes As IEnumerable(Of ItemType)
+        Get
+            Throw New NotImplementedException
+        End Get
+    End Property
+
     Friend Function Move(d As DirectionIdentifier) As MoveResult
         Return Creature.Move(d)
     End Function

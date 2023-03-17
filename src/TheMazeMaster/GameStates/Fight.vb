@@ -13,12 +13,15 @@
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
             Const AttackText = "Attack"
             Const RunText = "Run"
-            prompt.AddChoices(AttackText, RunText)
+            Const UseText = "Use..."
+            prompt.AddChoices(AttackText, RunText, UseText)
             Select Case AnsiConsole.Prompt(prompt)
                 Case RunText
                     Return StateIdentifier.InPlay
                 Case AttackText
-                    FIGHT_ATTACK()
+                    DoAttack()
+                Case UseText
+                    UseItem()
             End Select
         ElseIf Worlds.world.GetCreature(AI).Alive Then
             SfxHandler.HandleSfx(Sfx.KillEnemy)
@@ -35,6 +38,17 @@
         End If
         Return StateIdentifier.Fight
     End Function
+    Private Sub UseItem()
+        Dim usableItemTypes As IEnumerable(Of ItemType) = Worlds.world.character.UsableItemTypes
+        If Not usableItemTypes.Any Then
+            Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
+            prompt.AddChoice("You ain't got anything.")
+            AnsiConsole.Prompt(prompt)
+            Return
+        End If
+        Dim table = usableItemTypes.ToDictionary(Function(x) x.Name, Function(x) x)
+        Dim promp As New SelectionPrompt(Of String) With {.Title = "[][]"}
+    End Sub
     Friend Sub FIGHT_PROMPT()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = Worlds.world.character.CreatureIndex
@@ -45,7 +59,7 @@
             Worlds.world.character.AddXP(Worlds.world.GetCreature(DI).XP)
         End If
     End Sub
-    Friend Sub FIGHT_ATTACK()
+    Friend Sub DoAttack()
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = Worlds.world.character.CreatureIndex
         RESOLVE_ATTACK(AI, DI, Sfx.PlayerHit, Sfx.PlayerMiss)

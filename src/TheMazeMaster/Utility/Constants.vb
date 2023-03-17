@@ -6,4 +6,5 @@
     Friend Const BackToGame = "Back To Game"
     Friend Const Inventory = "Inventory"
     Friend Const Ok = "Ok"
+    Friend Const NeverMind = "Never Mind"
 End Module

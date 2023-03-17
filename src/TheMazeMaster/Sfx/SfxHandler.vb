@@ -41,7 +41,7 @@
     End Sub
 
     Private Sub PlayDeath()
-        Play("L500;C4;L250;G3;G3;L500;G#3;G3;R500;B3;C4")
+        Play("L600;A3;A3;A3;L450;F3;C4;L600;A3;L450;F3;C4;L600;A3")
     End Sub
 
     Private Sub PlayPlayerMiss()
