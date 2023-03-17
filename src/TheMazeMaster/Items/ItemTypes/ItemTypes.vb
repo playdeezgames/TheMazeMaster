@@ -33,7 +33,8 @@
                     "Köttbulle",
                     tileIndex:=tile_köttbulle,
                     stacks:=True,
-                    spawnCount:=128)
+                    spawnCount:=128,
+                    isUsable:=True)
             },
             {
                 ItemTypeIdentifier.Penny,

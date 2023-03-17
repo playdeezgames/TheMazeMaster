@@ -15,7 +15,7 @@
 
     Public ReadOnly Property UsableItemTypes As IEnumerable(Of ItemType)
         Get
-            Throw New NotImplementedException
+            Return ItemStacks.Select(Function(x) AllItemTypes(x.Key)).Where(Function(x) x.IsUsable)
         End Get
     End Property
 
@@ -62,5 +62,9 @@
                 Inventory.Add(II)
             End If
         End If
+    End Sub
+
+    Friend Sub UseItemType(itemType As ItemType)
+        Throw New NotImplementedException()
     End Sub
 End Class

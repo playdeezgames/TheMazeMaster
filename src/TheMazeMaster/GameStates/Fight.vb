@@ -40,14 +40,20 @@
     End Function
     Private Sub UseItem()
         Dim usableItemTypes As IEnumerable(Of ItemType) = Worlds.world.character.UsableItemTypes
-        If Not usableItemTypes.Any Then
-            Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
-            prompt.AddChoice("You ain't got anything.")
-            AnsiConsole.Prompt(prompt)
-            Return
-        End If
+        Dim prompt As SelectionPrompt(Of String)
         Dim table = usableItemTypes.ToDictionary(Function(x) x.Name, Function(x) x)
-        Dim promp As New SelectionPrompt(Of String) With {.Title = "[][]"}
+        prompt = New SelectionPrompt(Of String) With {.Title = "[olive]Use What?[/]"}
+        prompt.AddChoice(NeverMind)
+        prompt.AddChoices(table.Keys)
+        Dim answer = AnsiConsole.Prompt(prompt)
+        Select Case answer
+            Case NeverMind
+                Return
+            Case Else
+                Worlds.world.character.UseItemType(table(answer))
+                AnsiConsole.MarkupLine($"{Worlds.world.character.Creature.Name} uses {table(answer).Name}.")
+                Throw New NotImplementedException
+        End Select
     End Sub
     Friend Sub FIGHT_PROMPT()
         Dim DI = FIGHT_CREATURE_INDEX
