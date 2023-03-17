@@ -16,7 +16,7 @@
             Nothing))))
         Dim R = StateIdentifier.InPlay
         If d.HasValue Then
-            Dim MR = MOVE_PLAYER(d.Value)
+            Dim MR = Player.character.MOVE_PLAYER(d.Value)
             If MR = MoveResult.Fight Then
                 FIGHT_CREATURE_INDEX = GET_PLAYER_ENEMY(d.Value)
                 FIGHT_START()

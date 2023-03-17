@@ -13,9 +13,8 @@
         maze.Generate()
         rooms = GenerateRooms(maze)
         GenerateItems(maze)
-        'TODO: finish moving generation into world
         GenerateCreatures(maze)
-        Player.Generate(maze)
+        Player.GeneratePlayer(maze)
     End Sub
     Private Sub GenerateItems(maze As Maze)
         items = New List(Of Item)
