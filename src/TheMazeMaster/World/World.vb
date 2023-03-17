@@ -31,7 +31,7 @@
         For Each entry In AllCreatureTypes
             Dim SC = entry.Value.SpawnCount
             While SC > 0
-                AllCreatureTypes(entry.Key).GenerateCreatureType(maze)
+                GenerateCreatureType(entry.Value, maze)
                 SC -= 1
             End While
         Next
@@ -150,7 +150,7 @@
     End Function
     Friend character As Character
     Friend Sub GeneratePlayer(maze As Maze)
-        character = New Character(AllCreatureTypes(CreatureTypeIdentifier.Dude).GenerateCreatureType(maze))
+        character = New Character(GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
     End Sub
     Function GenerateCreatureType(creatureType As CreatureType, maze As Maze) As Integer
         Dim exitCount As Integer

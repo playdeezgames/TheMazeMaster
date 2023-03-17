@@ -44,23 +44,4 @@
     Public ReadOnly Property MaximumY As Integer
     Public ReadOnly Property XP As Integer
     Public ReadOnly Property Drop As ItemTypeIdentifier
-    Function GenerateCreatureType(maze As Maze) As Integer
-        Dim exitCount As Integer
-        Dim roomColumn As Integer
-        Dim roomRow As Integer
-        Dim mazeColumn As Integer
-        Dim mazeRow As Integer
-        Do
-            mazeColumn = Rnd(0, MAZE_COLUMNS - 1)
-            mazeRow = Rnd(0, MAZE_ROWS - 1)
-            exitCount = maze.GetCell(mazeColumn, mazeRow).ExitCount
-            Dim cell As MapCell
-            Do
-                roomColumn = Rnd(0, ROOM_COLUMNS - 1)
-                roomRow = Rnd(0, ROOM_ROWS - 1)
-                cell = Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow)
-            Loop Until cell.CanSpawn AndAlso roomColumn >= MinimumX AndAlso roomColumn <= MaximumX AndAlso roomRow >= MinimumY AndAlso roomRow <= MaximumY
-        Loop Until exitCount >= MinimumExitCount AndAlso exitCount <= MaximumExitCount
-        Return Worlds.world.AddCreature(Identifier, mazeColumn, mazeRow, roomColumn, roomRow)
-    End Function
 End Class
