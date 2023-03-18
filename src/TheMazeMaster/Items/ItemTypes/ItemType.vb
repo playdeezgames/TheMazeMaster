@@ -13,7 +13,7 @@
                   Optional maximumX As Integer = ROOM_COLUMNS - 2,
                   Optional minimumY As Integer = 1,
                   Optional maximumY As Integer = ROOM_ROWS - 2,
-                  Optional isUsable As Boolean = False)
+                  Optional isCombatUsable As Boolean = False)
         Me.Identifier = identifier
         Me.Stacks = stacks
         Me.Name = name
@@ -27,7 +27,7 @@
         Me.MaximumY = maximumY
         Me.MinimumX = minimumX
         Me.MinimumY = minimumY
-        Me.IsUsable = isUsable
+        Me.IsUsable = isCombatUsable
     End Sub
     Friend ReadOnly Property Identifier As ItemTypeIdentifier
     Friend ReadOnly Property Stacks As Boolean

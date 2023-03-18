@@ -50,7 +50,7 @@
             Case NeverMind
                 Return
             Case Else
-                For Each text In Worlds.world.character.UseItemType(table(answer))
+                For Each text In Worlds.world.character.CombatUseItemType(table(answer))
                     AnsiConsole.MarkupLine(text)
                 Next
                 OkPrompt()

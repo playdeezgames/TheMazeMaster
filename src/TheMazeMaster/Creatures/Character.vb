@@ -60,7 +60,7 @@
         End If
     End Sub
 
-    Friend Function UseItemType(itemType As ItemType) As String()
+    Friend Function CombatUseItemType(itemType As ItemType) As String()
         If Not itemType.IsUsable Then
             Return New String() {$"{Creature.Name} cannot use {itemType.Name}."}
         End If
