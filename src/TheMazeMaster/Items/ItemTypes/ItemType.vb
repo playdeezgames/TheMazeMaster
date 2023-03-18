@@ -53,7 +53,7 @@
     Friend Function Create() As Integer
         Return Worlds.world.AddItem(Identifier)
     End Function
-    Friend Function CreateInRoom(mazeColumn As Integer, mazeRow As Integer, roomColumn As Integer, roomRow As Integer) As Integer
+    Friend Function CreateInRoom(mazeColumn As Integer?, mazeRow As Integer?, roomColumn As Integer, roomRow As Integer) As Integer
         Dim i = Create()
         Worlds.world.GetItem(i).MazeColumn = mazeColumn
         Worlds.world.GetItem(i).MazeRow = mazeRow

@@ -26,8 +26,8 @@
         End Get
     End Property
     Property Alive As Boolean
-    Property MazeColumn As Integer
-    Property MazeRow As Integer
+    Property MazeColumn As Integer?
+    Property MazeRow As Integer?
     Property RoomColumn As Integer
     Property RoomRow As Integer
     Property MaximumHitPoints As Integer

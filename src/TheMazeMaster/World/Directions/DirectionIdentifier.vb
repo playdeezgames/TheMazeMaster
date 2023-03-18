@@ -40,8 +40,8 @@ Friend Module DirectionIdentifierExtensions
             {DirectionIdentifier.West, -1}
         }
     <Extension>
-    Friend Function StepX(directionIdentifier As DirectionIdentifier, x As Integer) As Integer
-        Return x + xSteps(directionIdentifier)
+    Friend Function StepX(directionIdentifier As DirectionIdentifier, x As Integer?) As Integer
+        Return x.Value + xSteps(directionIdentifier)
     End Function
     Private ReadOnly ySteps As IReadOnlyDictionary(Of DirectionIdentifier, Integer) =
         New Dictionary(Of DirectionIdentifier, Integer) From
@@ -52,7 +52,7 @@ Friend Module DirectionIdentifierExtensions
             {DirectionIdentifier.West, 0}
         }
     <Extension>
-    Friend Function StepY(directionIdentifier As DirectionIdentifier, y As Integer) As Integer
-        Return y + ySteps(directionIdentifier)
+    Friend Function StepY(directionIdentifier As DirectionIdentifier, y As Integer?) As Integer
+        Return y.Value + ySteps(directionIdentifier)
     End Function
 End Module
