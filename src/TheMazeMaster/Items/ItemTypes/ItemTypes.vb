@@ -1,50 +1,48 @@
 ﻿Friend Module ItemTypes
     Friend AllItemTypes As IReadOnlyDictionary(Of ItemTypeIdentifier, ItemType) =
-        New Dictionary(Of ItemTypeIdentifier, ItemType) From
+        New List(Of ItemType) From
         {
-            {
-                ItemTypeIdentifier.Fist,
                 New ItemType(
                     ItemTypeIdentifier.Fist,
                     "Fist",
                     attackValue:=1,
-                    attackMaximum:=1)
-            },
-            {
-                ItemTypeIdentifier.Bite,
+                    attackMaximum:=1),
                 New ItemType(
                     ItemTypeIdentifier.Bite,
                     "Bite",
                     attackValue:=1,
-                    attackMaximum:=1)
-            },
-            {
-                ItemTypeIdentifier.RatTail,
+                    attackMaximum:=1),
                 New ItemType(
                     ItemTypeIdentifier.RatTail,
                     "Rat Tail",
                     stacks:=True,
-                    tileIndex:=TILE_RATTAIL)
-            },
-            {
-                ItemTypeIdentifier.Köttbulle,
+                    tileIndex:=TILE_RATTAIL),
                 New ItemType(
                     ItemTypeIdentifier.Köttbulle,
                     "Köttbulle",
                     tileIndex:=tile_köttbulle,
                     stacks:=True,
                     spawnCount:=128,
-                    isUsable:=True)
-            },
-            {
-                ItemTypeIdentifier.Penny,
+                    isUsable:=True),
                 New ItemType(
                     ItemTypeIdentifier.Penny,
                     "Penny",
                     tileIndex:=TILE_PENNY,
                     stacks:=True,
-                    spawnCount:=256)
-            }
-        }
+                    spawnCount:=256),
+                New ItemType(
+                    ItemTypeIdentifier.MacGuffin,
+                    "MacGuffin",
+                    tileIndex:=TILE_MACGUFFIN,
+                    spawnCount:=1,
+                    maximumExitCount:=1),
+                New ItemType(
+                    ItemTypeIdentifier.RedHerring,
+                    "Red Herring",
+                    tileIndex:=TILE_MACGUFFIN,
+                    spawnCount:=15,
+                    maximumExitCount:=1,
+                    stacks:=True)
+        }.ToDictionary(Function(x) x.Identifier, Function(x) x)
 End Module
 

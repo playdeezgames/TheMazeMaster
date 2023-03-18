@@ -24,6 +24,7 @@
     Friend Const TILE_RATTAIL = 80
     Friend Const tile_köttbulle = 81
     Friend Const TILE_PENNY = 82
+    Friend Const TILE_MACGUFFIN = 83
 
     Friend Const TILE_RAT = 237
     Friend Const TILE_DUDE = 238
@@ -56,7 +57,8 @@
             {TILE_RAT, "[fuchsia]r[/]"},
             {TILE_DUDE, "[white]☻[/]"},
             {tile_köttbulle, "[olive]∙[/]"},
-            {TILE_PENNY, "[olive]¢[/]"}
+            {TILE_PENNY, "[olive]¢[/]"},
+            {TILE_MACGUFFIN, "[aqua]√[/]"}
         }
 End Module
 

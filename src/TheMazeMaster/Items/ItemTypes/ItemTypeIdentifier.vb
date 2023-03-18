@@ -5,4 +5,6 @@
     RatTail
     Köttbulle
     Penny
+    MacGuffin
+    RedHerring
 End Enum
