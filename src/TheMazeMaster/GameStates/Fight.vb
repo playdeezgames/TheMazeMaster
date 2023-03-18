@@ -50,9 +50,10 @@
             Case NeverMind
                 Return
             Case Else
-                Worlds.world.character.UseItemType(table(answer))
-                AnsiConsole.MarkupLine($"{Worlds.world.character.Creature.Name} uses {table(answer).Name}.")
-                Throw New NotImplementedException
+                For Each text In Worlds.world.character.UseItemType(table(answer))
+                    AnsiConsole.MarkupLine(text)
+                Next
+                OkPrompt()
         End Select
     End Sub
     Friend Sub FIGHT_PROMPT()

@@ -60,7 +60,23 @@
         End If
     End Sub
 
-    Friend Sub UseItemType(itemType As ItemType)
-        Throw New NotImplementedException()
-    End Sub
+    Friend Function UseItemType(itemType As ItemType) As String()
+        If Not itemType.IsUsable Then
+            Return New String() {$"{Creature.Name} cannot use {itemType.Name}."}
+        End If
+        If Not ItemStacks.ContainsKey(itemType.Identifier) OrElse ItemStacks(itemType.Identifier) < 1 Then
+            Return New String() {$"{Creature.Name} doesn't have any {itemType.Name}."}
+        End If
+        ItemStacks(itemType.Identifier) -= 1
+        Select Case itemType.Identifier
+            Case ItemTypeIdentifier.Köttbulle
+                Creature.AddWounds(-1)
+                Return New String() {
+                    $"{Creature.Name} eats {itemType.Name}.",
+                    $"{Creature.Name} now has {Creature.Health} HP."
+                }
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
 End Class

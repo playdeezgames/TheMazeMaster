@@ -64,11 +64,8 @@
     End Function
     Sub AddWounds(d As Integer)
         If Alive Then
-            Wounds += d
-            If Wounds >= MaximumHitPoints Then
-                Alive = False
-                Wounds = MaximumHitPoints
-            End If
+            Wounds = Math.Clamp(Wounds + d, 0, MaximumHitPoints)
+            Alive = Wounds < MaximumHitPoints
         End If
     End Sub
     Sub Drop()
@@ -79,11 +76,7 @@
         If IT = ItemTypeIdentifier.None Then
             Return
         End If
-        Dim MX = MazeColumn
-        Dim M_Y = MazeRow
-        Dim X = RoomColumn
-        Dim Y = RoomRow
-        Dim II = AllItemTypes(IT).CreateInRoom(MX, M_Y, X, Y)
+        Dim II = AllItemTypes(IT).CreateInRoom(MazeColumn, MazeRow, RoomColumn, RoomRow)
         Worlds.world.GetItem(II).Place()
     End Sub
     Sub Remove()
