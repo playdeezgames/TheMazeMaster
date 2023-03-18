@@ -35,7 +35,8 @@
                     "MacGuffin",
                     tileIndex:=TILE_MACGUFFIN,
                     spawnCount:=1,
-                    maximumExitCount:=1),
+                    maximumExitCount:=1,
+                    stacks:=True),
                 New ItemType(
                     ItemTypeIdentifier.RedHerring,
                     "Red Herring",
