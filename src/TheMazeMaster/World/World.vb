@@ -38,10 +38,7 @@
     End Sub
 
     Friend Function GetMazeRoom(column As Integer, row As Integer) As Room
-        If column < 0 OrElse row < 0 OrElse column >= MAZE_COLUMNS OrElse row >= MAZE_ROWS Then
-            Return Nothing
-        End If
-        Return rooms(column + row * MAZE_COLUMNS)
+        Return rooms.SingleOrDefault(Function(x) If(x.MazeRow = row, False) AndAlso If(x.MazeColumn = column, False))
     End Function
     Private Function GenerateRooms(maze As Maze) As List(Of Room)
         rooms = New List(Of Room)
