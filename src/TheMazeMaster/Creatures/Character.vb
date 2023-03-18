@@ -37,7 +37,7 @@
 
     Friend Function GetEnemy(direction As DirectionIdentifier) As Integer
         Return Worlds.world.
-            GetRoom(Creature.MazeColumn, Creature.MazeRow).Map.
+            GetMazeRoom(Creature.MazeColumn, Creature.MazeRow).Map.
             GetCell(direction.StepX(Creature.RoomColumn), direction.StepY(Creature.RoomRow)).
             Creature.CreatureIndex
     End Function
@@ -52,7 +52,7 @@
         Dim NY = D.StepY(Y)
         Dim MX = Worlds.world.GetCreature(I).MazeColumn
         Dim MY = Worlds.world.GetCreature(I).MazeRow
-        Return Worlds.world.GetRoom(MX, MY).Map.GetCell(NX, NY).ItemIndex.Value
+        Return Worlds.world.GetMazeRoom(MX, MY).Map.GetCell(NX, NY).ItemIndex.Value
     End Function
     Friend Sub TakeItem(II As Integer)
         Worlds.world.GetItem(II).ClearRoom()

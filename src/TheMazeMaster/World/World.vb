@@ -37,7 +37,7 @@
         Next
     End Sub
 
-    Friend Function GetRoom(column As Integer, row As Integer) As Room
+    Friend Function GetMazeRoom(column As Integer, row As Integer) As Room
         If column < 0 OrElse row < 0 OrElse column >= MAZE_COLUMNS OrElse row >= MAZE_ROWS Then
             Return Nothing
         End If
@@ -78,7 +78,7 @@
                 Else
                     ROOM_MAP = CLONE(PASSAGEWAY_MAPS(TEMP))
                 End If
-                rooms.Add(New Room(ROOM_MAP.ToMap, IS_CHAMBER))
+                rooms.Add(New Room(ROOM_MAP.ToMap, If(IS_CHAMBER, RoomType.Chamber, RoomType.Passageway)))
             Next
         Next
         PLACE_ROOM_DOORS(maze)
@@ -95,23 +95,23 @@
                     End While
                     Dim FM As MapAssetData
 
-                    If GetRoom(MX, M_y).IsChamber Then
+                    If GetMazeRoom(MX, M_y).RoomType = RoomType.Chamber Then
                         FM = CHAMBERDOOR_MAPS(D)
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
                     End If
-                    Dim toMap = Worlds.world.GetRoom(MX, M_y).Map
+                    Dim toMap = Worlds.world.GetMazeRoom(MX, M_y).Map
                     BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
 
                     Dim NX = D.StepX(MX)
                     Dim NY = D.StepY(M_y)
                     D = D.Opposite
-                    If GetRoom(NX, NY).IsChamber Then
+                    If GetMazeRoom(NX, NY).RoomType = RoomType.Chamber Then
                         FM = CHAMBERDOOR_MAPS(D)
                     Else
                         FM = PASSAGEWAYDOOR_MAPS(D)
                     End If
-                    toMap = Worlds.world.GetRoom(NX, NY).Map
+                    toMap = Worlds.world.GetMazeRoom(NX, NY).Map
                     BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
                 End If
             Next
@@ -166,7 +166,7 @@
             Do
                 roomColumn = Rnd(0, ROOM_COLUMNS - 1)
                 roomRow = Rnd(0, ROOM_ROWS - 1)
-                cell = Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow)
+                cell = Worlds.world.GetMazeRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow)
             Loop Until cell.CanSpawn AndAlso roomColumn >= creatureType.MinimumX AndAlso roomColumn <= creatureType.MaximumX AndAlso roomRow >= creatureType.MinimumY AndAlso roomRow <= creatureType.MaximumY
         Loop Until exitCount >= creatureType.MinimumExitCount AndAlso exitCount <= creatureType.MaximumExitCount
         Return Worlds.world.AddCreature(creatureType.Identifier, mazeColumn, mazeRow, roomColumn, roomRow)

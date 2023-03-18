@@ -73,7 +73,7 @@
             e = maze.GetCell(mazeColumn, mazeRow).ExitCount
             roomColumn = Rnd(MinimumX, MaximumX)
             roomRow = Rnd(MinimumY, MaximumY)
-        Loop Until e >= MinimumExitCount AndAlso e <= MaximumExitCount AndAlso Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow).CanSpawn
+        Loop Until e >= MinimumExitCount AndAlso e <= MaximumExitCount AndAlso Worlds.world.GetMazeRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow).CanSpawn
         Dim itemIndex = CreateInRoom(mazeColumn, mazeRow, roomColumn, roomRow)
         Worlds.world.GetItem(itemIndex).Place()
     End Sub

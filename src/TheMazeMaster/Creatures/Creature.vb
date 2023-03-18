@@ -34,7 +34,7 @@
     Property Wounds As Integer
     Property Weapon As Integer?
     Sub Place()
-        Worlds.world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature = Me
+        Worlds.world.GetMazeRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature = Me
     End Sub
     ReadOnly Property Name As String
         Get
@@ -80,7 +80,7 @@
         Worlds.world.GetItem(II).Place()
     End Sub
     Sub Remove()
-        Worlds.world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature = Nothing
+        Worlds.world.GetMazeRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature = Nothing
     End Sub
     Function Move(d As DirectionIdentifier) As MoveResult
         Dim R = MoveResult.Blocked
@@ -110,13 +110,13 @@
                     RoomRow = NY
                 End If
             Else
-                Dim terrain = AllTerrains(Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).Terrain)
+                Dim terrain = AllTerrains(Worlds.world.GetMazeRoom(MX, M_Y).Map.GetCell(NX, NY).Terrain)
                 If terrain.CanWalk Then
-                    Dim creature = Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).Creature
+                    Dim creature = Worlds.world.GetMazeRoom(MX, M_Y).Map.GetCell(NX, NY).Creature
                     If creature IsNot Nothing Then
                         R = MoveResult.Fight
                     Else
-                        Dim itemIndex = Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).ItemIndex
+                        Dim itemIndex = Worlds.world.GetMazeRoom(MX, M_Y).Map.GetCell(NX, NY).ItemIndex
                         If itemIndex.HasValue Then
                             R = MoveResult.PickUp
                         Else
