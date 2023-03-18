@@ -46,7 +46,7 @@
     Private Function GenerateRooms(maze As Maze) As List(Of Room)
         rooms = New List(Of Room)
         rooms.Clear()
-        Dim TEMP As Integer = 0
+        Dim TEMP As Integer
         For ROW = 0 To MAZE_ROWS - 1
             For COLUMN = 0 To MAZE_COLUMNS - 1
                 TEMP = 0
@@ -78,7 +78,7 @@
                 Else
                     ROOM_MAP = CLONE(PASSAGEWAY_MAPS(TEMP))
                 End If
-                rooms.Add(New Room(ROOM_MAP.ToMap, If(IS_CHAMBER, RoomType.Chamber, RoomType.Passageway)))
+                rooms.Add(New Room(ROOM_MAP.ToMap, If(IS_CHAMBER, RoomType.Chamber, RoomType.Passageway), COLUMN, ROW))
             Next
         Next
         PLACE_ROOM_DOORS(maze)
