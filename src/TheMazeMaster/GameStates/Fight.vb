@@ -11,9 +11,6 @@
         Dim AI = Worlds.world.character.CreatureIndex
         If Worlds.world.GetCreature(AI).Alive And Worlds.world.GetCreature(DI).Alive Then
             Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]Now What?[/]"}
-            Const AttackText = "Attack"
-            Const RunText = "Run"
-            Const UseText = "Use..."
             prompt.AddChoices(AttackText, RunText, UseText)
             Select Case AnsiConsole.Prompt(prompt)
                 Case RunText
@@ -21,7 +18,7 @@
                 Case AttackText
                     DoAttack()
                 Case UseText
-                    UseItem()
+                    CombatUseItem()
             End Select
         ElseIf Worlds.world.GetCreature(AI).Alive Then
             SfxHandler.HandleSfx(Sfx.KillEnemy)
@@ -38,8 +35,8 @@
         End If
         Return StateIdentifier.Fight
     End Function
-    Private Sub UseItem()
-        Dim usableItemTypes As IEnumerable(Of ItemType) = Worlds.world.character.UsableItemTypes
+    Private Sub CombatUseItem()
+        Dim usableItemTypes As IEnumerable(Of ItemType) = Worlds.world.character.CombatUsableItemTypes
         Dim prompt As SelectionPrompt(Of String)
         Dim table = usableItemTypes.ToDictionary(Function(x) x.Name, Function(x) x)
         prompt = New SelectionPrompt(Of String) With {.Title = "[olive]Use What?[/]"}

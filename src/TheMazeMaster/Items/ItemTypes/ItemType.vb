@@ -13,7 +13,8 @@
                   Optional maximumX As Integer = ROOM_COLUMNS - 2,
                   Optional minimumY As Integer = 1,
                   Optional maximumY As Integer = ROOM_ROWS - 2,
-                  Optional isCombatUsable As Boolean = False)
+                  Optional isCombatUsable As Boolean = False,
+                  Optional isNoncombatUsable As Boolean = False)
         Me.Identifier = identifier
         Me.Stacks = stacks
         Me.Name = name
@@ -27,7 +28,8 @@
         Me.MaximumY = maximumY
         Me.MinimumX = minimumX
         Me.MinimumY = minimumY
-        Me.IsUsable = isCombatUsable
+        Me.IsCombatUsable = isCombatUsable
+        Me.IsNoncombatUsable = isNoncombatUsable
     End Sub
     Friend ReadOnly Property Identifier As ItemTypeIdentifier
     Friend ReadOnly Property Stacks As Boolean
@@ -42,7 +44,9 @@
     Public ReadOnly Property MaximumY As Integer
     Public ReadOnly Property MinimumX As Integer
     Public ReadOnly Property MinimumY As Integer
-    Public ReadOnly Property IsUsable As Boolean
+    Public ReadOnly Property IsCombatUsable As Boolean
+    Public ReadOnly Property IsNoncombatUsable As Boolean
+
     Public Function RollAttack() As Integer
         Return ROLL_DICE(AttackValue, AttackMaximum)
     End Function

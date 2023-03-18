@@ -23,7 +23,8 @@
                     tileIndex:=tile_köttbulle,
                     stacks:=True,
                     spawnCount:=128,
-                    isCombatUsable:=True),
+                    isCombatUsable:=True,
+                    isNoncombatUsable:=True),
                 New ItemType(
                     ItemTypeIdentifier.Penny,
                     "Penny",

@@ -13,12 +13,16 @@
         End Get
     End Property
 
-    Public ReadOnly Property UsableItemTypes As IEnumerable(Of ItemType)
+    Public ReadOnly Property CombatUsableItemTypes As IEnumerable(Of ItemType)
         Get
-            Return ItemStacks.Select(Function(x) AllItemTypes(x.Key)).Where(Function(x) x.IsUsable)
+            Return ItemStacks.Select(Function(x) AllItemTypes(x.Key)).Where(Function(x) x.IsCombatUsable)
         End Get
     End Property
-
+    Public ReadOnly Property NoncombatUsableItemTypes As IEnumerable(Of ItemType)
+        Get
+            Return ItemStacks.Select(Function(x) AllItemTypes(x.Key)).Where(Function(x) x.IsNoncombatUsable)
+        End Get
+    End Property
     Friend Function Move(d As DirectionIdentifier) As MoveResult
         Return Creature.Move(d)
     End Function
@@ -61,7 +65,27 @@
     End Sub
 
     Friend Function CombatUseItemType(itemType As ItemType) As String()
-        If Not itemType.IsUsable Then
+        If Not itemType.IsCombatUsable Then
+            Return New String() {$"{Creature.Name} cannot use {itemType.Name}."}
+        End If
+        If Not ItemStacks.ContainsKey(itemType.Identifier) OrElse ItemStacks(itemType.Identifier) < 1 Then
+            Return New String() {$"{Creature.Name} doesn't have any {itemType.Name}."}
+        End If
+        ItemStacks(itemType.Identifier) -= 1
+        Select Case itemType.Identifier
+            Case ItemTypeIdentifier.Köttbulle
+                Creature.AddWounds(-1)
+                Return New String() {
+                    $"{Creature.Name} eats {itemType.Name}.",
+                    $"{Creature.Name} now has {Creature.Health} HP."
+                }
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+
+    Friend Function NoncombatUseItemType(itemType As ItemType) As IEnumerable(Of String)
+        If Not itemType.IsNoncombatUsable Then
             Return New String() {$"{Creature.Name} cannot use {itemType.Name}."}
         End If
         If Not ItemStacks.ContainsKey(itemType.Identifier) OrElse ItemStacks(itemType.Identifier) < 1 Then

@@ -8,4 +8,7 @@
     Friend Const Ok = "Ok"
     Friend Const NeverMind = "Never Mind"
     Friend Const Status = "Status"
+    Friend Const AttackText = "Attack"
+    Friend Const RunText = "Run"
+    Friend Const UseText = "Use..."
 End Module
