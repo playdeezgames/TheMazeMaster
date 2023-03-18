@@ -2,6 +2,8 @@
     Private rooms As List(Of Room)
     Private items As List(Of Item)
     Private creatures As List(Of Creature)
+    Private features As List(Of Feature)
+    Friend character As Character
     Function GetCreature(i As Integer) As Creature
         Return creatures(i)
     End Function
@@ -11,10 +13,21 @@
     Friend Sub Start()
         Dim maze As New Maze(MAZE_COLUMNS, MAZE_ROWS)
         maze.Generate()
-        rooms = GenerateRooms(maze)
+        GenerateRooms(maze)
+        GenerateFeatures()
         GenerateItems(maze)
         GenerateCreatures(maze)
         GeneratePlayer(maze)
+    End Sub
+    Private Sub GenerateFeatures()
+        features = New List(Of Feature)
+        For Each entry In AllFeatureTypes
+            Dim spawnCount = entry.Value.SpawnCount
+            While spawnCount > 0
+                entry.Value.Generate()
+                spawnCount -= 1
+            End While
+        Next
     End Sub
     Private Sub GenerateItems(maze As Maze)
         items = New List(Of Item)
@@ -36,11 +49,10 @@
             End While
         Next
     End Sub
-
     Friend Function GetRoom(column As Integer?, row As Integer?) As Room
         Return rooms.SingleOrDefault(Function(x) If(x.MazeRow = row, False) AndAlso If(x.MazeColumn = column, False))
     End Function
-    Private Function GenerateRooms(maze As Maze) As List(Of Room)
+    Private Sub GenerateRooms(maze As Maze)
         rooms = New List(Of Room)
         rooms.Clear()
         Dim TEMP As Integer
@@ -78,10 +90,19 @@
                 rooms.Add(New Room(ROOM_MAP.ToMap, If(IS_CHAMBER, RoomType.Chamber, RoomType.Passageway), COLUMN, ROW))
             Next
         Next
-        PLACE_ROOM_DOORS(maze)
-        Return rooms
-    End Function
-    Private Sub PLACE_ROOM_DOORS(maze As Maze)
+        PlaceRoomDoors(maze)
+        GenerateTown()
+    End Sub
+    Private Sub GenerateTown()
+        Dim room = New Room(New Map(TOWN_COLUMNS, TOWN_ROWS), RoomType.Town, Nothing, Nothing)
+        rooms.Add(room)
+        For column = 0 To room.Map.Columns - 1
+            For row = 0 To room.Map.Rows - 1
+                room.Map.GetCell(column, row).Terrain = TerrainIdentifier.GRASS
+            Next
+        Next
+    End Sub
+    Private Sub PlaceRoomDoors(maze As Maze)
         For MX = 0 To MAZE_COLUMNS - 1
             For M_y = 0 To MAZE_ROWS - 1
                 Dim EXIT_COUNT = maze.GetCell(MX, M_y).ExitCount
@@ -125,7 +146,6 @@
             Next
         Next
     End Sub
-
     Friend Function AddItem(identifier As ItemTypeIdentifier) As Integer
         'TODO: FIRST LOOK FOR EMPTY ITEM
         Dim I = items.Count
@@ -145,9 +165,8 @@
         creatures(I).Place()
         Return I
     End Function
-    Friend character As Character
     Friend Sub GeneratePlayer(maze As Maze)
-        character = New Character(GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
+        Character = New Character(GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
     End Sub
     Function GenerateCreatureType(creatureType As CreatureType, maze As Maze) As Integer
         Dim exitCount As Integer
@@ -167,5 +186,16 @@
             Loop Until cell.CanSpawn AndAlso roomColumn >= creatureType.MinimumX AndAlso roomColumn <= creatureType.MaximumX AndAlso roomRow >= creatureType.MinimumY AndAlso roomRow <= creatureType.MaximumY
         Loop Until exitCount >= creatureType.MinimumExitCount AndAlso exitCount <= creatureType.MaximumExitCount
         Return Worlds.world.AddCreature(creatureType.Identifier, mazeColumn, mazeRow, roomColumn, roomRow)
+    End Function
+
+    Friend Function GetRoomsOfType(roomType As RoomType) As IEnumerable(Of Room)
+        Return rooms.Where(Function(x) x.RoomType = roomType)
+    End Function
+
+    Friend Function AddFeature(
+                         identifier As FeatureTypeIdentifier) As Integer
+        Dim I = features.Count
+        features.Add(New Feature(I, identifier))
+        Return I
     End Function
 End Class

@@ -19,4 +19,5 @@
     DOOR_EAST
     DOOR_SOUTH
     DOOR_WEST
+    GRASS
 End Enum
