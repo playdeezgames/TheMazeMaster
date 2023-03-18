@@ -5,4 +5,5 @@
     PickUp
     GameMenu
     Inventory
+    Status
 End Enum

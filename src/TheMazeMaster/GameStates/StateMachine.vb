@@ -8,7 +8,8 @@
             {StateIdentifier.InPlay, AddressOf InPlay.Update},
             {StateIdentifier.PickUp, AddressOf PickUp.Update},
             {StateIdentifier.GameMenu, AddressOf GameMenu.Update},
-            {StateIdentifier.Inventory, AddressOf Inventory.Update}
+            {StateIdentifier.Inventory, AddressOf Inventory.Update},
+            {StateIdentifier.Status, AddressOf Status.Update}
         }
     Friend Sub Update()
         CURRENT_STATE = table(CURRENT_STATE)()
