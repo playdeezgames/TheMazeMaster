@@ -44,7 +44,8 @@
                     tileIndex:=TILE_MACGUFFIN,
                     spawnCount:=15,
                     maximumExitCount:=1,
-                    stacks:=True)
+                    stacks:=True,
+                    isNoncombatUsable:=True)
         }.ToDictionary(Function(x) x.Identifier, Function(x) x)
 End Module
 

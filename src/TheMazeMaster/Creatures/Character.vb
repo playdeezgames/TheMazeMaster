@@ -7,6 +7,7 @@
     Friend ReadOnly Property Inventory As New List(Of Integer)
     Friend ReadOnly Property ItemStacks As New Dictionary(Of ItemTypeIdentifier, Integer)
     Friend ReadOnly Property CreatureIndex As Integer
+    Friend ReadOnly Property EffectCounters As New Dictionary(Of CounterIdentifier, Integer)
     Friend ReadOnly Property Creature As Creature
         Get
             Return Worlds.world.GetCreature(CreatureIndex)
@@ -24,8 +25,16 @@
         End Get
     End Property
     Friend Function Move(d As DirectionIdentifier) As MoveResult
+        If HasEffect(CounterIdentifier.Mislead) Then
+            d = d.Opposite
+            AddToCounter(CounterIdentifier.Mislead, -1)
+        End If
         Return Creature.Move(d)
     End Function
+    Private Function HasEffect(identifier As CounterIdentifier) As Boolean
+        Return EffectCounters.ContainsKey(identifier) AndAlso EffectCounters(identifier) > 0
+    End Function
+
     Friend Function GetEnemy(direction As DirectionIdentifier) As Integer
         Return Worlds.world.
             GetRoom(Creature.MazeColumn, Creature.MazeRow).Map.
@@ -99,8 +108,16 @@
                     $"{Creature.Name} eats {itemType.Name}.",
                     $"{Creature.Name} now has {Creature.Health} HP."
                 }
+            Case ItemTypeIdentifier.RedHerring
+                AddToCounter(CounterIdentifier.Mislead, 10)
+                Return New String() {
+                    $"{Creature.Name} feels like they are being mislead."
+                }
             Case Else
                 Throw New NotImplementedException
         End Select
     End Function
+    Private Sub AddToCounter(identifier As CounterIdentifier, delta As Integer)
+        EffectCounters(identifier) = If(EffectCounters.ContainsKey(identifier), EffectCounters(identifier), 0) + delta
+    End Sub
 End Class
