@@ -26,6 +26,6 @@
             roomColumn = Rnd(0, room.Map.Columns - 1)
             roomRow = Rnd(0, room.Map.Rows - 1)
         Loop Until room.Map.GetCell(roomColumn, roomRow).Terrain = SpawnTerrainIdentifier
-        room.Map.GetCell(roomColumn, roomRow).FeatureIndex = world.AddFeature(Identifier)
+        room.Map.GetCell(roomColumn, roomRow).FeatureIndex = world.AddFeature(Identifier, room.MazeColumn, room.MazeRow, roomColumn, roomRow)
     End Sub
 End Class

@@ -50,7 +50,10 @@
         Next
     End Sub
     Friend Function GetRoom(column As Integer?, row As Integer?) As Room
-        Return rooms.SingleOrDefault(Function(x) If(x.MazeRow = row, False) AndAlso If(x.MazeColumn = column, False))
+        If column.HasValue AndAlso row.HasValue Then
+            Return rooms.Single(Function(x) If(x.MazeRow = row, False) AndAlso If(x.MazeColumn = column, False))
+        End If
+        Return rooms.Single(Function(x) Not x.MazeColumn.HasValue AndAlso Not x.MazeRow.HasValue)
     End Function
     Private Sub GenerateRooms(maze As Maze)
         rooms = New List(Of Room)
@@ -178,7 +181,10 @@
         Return I
     End Function
     Friend Sub GeneratePlayer(maze As Maze)
-        Character = New Character(GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
+        character = New Character(GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
+        character.Creature.Remove()
+        character.Creature.MoveToFeature(FeatureTypeIdentifier.StairsUp)
+        character.Creature.Place()
     End Sub
     Function GenerateCreatureType(creatureType As CreatureType, maze As Maze) As Integer
         Dim exitCount As Integer
@@ -202,10 +208,17 @@
     Friend Function GetRoomsOfType(roomType As RoomType) As IEnumerable(Of Room)
         Return rooms.Where(Function(x) x.RoomType = roomType)
     End Function
+    Friend Function GetFeatureOfType(featureType As FeatureTypeIdentifier) As Feature
+        Return features.SingleOrDefault(Function(x) x.FeatureTypeIdentifier = featureType)
+    End Function
     Friend Function AddFeature(
-                         identifier As FeatureTypeIdentifier) As Integer
+                         identifier As FeatureTypeIdentifier,
+                         mazeColumn As Integer?,
+                         mazeRow As Integer?,
+                         roomColumn As Integer,
+                         roomRow As Integer) As Integer
         Dim I = features.Count
-        features.Add(New Feature(I, identifier))
+        features.Add(New Feature(I, identifier, mazeColumn, mazeRow, roomColumn, roomRow))
         Return I
     End Function
     Friend Function GetFeature(featureIndex As Integer) As Feature

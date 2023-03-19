@@ -120,9 +120,15 @@
                         If itemIndex.HasValue Then
                             R = MoveResult.PickUp
                         Else
-                            RoomColumn = NX
-                            RoomRow = NY
-                            R = MoveResult.Success
+                            Dim feature = Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).Feature
+                            If feature IsNot Nothing Then
+                                InteractWithFeature(feature)
+                                R = MoveResult.Success
+                            Else
+                                RoomColumn = NX
+                                RoomRow = NY
+                                R = MoveResult.Success
+                            End If
                         End If
                     End If
                 End If
@@ -131,4 +137,23 @@
         End If
         Return R
     End Function
+
+    Private Sub InteractWithFeature(feature As Feature)
+        Select Case feature.FeatureTypeIdentifier
+            Case FeatureTypeIdentifier.StairsDown
+                MoveToFeature(FeatureTypeIdentifier.StairsUp)
+            Case FeatureTypeIdentifier.StairsUp
+                MoveToFeature(FeatureTypeIdentifier.StairsDown)
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Sub
+
+    Friend Sub MoveToFeature(featureTypeIdentifier As FeatureTypeIdentifier)
+        Dim feature = Worlds.world.GetFeatureOfType(featureTypeIdentifier)
+        MazeColumn = feature.MazeColumn
+        MazeRow = feature.MazeRow
+        RoomColumn = feature.RoomColumn
+        RoomRow = feature.RoomRow
+    End Sub
 End Class
