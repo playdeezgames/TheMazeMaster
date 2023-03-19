@@ -92,20 +92,21 @@
             Dim NY = d.StepY(Y)
             Dim MX = MazeColumn
             Dim M_Y = MazeRow
-            If NX < 0 OrElse NY < 0 OrElse NX >= ROOM_COLUMNS OrElse NY >= ROOM_ROWS Then
+            Dim room = Worlds.world.GetRoom(MX, M_Y)
+            If NX < 0 OrElse NY < 0 OrElse NX >= room.Map.Columns OrElse NY >= room.Map.Rows Then
                 MazeColumn = d.StepX(MX)
                 MazeRow = d.StepY(M_Y)
                 If NX < 0 Then
-                    RoomColumn = NX + ROOM_COLUMNS
-                ElseIf NX >= ROOM_COLUMNS Then
-                    RoomColumn = NX - ROOM_COLUMNS
+                    RoomColumn = NX + room.Map.Columns
+                ElseIf NX >= room.Map.COLUMNS Then
+                    RoomColumn = NX - room.Map.Columns
                 Else
                     RoomColumn = NX
                 End If
                 If NY < 0 Then
-                    RoomRow = NY + ROOM_ROWS
-                ElseIf NY >= ROOM_ROWS Then
-                    RoomRow = NY - ROOM_ROWS
+                    RoomRow = NY + room.Map.Rows
+                ElseIf NY >= room.Map.ROWS Then
+                    RoomRow = NY - room.Map.Rows
                 Else
                     RoomRow = NY
                 End If
@@ -122,8 +123,7 @@
                         Else
                             Dim feature = Worlds.world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).Feature
                             If feature IsNot Nothing Then
-                                InteractWithFeature(feature)
-                                R = MoveResult.Success
+                                R = InteractWithFeature(feature)
                             Else
                                 RoomColumn = NX
                                 RoomRow = NY
@@ -138,16 +138,18 @@
         Return R
     End Function
 
-    Private Sub InteractWithFeature(feature As Feature)
+    Private Function InteractWithFeature(feature As Feature) As MoveResult
         Select Case feature.FeatureTypeIdentifier
             Case FeatureTypeIdentifier.StairsDown
                 MoveToFeature(FeatureTypeIdentifier.StairsUp)
+                Return MoveResult.Success
             Case FeatureTypeIdentifier.StairsUp
                 MoveToFeature(FeatureTypeIdentifier.StairsDown)
+                Return MoveResult.Success
             Case Else
                 Throw New NotImplementedException
         End Select
-    End Sub
+    End Function
 
     Friend Sub MoveToFeature(featureTypeIdentifier As FeatureTypeIdentifier)
         Dim feature = Worlds.world.GetFeatureOfType(featureTypeIdentifier)

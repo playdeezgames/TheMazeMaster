@@ -28,7 +28,7 @@
     End Property
     Friend ReadOnly Property CanSpawn As Boolean
         Get
-            Return Not CreatureIndex.HasValue AndAlso Not ItemIndex.HasValue AndAlso AllTerrains(Terrain).CanWalk
+            Return Not FeatureIndex.HasValue AndAlso Not CreatureIndex.HasValue AndAlso Not ItemIndex.HasValue AndAlso AllTerrains(Terrain).CanWalk
         End Get
     End Property
 End Class
