@@ -21,7 +21,7 @@
             New Terrain(TerrainIdentifier.WALL_CORNER_OUTSIDE_SOUTHWEST, TILE_CORNER_OUTSIDE_SOUTHWEST),
             New Terrain(TerrainIdentifier.FLOOR, TILE_FLOOR, canWalk:=True),
             New Terrain(TerrainIdentifier.SOLID, TILE_SOLID),
-            New Terrain(TerrainIdentifier.GRASS, TILE_GRASS),
+            New Terrain(TerrainIdentifier.GRASS, TILE_GRASS, canWalk:=True),
             New Terrain(TerrainIdentifier.FENCE_NORTH, TILE_FENCE_NORTH),
             New Terrain(TerrainIdentifier.FENCE_EAST, TILE_FENCE_EAST),
             New Terrain(TerrainIdentifier.FENCE_SOUTH, TILE_FENCE_SOUTH),

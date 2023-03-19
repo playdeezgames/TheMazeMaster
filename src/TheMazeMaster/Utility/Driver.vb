@@ -25,6 +25,8 @@
                 Dim ti As Integer
                 If cell.Creature IsNot Nothing Then
                     ti = cell.Creature.CreatureType.TileIndex
+                ElseIf cell.Feature IsNot Nothing Then
+                    ti = cell.Feature.FeatureType.TileIndex
                 ElseIf cell.ItemIndex.HasValue Then
                     ti = Worlds.world.GetItem(cell.ItemIndex.Value).ItemType.TileIndex
                 Else

@@ -18,6 +18,14 @@
     End Property
     Property ItemIndex As Integer?
     Property FeatureIndex As Integer?
+    ReadOnly Property Feature As Feature
+        Get
+            If FeatureIndex Is Nothing Then
+                Return Nothing
+            End If
+            Return Worlds.world.GetFeature(FeatureIndex.Value)
+        End Get
+    End Property
     Friend ReadOnly Property CanSpawn As Boolean
         Get
             Return Not CreatureIndex.HasValue AndAlso Not ItemIndex.HasValue AndAlso AllTerrains(Terrain).CanWalk

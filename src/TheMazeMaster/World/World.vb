@@ -199,15 +199,16 @@
         Loop Until exitCount >= creatureType.MinimumExitCount AndAlso exitCount <= creatureType.MaximumExitCount
         Return Worlds.world.AddCreature(creatureType.Identifier, mazeColumn, mazeRow, roomColumn, roomRow)
     End Function
-
     Friend Function GetRoomsOfType(roomType As RoomType) As IEnumerable(Of Room)
         Return rooms.Where(Function(x) x.RoomType = roomType)
     End Function
-
     Friend Function AddFeature(
                          identifier As FeatureTypeIdentifier) As Integer
         Dim I = features.Count
         features.Add(New Feature(I, identifier))
         Return I
+    End Function
+    Friend Function GetFeature(featureIndex As Integer) As Feature
+        Return features(featureIndex)
     End Function
 End Class

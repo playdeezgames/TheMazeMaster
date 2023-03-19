@@ -2,18 +2,20 @@
     Friend ReadOnly SpawnCount As Integer
     Friend ReadOnly SpawnRoomType As RoomType
     Friend ReadOnly SpawnTerrainIdentifier As TerrainIdentifier
+    Friend ReadOnly TileIndex As Integer
     ReadOnly Property Identifier As FeatureTypeIdentifier
     Sub New(
            identifier As FeatureTypeIdentifier,
            spawnRoomType As RoomType,
            spawnTerrainIdentifier As TerrainIdentifier,
+           tileIndex As Integer,
            Optional spawnCount As Integer = 0)
         Me.Identifier = identifier
         Me.SpawnCount = spawnCount
         Me.SpawnRoomType = spawnRoomType
         Me.SpawnTerrainIdentifier = spawnTerrainIdentifier
+        Me.TileIndex = tileIndex
     End Sub
-
     Friend Sub Generate()
         Dim world = Worlds.world
         Dim rooms = world.GetRoomsOfType(SpawnRoomType)
