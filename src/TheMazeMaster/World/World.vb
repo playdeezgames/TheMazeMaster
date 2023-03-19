@@ -101,6 +101,18 @@
                 room.Map.GetCell(column, row).Terrain = TerrainIdentifier.GRASS
             Next
         Next
+        For column = 1 To room.Map.Columns - 2
+            room.Map.GetCell(column, 0).Terrain = TerrainIdentifier.FENCE_NORTH
+            room.Map.GetCell(column, room.Map.Rows - 1).Terrain = TerrainIdentifier.FENCE_SOUTH
+        Next
+        For row = 1 To room.Map.Rows - 2
+            room.Map.GetCell(0, row).Terrain = TerrainIdentifier.FENCE_WEST
+            room.Map.GetCell(room.Map.Columns - 1, row).Terrain = TerrainIdentifier.FENCE_EAST
+        Next
+        room.Map.GetCell(0, 0).Terrain = TerrainIdentifier.FENCE_CORNER_INSIDE_NORTHWEST
+        room.Map.GetCell(room.Map.Columns - 1, 0).Terrain = TerrainIdentifier.FENCE_CORNER_INSIDE_NORTHEAST
+        room.Map.GetCell(0, room.Map.Rows - 1).Terrain = TerrainIdentifier.FENCE_CORNER_INSIDE_SOUTHWEST
+        room.Map.GetCell(room.Map.Columns - 1, room.Map.Rows - 1).Terrain = TerrainIdentifier.FENCE_CORNER_INSIDE_SOUTHEAST
     End Sub
     Private Sub PlaceRoomDoors(maze As Maze)
         For mazeColumn = 0 To MAZE_COLUMNS - 1

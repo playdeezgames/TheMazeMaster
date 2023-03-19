@@ -18,8 +18,18 @@
     Friend Const TILE_SOLID = 32
     Friend Const TILE_FLOOR = 33
     Friend Const TILE_BLOOD = 34
+    Friend Const TILE_GRASS = 35
+    Friend Const TILE_FENCE_NORTH = 36
+    Friend Const TILE_FENCE_EAST = 37
+    Friend Const TILE_FENCE_SOUTH = 38
+    Friend Const TILE_FENCE_WEST = 39
+    Friend Const TILE_FENCE_CORNER_INSIDE_NORTHEAST = 40
+    Friend Const TILE_FENCE_CORNER_INSIDE_NORTHWEST = 41
+    Friend Const TILE_FENCE_CORNER_INSIDE_SOUTHEAST = 42
+    Friend Const TILE_FENCE_CORNER_INSIDE_SOUTHWEST = 43
+
     Friend Const TILE_TERRAIN_START = TILE_WALL_NORTH
-    Friend Const TILE_TERRAIN_END = TILE_BLOOD
+    Friend Const TILE_TERRAIN_END = TILE_FENCE_CORNER_INSIDE_SOUTHWEST
 
     Friend Const TILE_RATTAIL = 80
     Friend Const tile_köttbulle = 81

@@ -20,6 +20,15 @@
             New Terrain(TerrainIdentifier.WALL_CORNER_OUTSIDE_SOUTHEAST, TILE_CORNER_OUTSIDE_SOUTHEAST),
             New Terrain(TerrainIdentifier.WALL_CORNER_OUTSIDE_SOUTHWEST, TILE_CORNER_OUTSIDE_SOUTHWEST),
             New Terrain(TerrainIdentifier.FLOOR, TILE_FLOOR, canWalk:=True),
-            New Terrain(TerrainIdentifier.SOLID, TILE_SOLID)
+            New Terrain(TerrainIdentifier.SOLID, TILE_SOLID),
+            New Terrain(TerrainIdentifier.GRASS, TILE_GRASS),
+            New Terrain(TerrainIdentifier.FENCE_NORTH, TILE_FENCE_NORTH),
+            New Terrain(TerrainIdentifier.FENCE_EAST, TILE_FENCE_EAST),
+            New Terrain(TerrainIdentifier.FENCE_SOUTH, TILE_FENCE_SOUTH),
+            New Terrain(TerrainIdentifier.FENCE_WEST, TILE_FENCE_WEST),
+            New Terrain(TerrainIdentifier.FENCE_CORNER_INSIDE_NORTHEAST, TILE_FENCE_CORNER_INSIDE_NORTHEAST),
+            New Terrain(TerrainIdentifier.FENCE_CORNER_INSIDE_NORTHWEST, TILE_FENCE_CORNER_INSIDE_NORTHWEST),
+            New Terrain(TerrainIdentifier.FENCE_CORNER_INSIDE_SOUTHEAST, TILE_FENCE_CORNER_INSIDE_SOUTHEAST),
+            New Terrain(TerrainIdentifier.FENCE_CORNER_INSIDE_SOUTHWEST, TILE_FENCE_CORNER_INSIDE_SOUTHWEST)
         }.ToDictionary(Function(x) x.Identifier, Function(x) x)
 End Module
