@@ -10,6 +10,11 @@
             Return AllFeatureTypes(FeatureTypeIdentifier)
         End Get
     End Property
+    ReadOnly Property ShoppeType As ShoppeTypeIdentifier?
+        Get
+            Return FeatureType.ShoppeType
+        End Get
+    End Property
     Sub New(
            featureIndex As Integer,
            featureTypeIdentifier As FeatureTypeIdentifier,

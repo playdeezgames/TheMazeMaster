@@ -9,6 +9,13 @@
                 TILE_STAIRS_DOWN,
                 spawnCount:=1),
             New FeatureType(
+                FeatureTypeIdentifier.Knacker,
+                RoomType.Town,
+                TerrainIdentifier.GRASS,
+                TILE_KNACKER,
+                spawnCount:=1,
+                shoppeType:=ShoppeTypeIdentifier.Knacker),
+            New FeatureType(
                 FeatureTypeIdentifier.StairsUp,
                 RoomType.Passageway,
                 TerrainIdentifier.FLOOR,

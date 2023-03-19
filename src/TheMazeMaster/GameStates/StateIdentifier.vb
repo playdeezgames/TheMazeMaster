@@ -6,4 +6,5 @@
     GameMenu
     Inventory
     Status
+    Shoppe
 End Enum

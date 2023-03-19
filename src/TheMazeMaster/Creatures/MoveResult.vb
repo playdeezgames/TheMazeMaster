@@ -3,4 +3,5 @@
     Fight
     PickUp
     Blocked
+    Shoppe
 End Enum

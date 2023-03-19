@@ -120,4 +120,12 @@
     Private Sub AddToCounter(identifier As CounterIdentifier, delta As Integer)
         EffectCounters(identifier) = If(EffectCounters.ContainsKey(identifier), EffectCounters(identifier), 0) + delta
     End Sub
+
+    Friend Function GetShopType(direction As DirectionIdentifier) As ShoppeTypeIdentifier
+        Return Worlds.
+            world.
+            GetRoom(Creature.MazeColumn, Creature.MazeRow).
+            Map.
+            GetCell(direction.StepX(Creature.RoomColumn), direction.StepY(Creature.RoomRow)).Feature.ShoppeType.Value
+    End Function
 End Class
