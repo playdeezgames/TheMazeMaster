@@ -103,34 +103,34 @@
         Next
     End Sub
     Private Sub PlaceRoomDoors(maze As Maze)
-        For MX = 0 To MAZE_COLUMNS - 1
-            For M_y = 0 To MAZE_ROWS - 1
-                Dim EXIT_COUNT = maze.GetCell(MX, M_y).ExitCount
-                If EXIT_COUNT = 1 Then
-                    Dim D As DirectionIdentifier = DirectionIdentifier.North
-                    While Not maze.GetCell(MX, M_y).HasDoor(D)
-                        D = D.NextDirection
+        For mazeColumn = 0 To MAZE_COLUMNS - 1
+            For mazeRow = 0 To MAZE_ROWS - 1
+                Dim exitCount = maze.GetCell(mazeColumn, mazeRow).ExitCount
+                If exitCount = 1 Then
+                    Dim direction As DirectionIdentifier = DirectionIdentifier.North
+                    While Not maze.GetCell(mazeColumn, mazeRow).HasDoor(direction)
+                        direction = direction.NextDirection
                     End While
-                    Dim FM As MapAssetData
+                    Dim fromMap As MapAssetData
 
-                    If GetRoom(MX, M_y).RoomType = RoomType.Chamber Then
-                        FM = CHAMBERDOOR_MAPS(D)
+                    If GetRoom(mazeColumn, mazeRow).RoomType = RoomType.Chamber Then
+                        fromMap = CHAMBERDOOR_MAPS(direction)
                     Else
-                        FM = PASSAGEWAYDOOR_MAPS(D)
+                        fromMap = PASSAGEWAYDOOR_MAPS(direction)
                     End If
-                    Dim toMap = Worlds.world.GetRoom(MX, M_y).Map
-                    BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
+                    Dim toMap = Worlds.world.GetRoom(mazeColumn, mazeRow).Map
+                    BlitTerrain(fromMap.ToMap, toMap, TerrainIdentifier.EMPTY)
 
-                    Dim NX = D.StepX(MX)
-                    Dim NY = D.StepY(M_y)
-                    D = D.Opposite
-                    If GetRoom(NX, NY).RoomType = RoomType.Chamber Then
-                        FM = CHAMBERDOOR_MAPS(D)
+                    Dim nextX = direction.StepX(mazeColumn)
+                    Dim nextY = direction.StepY(mazeRow)
+                    direction = direction.Opposite
+                    If GetRoom(nextX, nextY).RoomType = RoomType.Chamber Then
+                        fromMap = CHAMBERDOOR_MAPS(direction)
                     Else
-                        FM = PASSAGEWAYDOOR_MAPS(D)
+                        fromMap = PASSAGEWAYDOOR_MAPS(direction)
                     End If
-                    toMap = Worlds.world.GetRoom(NX, NY).Map
-                    BlitTerrain(FM.ToMap, toMap, TerrainIdentifier.EMPTY)
+                    toMap = Worlds.world.GetRoom(nextX, nextY).Map
+                    BlitTerrain(fromMap.ToMap, toMap, TerrainIdentifier.EMPTY)
                 End If
             Next
         Next
