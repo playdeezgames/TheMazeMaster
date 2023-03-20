@@ -10,7 +10,7 @@
         Dim prompt As New SelectionPrompt(Of String) With {.Title = ""}
         prompt.AddChoice("Start")
         AnsiConsole.Prompt(prompt)
-        Worlds.Start()
+        world.Start()
         Return StateIdentifier.InPlay
     End Function
 End Module

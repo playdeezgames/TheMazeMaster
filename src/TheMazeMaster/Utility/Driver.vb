@@ -1,8 +1,8 @@
 ﻿Friend Module Driver
     Private ReadOnly random As New Random()
     Friend Sub UpdateWith(updater As Action(Of World))
+        Dim world = New World()
         Do
-            Dim world = New World()
             updater(world)
         Loop
     End Sub
@@ -19,17 +19,17 @@
     Friend Function LOAD_RESOURCE(filename As String) As MapAssetData
         Return JsonSerializer.Deserialize(Of MapAssetData)(File.ReadAllText(filename))
     End Function
-    Friend Sub DrawMap(map As Map)
+    Friend Sub DrawMap(world As World, map As Map)
         For y = 0 To map.Rows - 1
             For x = 0 To map.Columns - 1
                 Dim cell = map.GetCell(x, y)
                 Dim ti As Integer
-                If cell.Creature IsNot Nothing Then
-                    ti = cell.Creature.CreatureType.TileIndex
-                ElseIf cell.Feature IsNot Nothing Then
-                    ti = cell.Feature.FeatureType.TileIndex
+                If cell.Creature(world) IsNot Nothing Then
+                    ti = cell.Creature(world).CreatureType.TileIndex
+                ElseIf cell.Feature(world) IsNot Nothing Then
+                    ti = cell.Feature(world).FeatureType.TileIndex
                 ElseIf cell.ItemIndex.HasValue Then
-                    ti = Worlds.world.GetItem(cell.ItemIndex.Value).ItemType.TileIndex
+                    ti = world.GetItem(cell.ItemIndex.Value).ItemType.TileIndex
                 Else
                     ti = AllTerrains(cell.Terrain).TileIndex
                 End If

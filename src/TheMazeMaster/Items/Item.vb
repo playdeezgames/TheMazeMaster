@@ -33,7 +33,7 @@
     Friend Function RollAttack() As Integer
         Return ItemType.RollAttack
     End Function
-    Friend Sub Place()
+    Friend Sub Place(world As World)
         If MazeColumn.HasValue Then
             Dim IT = ItemType
             Dim MX = MazeColumn.Value
@@ -41,17 +41,17 @@
             Dim X = RoomColumn.Value
             Dim Y = RoomRow.Value
             Dim TI = IT.TileIndex
-            Worlds.world.GetRoom(MX, MY).Map.GetCell(X, Y).ItemIndex = ItemIndex
+            world.GetRoom(MX, MY).Map.GetCell(X, Y).ItemIndex = ItemIndex
         End If
     End Sub
-    Friend Sub Remove()
+    Friend Sub Remove(world As World)
         If MazeColumn.HasValue Then
             Dim IT = ItemType
             Dim MX = MazeColumn.Value
             Dim MY = MazeRow.Value
             Dim X = RoomColumn.Value
             Dim Y = RoomRow.Value
-            Worlds.world.GetRoom(MX, MY).Map.GetCell(X, Y).ItemIndex = Nothing
+            world.GetRoom(MX, MY).Map.GetCell(X, Y).ItemIndex = Nothing
         End If
     End Sub
     Friend Sub ClearRoom()

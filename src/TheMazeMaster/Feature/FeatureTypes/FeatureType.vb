@@ -19,8 +19,7 @@
         Me.TileIndex = tileIndex
         Me.ShoppeType = shoppeType
     End Sub
-    Friend Sub Generate()
-        Dim world = Worlds.world
+    Friend Sub Generate(world As World)
         Dim rooms = world.GetRoomsOfType(SpawnRoomType)
         Dim room = Rnd(rooms.ToList())
         Dim roomColumn As Integer

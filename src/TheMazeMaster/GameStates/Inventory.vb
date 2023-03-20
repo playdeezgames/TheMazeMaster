@@ -3,9 +3,9 @@
         AnsiConsole.Clear()
         AnsiConsole.MarkupLine("Inventory:")
         Dim hasNothing = True
-        If Worlds.world.character.ItemStacks.Any(Function(x) x.Value > 0) Then
+        If world.character.ItemStacks.Any(Function(x) x.Value > 0) Then
             hasNothing = False
-            For Each itemStack In Worlds.world.character.ItemStacks.Where(Function(x) x.Value > 0)
+            For Each itemStack In world.character.ItemStacks.Where(Function(x) x.Value > 0)
                 AnsiConsole.MarkupLine($"{AllItemTypes(itemStack.Key).Name} x{itemStack.Value}")
             Next
         End If
@@ -19,15 +19,15 @@
             Case BackToGame
                 Return StateIdentifier.GameMenu
             Case UseText
-                NoncombatUseItem()
+                NoncombatUseItem(world)
                 Return StateIdentifier.Inventory
             Case Else
                 Throw New NotImplementedException
         End Select
     End Function
 
-    Private Sub NoncombatUseItem()
-        Dim usableItemTypes As IEnumerable(Of ItemType) = Worlds.world.character.NoncombatUsableItemTypes
+    Private Sub NoncombatUseItem(world As World)
+        Dim usableItemTypes As IEnumerable(Of ItemType) = world.character.NoncombatUsableItemTypes
         Dim prompt As SelectionPrompt(Of String)
         Dim table = usableItemTypes.ToDictionary(Function(x) x.Name, Function(x) x)
         prompt = New SelectionPrompt(Of String) With {.Title = "[olive]Use What?[/]"}
@@ -38,7 +38,7 @@
             Case NeverMind
                 Return
             Case Else
-                For Each text In Worlds.world.character.NoncombatUseItemType(table(answer))
+                For Each text In world.character.NoncombatUseItemType(world, table(answer))
                     AnsiConsole.MarkupLine(text)
                 Next
                 OkPrompt()

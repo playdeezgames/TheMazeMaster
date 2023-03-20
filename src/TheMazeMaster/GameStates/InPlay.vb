@@ -1,12 +1,12 @@
 ﻿Friend Module InPlay
     Friend Function Update(world As World) As StateIdentifier
         AnsiConsole.Clear()
-        DrawMap()
+        DrawMap(world)
         AnsiConsole.MarkupLine("[olive]▲▼►◄[/] - Navigate | [olive]Esc[/] - Menu")
-        Return MovePlayer()
+        Return MovePlayer(world)
     End Function
 
-    Private Function MovePlayer() As StateIdentifier
+    Private Function MovePlayer(world As World) As StateIdentifier
         Dim key = Console.ReadKey(True).Key
         Dim d As DirectionIdentifier? =
             If(key = ConsoleKey.UpArrow, DirectionIdentifier.North,
@@ -16,16 +16,16 @@
             Nothing))))
         Dim R = StateIdentifier.InPlay
         If d.HasValue Then
-            Dim MR = Worlds.world.character.Move(d.Value)
+            Dim MR = world.character.Move(world, d.Value)
             If MR = MoveResult.Shoppe Then
-                Shoppe.ShoppeTypeIdentifier = Worlds.world.character.GetShopType(d.Value)
+                Shoppe.ShoppeTypeIdentifier = world.character.GetShopType(world, d.Value)
                 Return StateIdentifier.Shoppe
             ElseIf MR = MoveResult.Fight Then
-                FIGHT_CREATURE_INDEX = Worlds.world.character.GetEnemy(d.Value)
-                FIGHT_START()
+                FIGHT_CREATURE_INDEX = world.character.GetEnemy(world, d.Value)
+                FIGHT_START(world)
                 Return StateIdentifier.Fight
             ElseIf MR = MoveResult.PickUp Then
-                PICKUP_ITEM_INDEX = Worlds.world.character.GetPickUp(d.Value)
+                PICKUP_ITEM_INDEX = world.character.GetPickUp(world, d.Value)
                 Return StateIdentifier.PickUp
             End If
         End If
@@ -35,9 +35,9 @@
         Return R
     End Function
 
-    Private Sub DrawMap()
-        Dim MX = Worlds.world.GetCreature(Worlds.world.character.CreatureIndex).MazeColumn
-        Dim M_y = Worlds.world.GetCreature(Worlds.world.character.CreatureIndex).MazeRow
-        Driver.DrawMap(Worlds.world.GetRoom(MX, M_y).Map)
+    Private Sub DrawMap(world As World)
+        Dim MX = world.GetCreature(world.character.CreatureIndex).MazeColumn
+        Dim M_y = world.GetCreature(world.character.CreatureIndex).MazeRow
+        Driver.DrawMap(world, world.GetRoom(MX, M_y).Map)
     End Sub
 End Module

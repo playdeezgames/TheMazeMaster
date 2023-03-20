@@ -24,7 +24,7 @@
         For Each entry In AllFeatureTypes
             Dim spawnCount = entry.Value.SpawnCount
             While spawnCount > 0
-                entry.Value.Generate()
+                entry.Value.Generate(Me)
                 spawnCount -= 1
             End While
         Next
@@ -34,7 +34,7 @@
         For Each entry In AllItemTypes
             Dim spawnCount = entry.Value.SpawnCount
             While spawnCount > 0
-                entry.Value.Generate(maze)
+                entry.Value.Generate(Me, maze)
                 spawnCount -= 1
             End While
         Next
@@ -133,7 +133,7 @@
                     Else
                         fromMap = PASSAGEWAYDOOR_MAPS(direction)
                     End If
-                    Dim toMap = Worlds.world.GetRoom(mazeColumn, mazeRow).Map
+                    Dim toMap = GetRoom(mazeColumn, mazeRow).Map
                     BlitTerrain(fromMap.ToMap, toMap, TerrainIdentifier.EMPTY)
 
                     Dim nextX = direction.StepX(mazeColumn)
@@ -144,7 +144,7 @@
                     Else
                         fromMap = PASSAGEWAYDOOR_MAPS(direction)
                     End If
-                    toMap = Worlds.world.GetRoom(nextX, nextY).Map
+                    toMap = GetRoom(nextX, nextY).Map
                     BlitTerrain(fromMap.ToMap, toMap, TerrainIdentifier.EMPTY)
                 End If
             Next
@@ -175,16 +175,16 @@
                                roomRow As Integer) As Integer
         'TODO: REUSE DEAD CREATURES WHEN POSSIBLE
         Dim I = creatures.Count
-        creatures.Add(New Creature(I, identifier, mazeColumn, mazeRow, roomColumn, roomRow))
+        creatures.Add(New Creature(Me, I, identifier, mazeColumn, mazeRow, roomColumn, roomRow))
         Dim WT = AllCreatureTypes(identifier).DefaultWeaponType
-        creatures(I).Place()
+        creatures(I).Place(Me)
         Return I
     End Function
     Friend Sub GeneratePlayer(maze As Maze)
         character = New Character(GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
-        character.Creature.Remove()
-        character.Creature.MoveToFeature(FeatureTypeIdentifier.StairsUp)
-        character.Creature.Place()
+        character.Creature(Me).Remove(Me)
+        character.Creature(Me).MoveToFeature(Me, FeatureTypeIdentifier.StairsUp)
+        character.Creature(Me).Place(Me)
     End Sub
     Function GenerateCreatureType(creatureType As CreatureType, maze As Maze) As Integer
         Dim exitCount As Integer
@@ -200,10 +200,10 @@
             Do
                 roomColumn = Rnd(0, ROOM_COLUMNS - 1)
                 roomRow = Rnd(0, ROOM_ROWS - 1)
-                cell = Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow)
+                cell = GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow)
             Loop Until cell.CanSpawn AndAlso roomColumn >= creatureType.MinimumX AndAlso roomColumn <= creatureType.MaximumX AndAlso roomRow >= creatureType.MinimumY AndAlso roomRow <= creatureType.MaximumY
         Loop Until exitCount >= creatureType.MinimumExitCount AndAlso exitCount <= creatureType.MaximumExitCount
-        Return Worlds.world.AddCreature(creatureType.Identifier, mazeColumn, mazeRow, roomColumn, roomRow)
+        Return AddCreature(creatureType.Identifier, mazeColumn, mazeRow, roomColumn, roomRow)
     End Function
     Friend Function GetRoomsOfType(roomType As RoomType) As IEnumerable(Of Room)
         Return rooms.Where(Function(x) x.RoomType = roomType)

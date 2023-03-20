@@ -50,18 +50,18 @@
     Public Function RollAttack() As Integer
         Return ROLL_DICE(AttackValue, AttackMaximum)
     End Function
-    Friend Function Create() As Integer
-        Return Worlds.world.AddItem(Identifier)
+    Friend Function Create(world As World) As Integer
+        Return world.AddItem(Identifier)
     End Function
-    Friend Function CreateInRoom(mazeColumn As Integer?, mazeRow As Integer?, roomColumn As Integer, roomRow As Integer) As Integer
-        Dim i = Create()
-        Worlds.world.GetItem(i).MazeColumn = mazeColumn
-        Worlds.world.GetItem(i).MazeRow = mazeRow
-        Worlds.world.GetItem(i).RoomColumn = roomColumn
-        Worlds.world.GetItem(i).RoomRow = roomRow
+    Friend Function CreateInRoom(world As World, mazeColumn As Integer?, mazeRow As Integer?, roomColumn As Integer, roomRow As Integer) As Integer
+        Dim i = Create(world)
+        world.GetItem(i).MazeColumn = mazeColumn
+        world.GetItem(i).MazeRow = mazeRow
+        world.GetItem(i).RoomColumn = roomColumn
+        world.GetItem(i).RoomRow = roomRow
         Return i
     End Function
-    Friend Sub Generate(maze As Maze)
+    Friend Sub Generate(world As World, maze As Maze)
         Dim mazeColumn As Integer
         Dim mazeRow As Integer
         Dim roomColumn As Integer
@@ -73,8 +73,8 @@
             e = maze.GetCell(mazeColumn, mazeRow).ExitCount
             roomColumn = Rnd(MinimumX, MaximumX)
             roomRow = Rnd(MinimumY, MaximumY)
-        Loop Until e >= MinimumExitCount AndAlso e <= MaximumExitCount AndAlso Worlds.world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow).CanSpawn
-        Dim itemIndex = CreateInRoom(mazeColumn, mazeRow, roomColumn, roomRow)
-        Worlds.world.GetItem(itemIndex).Place()
+        Loop Until e >= MinimumExitCount AndAlso e <= MaximumExitCount AndAlso world.GetRoom(mazeColumn, mazeRow).Map.GetCell(roomColumn, roomRow).CanSpawn
+        Dim itemIndex = CreateInRoom(world, mazeColumn, mazeRow, roomColumn, roomRow)
+        world.GetItem(itemIndex).Place(world)
     End Sub
 End Class
