@@ -47,7 +47,7 @@
             Case NeverMind
                 Return
             Case Else
-                For Each text In world.character.CombatUseItemType(world, table(answer))
+                For Each text In world.character.CombatUseItemType(table(answer))
                     AnsiConsole.MarkupLine(text)
                 Next
                 OkPrompt()
@@ -74,7 +74,7 @@
     End Sub
     Friend Sub RESOLVE_ATTACK(world As World, AI As Integer, DI As Integer, hitSfx As Sfx, missSfx As Sfx)
         AnsiConsole.MarkupLine($"{world.GetCreature(AI).Name} attacks {world.GetCreature(DI).Name}")
-        Dim AR = world.GetCreature(AI).RollAttack(world)
+        Dim AR = world.GetCreature(AI).RollAttack()
         Dim DR = world.GetCreature(DI).RollDefend
         AnsiConsole.MarkupLine($"{world.GetCreature(AI).Name} rolls {AR}")
         AnsiConsole.MarkupLine($"{world.GetCreature(DI).Name} rolls {DR}")
@@ -85,8 +85,8 @@
             SfxHandler.HandleSfx(hitSfx)
             If Not world.GetCreature(DI).Alive Then
                 AnsiConsole.MarkupLine($"{world.GetCreature(AI).Name} kills {world.GetCreature(DI).Name}")
-                world.GetCreature(DI).Remove(world)
-                world.GetCreature(DI).Drop(world)
+                world.GetCreature(DI).Remove()
+                world.GetCreature(DI).Drop()
             End If
         Else
             AnsiConsole.MarkupLine($"{world.GetCreature(AI).Name} misses")

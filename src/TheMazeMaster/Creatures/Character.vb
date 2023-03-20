@@ -10,7 +10,7 @@
     Friend ReadOnly Property ItemStacks As New Dictionary(Of ItemTypeIdentifier, Integer)
     Friend ReadOnly Property CreatureIndex As Integer
     Friend ReadOnly Property EffectCounters As New Dictionary(Of CounterIdentifier, Integer)
-    Friend ReadOnly Property Creature(world As World) As Creature
+    Friend ReadOnly Property Creature As Creature
         Get
             Return world.GetCreature(CreatureIndex)
         End Get
@@ -26,27 +26,27 @@
             Return ItemStacks.Select(Function(x) AllItemTypes(x.Key)).Where(Function(x) x.IsNoncombatUsable)
         End Get
     End Property
-    Friend Function Move(world As World, d As DirectionIdentifier) As MoveResult
+    Friend Function Move(d As DirectionIdentifier) As MoveResult
         If HasEffect(CounterIdentifier.Mislead) Then
             d = d.Opposite
             AddToCounter(CounterIdentifier.Mislead, -1)
         End If
-        Return Creature(world).Move(world, d)
+        Return Creature.Move(d)
     End Function
     Private Function HasEffect(identifier As CounterIdentifier) As Boolean
         Return EffectCounters.ContainsKey(identifier) AndAlso EffectCounters(identifier) > 0
     End Function
 
-    Friend Function GetEnemy(world As World, direction As DirectionIdentifier) As Integer
+    Friend Function GetEnemy(direction As DirectionIdentifier) As Integer
         Return world.
-            GetRoom(Creature(world).MazeColumn, Creature(world).MazeRow).Map.
-            GetCell(direction.StepX(Creature(world).RoomColumn), direction.StepY(Creature(world).RoomRow)).
+            GetRoom(Creature.MazeColumn, Creature.MazeRow).Map.
+            GetCell(direction.StepX(Creature.RoomColumn), direction.StepY(Creature.RoomRow)).
             Creature(world).CreatureIndex
     End Function
     Friend Sub AddXP(XP As Integer)
         XP += XP
     End Sub
-    Friend Function GetPickUp(world As World, D As DirectionIdentifier) As Integer
+    Friend Function GetPickUp(D As DirectionIdentifier) As Integer
         Dim I = CreatureIndex
         Dim X = world.GetCreature(I).RoomColumn
         Dim Y = world.GetCreature(I).RoomRow
@@ -56,7 +56,7 @@
         Dim MY = world.GetCreature(I).MazeRow
         Return world.GetRoom(MX, MY).Map.GetCell(NX, NY).ItemIndex.Value
     End Function
-    Friend Sub TakeItem(world As World, II As Integer)
+    Friend Sub TakeItem(II As Integer)
         world.GetItem(II).ClearRoom()
         Dim IT = world.GetItem(II).ItemType
         Dim ic As Integer
@@ -75,45 +75,45 @@
         End If
     End Sub
 
-    Friend Function CombatUseItemType(world As World, itemType As ItemType) As String()
+    Friend Function CombatUseItemType(itemType As ItemType) As String()
         If Not itemType.IsCombatUsable Then
-            Return New String() {$"{Creature(world).Name} cannot use {itemType.Name}."}
+            Return New String() {$"{Creature.Name} cannot use {itemType.Name}."}
         End If
         If Not ItemStacks.ContainsKey(itemType.Identifier) OrElse ItemStacks(itemType.Identifier) < 1 Then
-            Return New String() {$"{Creature(world).Name} doesn't have any {itemType.Name}."}
+            Return New String() {$"{Creature.Name} doesn't have any {itemType.Name}."}
         End If
         ItemStacks(itemType.Identifier) -= 1
         Select Case itemType.Identifier
             Case ItemTypeIdentifier.Köttbulle
-                Creature(world).AddWounds(-1)
+                Creature.AddWounds(-1)
                 Return New String() {
-                    $"{Creature(world).Name} eats {itemType.Name}.",
-                    $"{Creature(world).Name} now has {Creature(world).Health} HP."
+                    $"{Creature.Name} eats {itemType.Name}.",
+                    $"{Creature.Name} now has {Creature.Health} HP."
                 }
             Case Else
                 Throw New NotImplementedException
         End Select
     End Function
 
-    Friend Function NoncombatUseItemType(world As World, itemType As ItemType) As IEnumerable(Of String)
+    Friend Function NoncombatUseItemType(itemType As ItemType) As IEnumerable(Of String)
         If Not itemType.IsNoncombatUsable Then
-            Return New String() {$"{Creature(world).Name} cannot use {itemType.Name}."}
+            Return New String() {$"{Creature.Name} cannot use {itemType.Name}."}
         End If
         If Not ItemStacks.ContainsKey(itemType.Identifier) OrElse ItemStacks(itemType.Identifier) < 1 Then
-            Return New String() {$"{Creature(world).Name} doesn't have any {itemType.Name}."}
+            Return New String() {$"{Creature.Name} doesn't have any {itemType.Name}."}
         End If
         ItemStacks(itemType.Identifier) -= 1
         Select Case itemType.Identifier
             Case ItemTypeIdentifier.Köttbulle
-                Creature(world).AddWounds(-1)
+                Creature.AddWounds(-1)
                 Return New String() {
-                    $"{Creature(world).Name} eats {itemType.Name}.",
-                    $"{Creature(world).Name} now has {Creature(world).Health} HP."
+                    $"{Creature.Name} eats {itemType.Name}.",
+                    $"{Creature.Name} now has {Creature.Health} HP."
                 }
             Case ItemTypeIdentifier.RedHerring
                 AddToCounter(CounterIdentifier.Mislead, 10)
                 Return New String() {
-                    $"{Creature(world).Name} feels like they are being mislead."
+                    $"{Creature.Name} feels like they are being mislead."
                 }
             Case Else
                 Throw New NotImplementedException
@@ -123,11 +123,11 @@
         EffectCounters(identifier) = If(EffectCounters.ContainsKey(identifier), EffectCounters(identifier), 0) + delta
     End Sub
 
-    Friend Function GetShopType(world As World, direction As DirectionIdentifier) As ShoppeTypeIdentifier
+    Friend Function GetShopType(direction As DirectionIdentifier) As ShoppeTypeIdentifier
         Return world.
-            GetRoom(Creature(world).MazeColumn, Creature(world).MazeRow).
+            GetRoom(Creature.MazeColumn, Creature.MazeRow).
             Map.
-            GetCell(direction.StepX(Creature(world).RoomColumn), direction.StepY(Creature(world).RoomRow)).Feature(world).ShoppeType.Value
+            GetCell(direction.StepX(Creature.RoomColumn), direction.StepY(Creature.RoomRow)).Feature(world).ShoppeType.Value
     End Function
 
     Friend Function CanTrade(trade As Trade) As Boolean

@@ -177,14 +177,14 @@
         Dim I = creatures.Count
         creatures.Add(New Creature(Me, I, identifier, mazeColumn, mazeRow, roomColumn, roomRow))
         Dim WT = AllCreatureTypes(identifier).DefaultWeaponType
-        creatures(I).Place(Me)
+        creatures(I).Place()
         Return I
     End Function
     Friend Sub GeneratePlayer(maze As Maze)
         character = New Character(Me, GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
-        character.Creature(Me).Remove(Me)
-        character.Creature(Me).MoveToFeature(Me, FeatureTypeIdentifier.StairsUp)
-        character.Creature(Me).Place(Me)
+        character.Creature.Remove()
+        character.Creature.MoveToFeature(FeatureTypeIdentifier.StairsUp)
+        character.Creature.Place()
     End Sub
     Function GenerateCreatureType(creatureType As CreatureType, maze As Maze) As Integer
         Dim exitCount As Integer

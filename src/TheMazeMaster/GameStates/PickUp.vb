@@ -5,7 +5,7 @@
         Dim IT = world.GetItem(II).ItemType
         If AnsiConsole.Confirm($"[olive]Pick up {IT.Name}?[/]", True) Then
             world.GetItem(II).Remove(world)
-            world.character.TakeItem(world, II)
+            world.character.TakeItem(II)
         End If
         Return StateIdentifier.InPlay
     End Function

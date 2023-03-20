@@ -16,16 +16,16 @@
             Nothing))))
         Dim R = StateIdentifier.InPlay
         If d.HasValue Then
-            Dim MR = world.character.Move(world, d.Value)
+            Dim MR = world.character.Move(d.Value)
             If MR = MoveResult.Shoppe Then
-                Shoppe.ShoppeTypeIdentifier = world.character.GetShopType(world, d.Value)
+                Shoppe.ShoppeTypeIdentifier = world.character.GetShopType(d.Value)
                 Return StateIdentifier.Shoppe
             ElseIf MR = MoveResult.Fight Then
-                FIGHT_CREATURE_INDEX = world.character.GetEnemy(world, d.Value)
+                FIGHT_CREATURE_INDEX = world.character.GetEnemy(d.Value)
                 FIGHT_START(world)
                 Return StateIdentifier.Fight
             ElseIf MR = MoveResult.PickUp Then
-                PICKUP_ITEM_INDEX = world.character.GetPickUp(world, d.Value)
+                PICKUP_ITEM_INDEX = world.character.GetPickUp(d.Value)
                 Return StateIdentifier.PickUp
             End If
         End If

@@ -3,7 +3,7 @@
         AnsiConsole.Clear()
         Dim character = world.character
         AnsiConsole.MarkupLine("Status:")
-        AnsiConsole.MarkupLine($"HP {character.Creature(world).Health}/{character.Creature(world).MaximumHitPoints}")
+        AnsiConsole.MarkupLine($"HP {character.Creature.Health}/{character.Creature.MaximumHitPoints}")
         OkPrompt()
         Return StateIdentifier.GameMenu
     End Function

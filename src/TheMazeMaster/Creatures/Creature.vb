@@ -1,4 +1,5 @@
 ﻿Friend Class Creature
+    Private world As World
     Sub New(
            world As World,
            creatureIndex As Integer,
@@ -8,6 +9,7 @@
            roomColumn As Integer,
            roomRow As Integer,
            Optional alive As Boolean = True)
+        Me.world = world
         Me.CreatureIndex = creatureIndex
         Me.Alive = alive
         Me.MazeColumn = mazeColumn
@@ -34,7 +36,7 @@
     Property MaximumHitPoints As Integer
     Property Wounds As Integer
     Property Weapon As Integer?
-    Sub Place(world As World)
+    Sub Place()
         world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature(world) = Me
     End Sub
     ReadOnly Property Name As String
@@ -52,7 +54,7 @@
             Return CreatureType.XP
         End Get
     End Property
-    Function RollAttack(world As World) As Integer
+    Function RollAttack() As Integer
         If Weapon.HasValue Then
             Dim W = Weapon.Value
             Return world.GetItem(W).RollAttack
@@ -69,7 +71,7 @@
             Alive = Wounds < MaximumHitPoints
         End If
     End Sub
-    Sub Drop(world As World)
+    Sub Drop()
         Dim CT = CreatureType
         'TODO: CHANCE OF NOT DROPPING ITEM?
         'TODO: WEIGHTED GENERATOR FOR WHAT ITEM GETS DROPPED?
@@ -80,13 +82,13 @@
         Dim II = AllItemTypes(IT).CreateInRoom(world, MazeColumn, MazeRow, RoomColumn, RoomRow)
         world.GetItem(II).Place(world)
     End Sub
-    Sub Remove(world As World)
+    Sub Remove()
         world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow).Creature(world) = Nothing
     End Sub
-    Function Move(world As World, d As DirectionIdentifier) As MoveResult
+    Function Move(d As DirectionIdentifier) As MoveResult
         Dim R = MoveResult.Blocked
         If Alive Then
-            Remove(world)
+            Remove()
             Dim X = RoomColumn
             Dim Y = RoomRow
             Dim NX = d.StepX(X)
@@ -124,7 +126,7 @@
                         Else
                             Dim feature = world.GetRoom(MX, M_Y).Map.GetCell(NX, NY).Feature(world)
                             If feature IsNot Nothing Then
-                                R = InteractWithFeature(world, feature)
+                                R = InteractWithFeature(feature)
                             Else
                                 RoomColumn = NX
                                 RoomRow = NY
@@ -134,18 +136,18 @@
                     End If
                 End If
             End If
-            Place(world)
+            Place()
         End If
         Return R
     End Function
 
-    Private Function InteractWithFeature(world As World, feature As Feature) As MoveResult
+    Private Function InteractWithFeature(feature As Feature) As MoveResult
         Select Case feature.FeatureTypeIdentifier
             Case FeatureTypeIdentifier.StairsDown
-                MoveToFeature(world, FeatureTypeIdentifier.StairsUp)
+                MoveToFeature(FeatureTypeIdentifier.StairsUp)
                 Return MoveResult.Success
             Case FeatureTypeIdentifier.StairsUp
-                MoveToFeature(world, FeatureTypeIdentifier.StairsDown)
+                MoveToFeature(FeatureTypeIdentifier.StairsDown)
                 Return MoveResult.Success
             Case FeatureTypeIdentifier.Knacker, FeatureTypeIdentifier.Chef
                 Return MoveResult.Shoppe
@@ -154,7 +156,7 @@
         End Select
     End Function
 
-    Friend Sub MoveToFeature(world As World, featureTypeIdentifier As FeatureTypeIdentifier)
+    Friend Sub MoveToFeature(featureTypeIdentifier As FeatureTypeIdentifier)
         Dim feature = world.GetFeatureOfType(featureTypeIdentifier)
         MazeColumn = feature.MazeColumn
         MazeRow = feature.MazeRow

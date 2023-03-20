@@ -38,7 +38,7 @@
             Case NeverMind
                 Return
             Case Else
-                For Each text In world.character.NoncombatUseItemType(world, table(answer))
+                For Each text In world.character.NoncombatUseItemType(table(answer))
                     AnsiConsole.MarkupLine(text)
                 Next
                 OkPrompt()
