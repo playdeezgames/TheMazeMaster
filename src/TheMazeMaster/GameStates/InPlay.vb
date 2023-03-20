@@ -18,7 +18,7 @@
         If d.HasValue Then
             Dim MR = Worlds.world.character.Move(d.Value)
             If MR = MoveResult.Shoppe Then
-                ShoppeType = Worlds.world.character.GetShopType(d.Value)
+                Shoppe.ShoppeTypeIdentifier = Worlds.world.character.GetShopType(d.Value)
                 Return StateIdentifier.Shoppe
             ElseIf MR = MoveResult.Fight Then
                 FIGHT_CREATURE_INDEX = Worlds.world.character.GetEnemy(d.Value)

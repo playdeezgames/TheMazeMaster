@@ -1,5 +1,5 @@
 ﻿Friend Module Shoppe
-    Friend ShoppeType As ShoppeTypeIdentifier
+    Friend ShoppeTypeIdentifier As ShoppeTypeIdentifier
 
     Friend Function Update() As StateIdentifier
         AnsiConsole.Clear()
