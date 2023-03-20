@@ -1,7 +1,7 @@
 ﻿Friend Module Shoppe
     Friend ShoppeTypeIdentifier As ShoppeTypeIdentifier
 
-    Friend Function Update() As StateIdentifier
+    Friend Function Update(world As World) As StateIdentifier
         AnsiConsole.Clear()
         Dim shoppeType = AllShoppeTypes(ShoppeTypeIdentifier)
         AnsiConsole.MarkupLine($"Yer in {shoppeType.Name}.")

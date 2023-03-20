@@ -1,8 +1,9 @@
 ﻿Friend Module Driver
     Private ReadOnly random As New Random()
-    Friend Sub UpdateWith(updater As Action)
+    Friend Sub UpdateWith(updater As Action(Of World))
         Do
-            updater()
+            Dim world = New World()
+            updater(world)
         Loop
     End Sub
     Friend Function Rnd(low As Integer, high As Integer) As Integer

@@ -1,5 +1,5 @@
 ﻿Friend Module Status
-    Friend Function Update() As StateIdentifier
+    Friend Function Update(world As World) As StateIdentifier
         AnsiConsole.Clear()
         Dim character = Worlds.world.character
         AnsiConsole.MarkupLine("Status:")

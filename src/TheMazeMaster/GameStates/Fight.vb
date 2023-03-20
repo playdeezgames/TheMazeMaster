@@ -6,7 +6,7 @@
         AnsiConsole.MarkupLine($"FIGHTING {Worlds.world.GetCreature(DI).Name}")
         FIGHT_PROMPT()
     End Sub
-    Friend Function Update() As StateIdentifier
+    Friend Function Update(world As World) As StateIdentifier
         Dim DI = FIGHT_CREATURE_INDEX
         Dim AI = Worlds.world.character.CreatureIndex
         If Worlds.world.GetCreature(AI).Alive And Worlds.world.GetCreature(DI).Alive Then

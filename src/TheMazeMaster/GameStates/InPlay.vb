@@ -1,5 +1,5 @@
 ﻿Friend Module InPlay
-    Friend Function Update() As StateIdentifier
+    Friend Function Update(world As World) As StateIdentifier
         AnsiConsole.Clear()
         DrawMap()
         AnsiConsole.MarkupLine("[olive]▲▼►◄[/] - Navigate | [olive]Esc[/] - Menu")

@@ -1,5 +1,5 @@
 ﻿Friend Module Inventory
-    Friend Function Update() As StateIdentifier
+    Friend Function Update(world As World) As StateIdentifier
         AnsiConsole.Clear()
         AnsiConsole.MarkupLine("Inventory:")
         Dim hasNothing = True

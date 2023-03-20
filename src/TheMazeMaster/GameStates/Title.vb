@@ -1,5 +1,5 @@
 ﻿Friend Module Title
-    Friend Function Update() As StateIdentifier
+    Friend Function Update(world As World) As StateIdentifier
         AnsiConsole.Clear()
         Dim figlet As New FigletText("The Maze Master") With {.Color = Color.Fuchsia, .Justification = Justify.Center}
         AnsiConsole.Write(figlet)
