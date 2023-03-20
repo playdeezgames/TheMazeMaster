@@ -181,7 +181,7 @@
         Return I
     End Function
     Friend Sub GeneratePlayer(maze As Maze)
-        character = New Character(GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
+        character = New Character(Me, GenerateCreatureType(AllCreatureTypes(CreatureTypeIdentifier.Dude), maze))
         character.Creature(Me).Remove(Me)
         character.Creature(Me).MoveToFeature(Me, FeatureTypeIdentifier.StairsUp)
         character.Creature(Me).Place(Me)

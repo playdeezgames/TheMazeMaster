@@ -1,6 +1,8 @@
 ﻿Friend Class Character
-    Sub New(creatureIndex As Integer)
+    Private world As World
+    Sub New(world As World, creatureIndex As Integer)
         Me.CreatureIndex = creatureIndex
+        Me.world = world
     End Sub
     Friend Property XP As Integer = 0
     Friend Property XPGoal As Integer = 10
