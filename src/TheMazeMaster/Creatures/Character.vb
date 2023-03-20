@@ -128,4 +128,35 @@
             Map.
             GetCell(direction.StepX(Creature.RoomColumn), direction.StepY(Creature.RoomRow)).Feature.ShoppeType.Value
     End Function
+
+    Friend Function CanTrade(trade As Trade) As Boolean
+        Return GetItemCount(trade.Input.Item1) >= trade.Input.Item2
+    End Function
+
+    Private Function GetItemCount(itemTypeIdentifier As ItemTypeIdentifier) As Integer
+        If Not ItemStacks.ContainsKey(itemTypeIdentifier) Then
+            Return 0
+        End If
+        Return ItemStacks(itemTypeIdentifier)
+    End Function
+
+    Friend Sub MakeTrade(trade As Trade)
+        If CanTrade(trade) Then
+            RemoveItemCount(trade.Input.Item1, trade.Input.Item2)
+            AddItemCount(trade.Output.Item1, trade.Output.Item2)
+        End If
+    End Sub
+
+    Private Sub AddItemCount(item As ItemTypeIdentifier, delta As Integer)
+        Dim newCount = GetItemCount(item) + delta
+        If newCount <= 0 Then
+            ItemStacks.Remove(item)
+            Return
+        End If
+        ItemStacks(item) = newCount
+    End Sub
+
+    Private Sub RemoveItemCount(item As ItemTypeIdentifier, delta As Integer)
+        AddItemCount(item, -delta)
+    End Sub
 End Class

@@ -13,4 +13,6 @@
     Friend Const AttackText = "Attack"
     Friend Const RunText = "Run"
     Friend Const UseText = "Use..."
+    Friend Const Leave = "Leave"
+    Friend Const Trade = "Trade"
 End Module
