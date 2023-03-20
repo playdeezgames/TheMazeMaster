@@ -2,4 +2,5 @@
     StairsDown
     StairsUp
     Knacker
+    Chef
 End Enum

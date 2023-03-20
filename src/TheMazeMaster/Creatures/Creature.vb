@@ -146,7 +146,7 @@
             Case FeatureTypeIdentifier.StairsUp
                 MoveToFeature(FeatureTypeIdentifier.StairsDown)
                 Return MoveResult.Success
-            Case FeatureTypeIdentifier.Knacker
+            Case FeatureTypeIdentifier.Knacker, FeatureTypeIdentifier.Chef
                 Return MoveResult.Shoppe
             Case Else
                 Throw New NotImplementedException

@@ -21,7 +21,7 @@
         Return StateIdentifier.Shoppe
     End Function
     Private Sub DoTrade(shoppeType As ShoppeType)
-        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]What would you like to sell?[/]"}
+        Dim prompt As New SelectionPrompt(Of String) With {.Title = "[olive]What would you like to trade?[/]"}
         prompt.AddChoice(NeverMind)
         Dim trades = shoppeType.Offers.Where(AddressOf Worlds.world.character.CanTrade)
         Dim table = trades.ToDictionary(Function(x) x.ToString(), Function(x) x)
