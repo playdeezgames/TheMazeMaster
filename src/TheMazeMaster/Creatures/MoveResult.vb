@@ -4,4 +4,5 @@
     PickUp
     Blocked
     Shoppe
+    QuestGiver
 End Enum

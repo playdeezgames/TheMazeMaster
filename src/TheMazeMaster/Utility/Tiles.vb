@@ -33,6 +33,7 @@
     Friend Const TILE_CHEF = 47
     Friend Const TILE_NSDOOR = 48
     Friend Const TILE_EWDOOR = 49
+    Friend Const TILE_QUESTGIVER = 50
 
     Friend Const TILE_TERRAIN_START = TILE_WALL_NORTH
     Friend Const TILE_TERRAIN_END = TILE_FENCE_CORNER_INSIDE_SOUTHWEST
@@ -91,7 +92,8 @@
             {TILE_CHEF, "[yellow]C[/]"},
             {TILE_NSDOOR, "[olive]─[/]"},
             {TILE_EWDOOR, "[olive]│[/]"},
-            {TILE_KEY, "[olive]&[/]"}
+            {TILE_KEY, "[olive]&[/]"},
+            {TILE_QUESTGIVER, "[yellow]Q[/]"}
         }
 End Module
 

@@ -20,6 +20,8 @@
             If MR = MoveResult.Shoppe Then
                 Shoppe.ShoppeTypeIdentifier = world.character.GetShopType(d.Value)
                 Return StateIdentifier.Shoppe
+            ElseIf MR = MoveResult.QuestGiver Then
+                Return StateIdentifier.QuestGiver
             ElseIf MR = MoveResult.Fight Then
                 FIGHT_CREATURE_INDEX = world.character.GetEnemy(d.Value)
                 FIGHT_START(world)

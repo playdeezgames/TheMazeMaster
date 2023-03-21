@@ -159,6 +159,11 @@
                     End If
                 End If
                 Return MoveResult.Blocked
+            Case FeatureTypeIdentifier.QuestGiver
+                If world.character.CreatureIndex = CreatureIndex Then
+                    Return MoveResult.QuestGiver
+                End If
+                Return MoveResult.Blocked
             Case Else
                 Throw New NotImplementedException
         End Select

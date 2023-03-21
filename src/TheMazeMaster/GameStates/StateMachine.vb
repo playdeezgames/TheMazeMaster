@@ -10,7 +10,9 @@
             {StateIdentifier.GameMenu, AddressOf GameMenu.Update},
             {StateIdentifier.Inventory, AddressOf Inventory.Update},
             {StateIdentifier.Status, AddressOf Status.Update},
-            {StateIdentifier.Shoppe, AddressOf Shoppe.Update}
+            {StateIdentifier.Shoppe, AddressOf Shoppe.Update},
+            {StateIdentifier.QuestGiver, AddressOf QuestGiver.Update},
+            {StateIdentifier.Win, AddressOf Win.Update}
         }
     Friend Sub Update(world As World)
         CURRENT_STATE = table(CURRENT_STATE)(world)

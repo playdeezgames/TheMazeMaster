@@ -5,4 +5,5 @@
     Chef
     NSDoor
     EWDoor
+    QuestGiver
 End Enum

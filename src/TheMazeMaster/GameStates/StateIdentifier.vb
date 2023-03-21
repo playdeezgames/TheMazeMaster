@@ -7,4 +7,6 @@
     Inventory
     Status
     Shoppe
+    QuestGiver
+    Win
 End Enum

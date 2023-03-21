@@ -9,6 +9,12 @@
                 TILE_STAIRS_DOWN,
                 spawnCount:=1),
             New FeatureType(
+                FeatureTypeIdentifier.QuestGiver,
+                RoomType.Town,
+                TerrainIdentifier.GRASS,
+                TILE_QUESTGIVER,
+                spawnCount:=1),
+            New FeatureType(
                 FeatureTypeIdentifier.Knacker,
                 RoomType.Town,
                 TerrainIdentifier.GRASS,
