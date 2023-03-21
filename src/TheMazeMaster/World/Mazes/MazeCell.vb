@@ -6,6 +6,12 @@
         Doors.Clear()
         State = MazeCellState.Outside
     End Sub
+    Friend ReadOnly Property AllDoors As IEnumerable(Of DirectionIdentifier)
+        Get
+            Return Doors
+        End Get
+    End Property
+
 
     Friend Sub AddDoor(direction As DirectionIdentifier)
         Doors.Add(direction)

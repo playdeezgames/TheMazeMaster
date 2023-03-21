@@ -16,6 +16,16 @@
                 spawnCount:=1,
                 shoppeType:=ShoppeTypeIdentifier.Knacker),
             New FeatureType(
+                FeatureTypeIdentifier.NSDoor,
+                RoomType.Chamber,
+                TerrainIdentifier.FLOOR,
+                TILE_NSDOOR),
+            New FeatureType(
+                FeatureTypeIdentifier.EWDoor,
+                RoomType.Chamber,
+                TerrainIdentifier.FLOOR,
+                TILE_EWDOOR),
+            New FeatureType(
                 FeatureTypeIdentifier.Chef,
                 RoomType.Town,
                 TerrainIdentifier.GRASS,

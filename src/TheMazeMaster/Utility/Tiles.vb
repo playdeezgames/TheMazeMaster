@@ -31,6 +31,8 @@
     Friend Const TILE_STAIRS_UP = 45
     Friend Const TILE_KNACKER = 46
     Friend Const TILE_CHEF = 47
+    Friend Const TILE_NSDOOR = 48
+    Friend Const TILE_EWDOOR = 49
 
     Friend Const TILE_TERRAIN_START = TILE_WALL_NORTH
     Friend Const TILE_TERRAIN_END = TILE_FENCE_CORNER_INSIDE_SOUTHWEST
@@ -85,7 +87,9 @@
             {TILE_STAIRS_DOWN, "[purple]↓[/]"},
             {TILE_STAIRS_UP, "[purple]↑[/]"},
             {TILE_KNACKER, "[yellow]K[/]"},
-            {TILE_CHEF, "[yellow]C[/]"}
+            {TILE_CHEF, "[yellow]C[/]"},
+            {TILE_NSDOOR, "[olive]─[/]"},
+            {TILE_EWDOOR, "[olive]│[/]"}
         }
 End Module
 

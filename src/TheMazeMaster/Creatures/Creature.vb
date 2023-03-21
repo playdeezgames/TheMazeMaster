@@ -151,6 +151,8 @@
                 Return MoveResult.Success
             Case FeatureTypeIdentifier.Knacker, FeatureTypeIdentifier.Chef
                 Return MoveResult.Shoppe
+            Case FeatureTypeIdentifier.NSDoor, FeatureTypeIdentifier.EWDoor
+                Return MoveResult.Blocked
             Case Else
                 Throw New NotImplementedException
         End Select

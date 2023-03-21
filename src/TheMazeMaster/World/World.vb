@@ -15,10 +15,61 @@
         maze.Generate()
         GenerateRooms(maze)
         GenerateFeatures()
+        GenerateDoors(maze)
         GenerateItems(maze)
         GenerateCreatures(maze)
         GeneratePlayer(maze)
     End Sub
+    Private doorFeatureTypeIdentifiers As IReadOnlyDictionary(Of DirectionIdentifier, FeatureTypeIdentifier) =
+        New Dictionary(Of DirectionIdentifier, FeatureTypeIdentifier) From
+        {
+            {DirectionIdentifier.North, FeatureTypeIdentifier.NSDoor},
+            {DirectionIdentifier.East, FeatureTypeIdentifier.EWDoor},
+            {DirectionIdentifier.South, FeatureTypeIdentifier.NSDoor},
+            {DirectionIdentifier.West, FeatureTypeIdentifier.EWDoor}
+        }
+    Dim doorRoomColumns As IReadOnlyDictionary(Of DirectionIdentifier, Integer) =
+        New Dictionary(Of DirectionIdentifier, Integer) From
+        {
+            {DirectionIdentifier.North, ROOM_COLUMNS \ 2},
+            {DirectionIdentifier.East, ROOM_COLUMNS - 1},
+            {DirectionIdentifier.South, ROOM_COLUMNS \ 2},
+            {DirectionIdentifier.West, 0}
+        }
+    Dim doorRoomRows As IReadOnlyDictionary(Of DirectionIdentifier, Integer) =
+        New Dictionary(Of DirectionIdentifier, Integer) From
+        {
+            {DirectionIdentifier.North, 0},
+            {DirectionIdentifier.East, ROOM_ROWS \ 2},
+            {DirectionIdentifier.South, ROOM_ROWS - 1},
+            {DirectionIdentifier.West, ROOM_ROWS \ 2}
+        }
+
+    Private Sub GenerateDoors(maze As Maze)
+        For mazeColumn = 0 To maze.Columns - 1
+            For mazeRow = 0 To maze.Rows - 1
+                Dim cell = maze.GetCell(mazeColumn, mazeRow)
+                If cell.ExitCount = 1 Then
+                    Dim direction = cell.AllDoors.Single
+                    Dim nextColumn = direction.StepX(mazeColumn)
+                    Dim nextRow = direction.StepY(mazeRow)
+                    Dim opposite = direction.Opposite
+                    Dim index = features.Count
+                    Dim roomColumn = doorRoomColumns(opposite)
+                    Dim roomRow = doorRoomRows(opposite)
+                    features.Add(New Feature(
+                                 index,
+                                 doorFeatureTypeIdentifiers(opposite),
+                                 nextColumn,
+                                 nextRow,
+                                 roomColumn,
+                                 roomRow))
+                    GetRoom(nextColumn, nextRow).Map.GetCell(roomColumn, roomRow).FeatureIndex = index
+                End If
+            Next
+        Next
+    End Sub
+
     Private Sub GenerateFeatures()
         features = New List(Of Feature)
         For Each entry In AllFeatureTypes

@@ -3,4 +3,6 @@
     StairsUp
     Knacker
     Chef
+    NSDoor
+    EWDoor
 End Enum
