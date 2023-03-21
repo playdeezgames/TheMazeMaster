@@ -29,4 +29,8 @@
         Me.RoomColumn = roomColumn
         Me.RoomRow = roomRow
     End Sub
+    Friend Sub Remove(world As World)
+        Dim cell = world.GetRoom(MazeColumn, MazeRow).Map.GetCell(RoomColumn, RoomRow)
+        cell.FeatureIndex = Nothing
+    End Sub
 End Class

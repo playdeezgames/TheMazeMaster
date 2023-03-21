@@ -134,7 +134,7 @@
         Return GetItemCount(trade.Input.Item1) >= trade.Input.Item2
     End Function
 
-    Private Function GetItemCount(itemTypeIdentifier As ItemTypeIdentifier) As Integer
+    Friend Function GetItemCount(itemTypeIdentifier As ItemTypeIdentifier) As Integer
         If Not ItemStacks.ContainsKey(itemTypeIdentifier) Then
             Return 0
         End If
@@ -157,7 +157,7 @@
         ItemStacks(item) = newCount
     End Sub
 
-    Private Sub RemoveItemCount(item As ItemTypeIdentifier, delta As Integer)
+    Friend Sub RemoveItemCount(item As ItemTypeIdentifier, delta As Integer)
         AddItemCount(item, -delta)
     End Sub
 End Class

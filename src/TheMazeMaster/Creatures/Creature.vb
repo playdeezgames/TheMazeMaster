@@ -152,6 +152,12 @@
             Case FeatureTypeIdentifier.Knacker, FeatureTypeIdentifier.Chef
                 Return MoveResult.Shoppe
             Case FeatureTypeIdentifier.NSDoor, FeatureTypeIdentifier.EWDoor
+                If world.character.CreatureIndex = CreatureIndex Then
+                    If world.character.GetItemCount(ItemTypeIdentifier.Key) > 0 Then
+                        world.character.RemoveItemCount(ItemTypeIdentifier.Key, 1)
+                        feature.Remove(world)
+                    End If
+                End If
                 Return MoveResult.Blocked
             Case Else
                 Throw New NotImplementedException
