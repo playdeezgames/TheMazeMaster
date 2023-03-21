@@ -15,11 +15,20 @@
         maze.Generate()
         GenerateRooms(maze)
         GenerateFeatures()
-        GenerateDoors(maze)
+        Dim doorCount = GenerateDoors(maze)
         GenerateItems(maze)
+        GenerateKeys(doorCount, maze)
         GenerateCreatures(maze)
         GeneratePlayer(maze)
     End Sub
+
+    Private Sub GenerateKeys(doorCount As Integer, maze As Maze)
+        While doorCount > 0
+            AllItemTypes(ItemTypeIdentifier.Key).Generate(Me, maze)
+            doorCount -= 1
+        End While
+    End Sub
+
     Private doorFeatureTypeIdentifiers As IReadOnlyDictionary(Of DirectionIdentifier, FeatureTypeIdentifier) =
         New Dictionary(Of DirectionIdentifier, FeatureTypeIdentifier) From
         {
@@ -45,7 +54,8 @@
             {DirectionIdentifier.West, ROOM_ROWS \ 2}
         }
 
-    Private Sub GenerateDoors(maze As Maze)
+    Private Function GenerateDoors(maze As Maze) As Integer
+        Dim result = 0
         For mazeColumn = 0 To maze.Columns - 1
             For mazeRow = 0 To maze.Rows - 1
                 Dim cell = maze.GetCell(mazeColumn, mazeRow)
@@ -65,10 +75,12 @@
                                  roomColumn,
                                  roomRow))
                     GetRoom(nextColumn, nextRow).Map.GetCell(roomColumn, roomRow).FeatureIndex = index
+                    result += 1
                 End If
             Next
         Next
-    End Sub
+        Return result
+    End Function
 
     Private Sub GenerateFeatures()
         features = New List(Of Feature)

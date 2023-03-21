@@ -41,6 +41,7 @@
     Friend Const tile_köttbulle = 81
     Friend Const TILE_PENNY = 82
     Friend Const TILE_MACGUFFIN = 83
+    Friend Const TILE_KEY = 84
 
     Friend Const TILE_RAT = 237
     Friend Const TILE_DUDE = 238
@@ -89,7 +90,8 @@
             {TILE_KNACKER, "[yellow]K[/]"},
             {TILE_CHEF, "[yellow]C[/]"},
             {TILE_NSDOOR, "[olive]─[/]"},
-            {TILE_EWDOOR, "[olive]│[/]"}
+            {TILE_EWDOOR, "[olive]│[/]"},
+            {TILE_KEY, "[olive]&[/]"}
         }
 End Module
 

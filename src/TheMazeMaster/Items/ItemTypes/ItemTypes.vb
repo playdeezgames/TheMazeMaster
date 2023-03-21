@@ -32,6 +32,12 @@
                     stacks:=True,
                     spawnCount:=256),
                 New ItemType(
+                    ItemTypeIdentifier.Key,
+                    "Key",
+                    tileIndex:=TILE_KEY,
+                    stacks:=True,
+                    minimumExitCount:=2),
+                New ItemType(
                     ItemTypeIdentifier.MacGuffin,
                     "MacGuffin",
                     tileIndex:=TILE_MACGUFFIN,

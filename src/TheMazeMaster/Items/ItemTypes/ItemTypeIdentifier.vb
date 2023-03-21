@@ -7,4 +7,5 @@
     Penny
     MacGuffin
     RedHerring
+    Key
 End Enum
